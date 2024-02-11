@@ -18,11 +18,12 @@ public final class Constants {
   public static class OperatorConstants {
   // joysticks
   public static final int kDriverControllerPort = 0;
-  public static final int kOperatorControllerPort = 0;
+  public static final int kOperatorControllerPort = 1;
     }
 
 /*public static class shooterConstants{ 
   // motor can ids 
+[]\
     public static final int kshooterId = 2;
     public static final int kintakeId = 1;
   //curent limiting
@@ -55,6 +56,7 @@ public final class Constants {
     public static final double kIntakeFeederReverseSpeed = -.25;
 
     public static final double kLauncherDelay = 1;
+   
   }
 
 public static class armConstants{
@@ -65,8 +67,18 @@ public static class armConstants{
     //rotate cancoder 
   public static final String drivecanbusname = "Drive CAN";
   public static final int armCANcoderId = 47;
-
+  public static double kP = .4;
+  public static double kI =.2;
+  public static double kD = .1;
+  public static double kIz = .15;
+  
+  public static double kMaxOutput=.1;
+  public static double kMinOutput=-.1;
+  public static double kCPR = 8192;
+  public static double koffset = -.1;
 }
+
+
 public static class climberConstants{
 // motor can ids
 public static final int kclimberlead = 4;

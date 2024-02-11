@@ -4,9 +4,17 @@
 
 package frc.robot;
 
+import com.ctre.phoenix6.mechanisms.swerve.SwerveModule.DriveRequestType;
+import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest;
+
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 //import edu.wpi.first.wpilibj2.command.Command;
 //import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -18,9 +26,13 @@ import frc.robot.commands.LaunchNote;
 import frc.robot.commands.PrepareLaunch;
 //import frc.robot.subsystems.PWMDrivetrain;
 //import frc.robot.subsystems.PWMLauncher;
+import frc.robot.generated.TunerConstants;
+import frc.robot.Constants.OperatorConstants;
 
- //import frc.robot.subsystems.CANDrivetrain;
- import frc.robot.subsystems.CANLauncher;
+//import frc.robot.commands.Autos;
+import frc.robot.commands.LaunchNote;
+import frc.robot.commands.PrepareLaunch;
+import frc.robot.subsystems.CANLauncher;
 import frc.robot.subsystems.arm;
 import frc.robot.subsystems.climber;
 
@@ -31,6 +43,31 @@ import frc.robot.subsystems.climber;
  * subsystems, commands, and trigger mappings) should be declared here.
  */
 public class RobotContainer {
+  //swerve section
+  private double MaxSpeed = TunerConstants.kSpeedAt12VoltsMps; // kSpeedAt12VoltsMps desired top speed
+  private double MaxAngularRate = 1.75 * Math.PI; // 3/4 of a rotation per second max angular velocity
+
+  /* Setting up bindings for necessary control of the swerve drive platform */
+  private final CommandXboxController m_operatorController =
+     new CommandXboxController(OperatorConstants.kOperatorControllerPort); // My joystick
+  private final CommandJoystick m_drivercontroller = 
+    new CommandJoystick(OperatorConstants.kDriverControllerPort); // My joystick
+  public final CommandSwerveDrivetrain drivetrain = TunerConstants.DriveTrain; // My drivetrain
+
+  private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
+      .withDeadband(MaxSpeed * 0.1).withRotationalDeadband(MaxAngularRate * 0.1) // Add a 10% deadband
+      .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // I want field-centric
+                                                               // driving in open loop
+  private final SwerveRequest.SwerveDriveBrake brake = new SwerveRequest.SwerveDriveBrake();
+  private final SwerveRequest.RobotCentric forwardStraight = new SwerveRequest.RobotCentric().withDriveRequestType(DriveRequestType.OpenLoopVoltage);
+  private final SwerveRequest.PointWheelsAt point = new SwerveRequest.PointWheelsAt();
+
+  /* Path follower */
+  private Command runAuto = drivetrain.getAutoPath("Tests");
+  //private Command runAuto = drivetrain.getAutoPath("SimplePath");
+  private final Telemetry logger = new Telemetry(MaxSpeed);
+
+
   // The robot's subsystems are defined here.
   // private final PWMDrivetrain m_drivetrain = new PWMDrivetrain();
   //private final CANDrivetrain m_drivetrain = new CANDrivetrain();
@@ -40,10 +77,7 @@ public class RobotContainer {
   private final climber m_climber = new climber();
   /*The gamepad provided in the KOP shows up like an XBox controller if the mode switch is set to X mode using the
    * switch on the top.*/
-  private final CommandXboxController m_driverController =
-      new CommandXboxController(OperatorConstants.kDriverControllerPort);
-  private final CommandXboxController m_operatorController =
-      new CommandXboxController(OperatorConstants.kOperatorControllerPort);
+
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -58,31 +92,61 @@ public class RobotContainer {
    */
   private void configureBindings() {
     // Set the default command for the drivetrain to drive using the joysticks
+    //swerve button bindings
+        drivetrain.setDefaultCommand( // Drivetrain will execute this command periodically
+        drivetrain.applyRequest(() -> drive.withVelocityX(m_drivercontroller.getRawAxis(1) * MaxSpeed) // Drive forward with
+                                                                                          // negative Y (forward)
+            .withVelocityY(-m_drivercontroller.getRawAxis(0) * MaxSpeed) // Drive left with negative X (left)
+            .withRotationalRate(-m_drivercontroller.getRawAxis(3) * MaxAngularRate) // Drive counterclockwise with negative X (left)
+        ).ignoringDisable(true));
+
+    m_drivercontroller.button(15).whileTrue(drivetrain.applyRequest(() -> brake));    
+    m_drivercontroller.button(16).whileTrue(drivetrain
+        .applyRequest(() -> point.withModuleDirection(new Rotation2d(-m_drivercontroller.getRawAxis(0), m_drivercontroller.getRawAxis(1)))));
+    
+        
+    //joystick.a().whileTrue(drivetrain.applyRequest(() -> brake));
+    //joystick.b().whileTrue(drivetrain
+    //  .applyRequest(() -> point.withModuleDirection(new Rotation2d(-joystick.getLeftY(), -joystick.getLeftX()))));
+
+    // reset the field-centric heading on left bumper press
+    m_drivercontroller.button(14).whileTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));
+
+    // if (Utils.isSimulation()) {
+    //   drivetrain.seedFieldRelative(new Pose2d(new Translation2d(), Rotation2d.fromDegrees(90)));
+    // }
+    drivetrain.registerTelemetry(logger::telemeterize);
+
+    m_drivercontroller.button(22).whileTrue(drivetrain.applyRequest(() -> forwardStraight.withVelocityX(.75).withVelocityY(0)));
+    m_drivercontroller.button(21).whileTrue(drivetrain.applyRequest(() -> forwardStraight.withVelocityX(-0.75).withVelocityY(0)));
+    m_drivercontroller.button(19).whileTrue(drivetrain.applyRequest(() -> forwardStraight.withVelocityX(0).withVelocityY(0.75)));
+    m_drivercontroller.button(20).whileTrue(drivetrain.applyRequest(() -> forwardStraight.withVelocityX(0).withVelocityY(-0.75)));    
+
 
     /*Create an inline sequence to run when the operator presses and holds the A (green) button. Run the PrepareLaunch
      * command for 1 seconds and then run the LaunchNote command */
-    m_driverController.rightBumper().whileTrue(
+    m_operatorController.rightBumper().whileTrue(
             new PrepareLaunch(m_launcher)
                 .withTimeout(LauncherConstants.kLauncherDelay)
                 .andThen(new LaunchNote(m_launcher))
                 .handleInterrupt(() -> m_launcher.stop()));
-
-
                 
     // Set up a binding to run the intake command while the operator is pressing and holding the
     // left Bumper
-    m_driverController.leftBumper().whileTrue(m_launcher.getIntakeCommand());
-    m_driverController.y().whileTrue(m_launcher.getReverseNoteCommand());
-    m_driverController.x().onTrue(new InstantCommand(m_arm::armfoward))
+    m_operatorController.leftBumper().whileTrue(m_launcher.getIntakeCommand());
+    m_operatorController.y().whileTrue(m_launcher.getReverseNoteCommand());
+    m_operatorController.x().onTrue(new InstantCommand(m_arm::armfoward))
                           .onFalse(new InstantCommand(m_arm::stop));
-    m_driverController.b().onTrue(new InstantCommand(m_arm::armreverese))
+    m_operatorController.b().onTrue(new InstantCommand(m_arm::armreverese))
                           .onFalse(new InstantCommand(m_arm::stop));
-   m_driverController.povUp().onTrue(new InstantCommand(m_climber::climbup))
+   m_operatorController.povUp().onTrue(new InstantCommand(m_climber::climbup))
                              .onFalse(new InstantCommand(m_climber::stop));
-   m_driverController.povDown().onTrue(new InstantCommand(m_climber::climbdown))
+   m_operatorController.povDown().onTrue(new InstantCommand(m_climber::climbdown))
                              .onFalse(new InstantCommand(m_climber::stop));
-                        
-   /*  m_arm.setDefaultCommand(
+ 
+   m_operatorController.povLeft().onTrue(new InstantCommand(m_arm::armposition1));
+                                  //.onFalse(new InstantCommand(m_arm::armpositionhome));
+     /*m_arm.setDefaultCommand(
         new RunCommand(
             () ->
             m_arm.setarm(m_driverController.getLeftY())
@@ -98,8 +162,20 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  /*public Command getAutonomousCommand() {
+  public Command getAutonomousCommand() {
+    return runAuto;
     // An example command will be run in autonomous
     //return Autos.exampleAuto(m_drivetrain);
-  }*/
+  }
+
+  private void buildDashboard(){
+    buildarmTab();
+
+  }
+
+  private void buildarmTab(){
+
+    ShuffleboardTab armTab = Shuffleboard.getTab("arm");
+
+  }
 }
