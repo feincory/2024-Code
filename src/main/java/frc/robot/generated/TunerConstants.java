@@ -51,7 +51,7 @@ public class TunerConstants {
     private static final boolean kInvertLeftSide = false;
     private static final boolean kInvertRightSide = true;
 
-    private static final String kCANbusName = "Drive CAN";
+    public static final String kCANbusName = "Drive CAN";
     private static final int kPigeonId = 44;
 
 
@@ -95,7 +95,7 @@ public class TunerConstants {
     private static final double kFrontLeftYPosInches = 15.25;
 
     // Front Right
-    private static final int kFrontRightDriveMotorId = 0;
+    private static final int kFrontRightDriveMotorId = 10;
     private static final int kFrontRightSteerMotorId = 11;
     private static final int kFrontRightEncoderId = 12;
     private static final double kFrontRightEncoderOffset = 0.45361328125;

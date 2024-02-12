@@ -67,15 +67,19 @@ public static class armConstants{
     //rotate cancoder 
   public static final String drivecanbusname = "Drive CAN";
   public static final int armCANcoderId = 47;
-  public static double kP = .4;
-  public static double kI =.2;
-  public static double kD = .1;
-  public static double kIz = .15;
-  
+  public static double kPc = 10;
+  public static double kIc = .5;
+  public static double kDc = .5;
+  public static double kGc = 0; //Gravity
+  //pid
   public static double kMaxOutput=.1;
   public static double kMinOutput=-.1;
-  public static double kCPR = 8192;
-  public static double koffset = -.1;
+  // position
+  public static double kIntakePosition = -.164;
+  //set zero with t squre 24" from ground
+  public static double kampPosition = .090;
+  public static double kTrapPrepPosition = .240;
+  public static double kTrapclimbPosition = .170;
 }
 
 

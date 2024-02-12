@@ -42,16 +42,32 @@ public class climber extends SubsystemBase {
   }
 
 public void setarm(double speed){
-  m_climbmotorlead.set(speed*4);
+  m_climbmotorlead.set(speed);
 }
 
+public void climberrelase(double speed){
+  //winch out for distance
+
+}
+
+public void climberaligntotag(double speed){
+  //snap to angle
+  //run into chain
+  //start winching
+  //
+  
+}
+public void climberrun(double speed){
+ 
+}
+
+
 public void  climbup(){
-  m_climbmotorlead.set(-.4);
+  m_climbmotorlead.set(-.5);
 }
 
 public void climbdown(){
-  
-m_climbmotorlead.set(.4);
+m_climbmotorlead.set(.5);
 }
 
 public void stop(){

@@ -48,9 +48,9 @@ public class RobotContainer {
   private double MaxAngularRate = 1.75 * Math.PI; // 3/4 of a rotation per second max angular velocity
 
   /* Setting up bindings for necessary control of the swerve drive platform */
-  private final CommandXboxController m_operatorController =
+  public final CommandXboxController m_operatorController =
      new CommandXboxController(OperatorConstants.kOperatorControllerPort); // My joystick
-  private final CommandJoystick m_drivercontroller = 
+  public final CommandJoystick m_drivercontroller = 
     new CommandJoystick(OperatorConstants.kDriverControllerPort); // My joystick
   public final CommandSwerveDrivetrain drivetrain = TunerConstants.DriveTrain; // My drivetrain
 
@@ -105,16 +105,10 @@ public class RobotContainer {
         .applyRequest(() -> point.withModuleDirection(new Rotation2d(-m_drivercontroller.getRawAxis(0), m_drivercontroller.getRawAxis(1)))));
     
         
-    //joystick.a().whileTrue(drivetrain.applyRequest(() -> brake));
-    //joystick.b().whileTrue(drivetrain
-    //  .applyRequest(() -> point.withModuleDirection(new Rotation2d(-joystick.getLeftY(), -joystick.getLeftX()))));
-
-    // reset the field-centric heading on left bumper press
+      // reset the field-centric heading on left bumper press
     m_drivercontroller.button(14).whileTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));
 
-    // if (Utils.isSimulation()) {
-    //   drivetrain.seedFieldRelative(new Pose2d(new Translation2d(), Rotation2d.fromDegrees(90)));
-    // }
+ 
     drivetrain.registerTelemetry(logger::telemeterize);
 
     m_drivercontroller.button(22).whileTrue(drivetrain.applyRequest(() -> forwardStraight.withVelocityX(.75).withVelocityY(0)));
@@ -139,18 +133,20 @@ public class RobotContainer {
                           .onFalse(new InstantCommand(m_arm::stop));
     m_operatorController.b().onTrue(new InstantCommand(m_arm::armreverese))
                           .onFalse(new InstantCommand(m_arm::stop));
-   m_operatorController.povUp().onTrue(new InstantCommand(m_climber::climbup))
+      
+   //climber                   
+   m_operatorController.leftTrigger(.5).onTrue(new InstantCommand(m_climber::climbup))
                              .onFalse(new InstantCommand(m_climber::stop));
-   m_operatorController.povDown().onTrue(new InstantCommand(m_climber::climbdown))
+   m_operatorController.rightTrigger(.5).onTrue(new InstantCommand(m_climber::climbdown))
                              .onFalse(new InstantCommand(m_climber::stop));
  
-   m_operatorController.povLeft().onTrue(new InstantCommand(m_arm::armposition1));
-                                  //.onFalse(new InstantCommand(m_arm::armpositionhome));
-     /*m_arm.setDefaultCommand(
-        new RunCommand(
-            () ->
-            m_arm.setarm(m_driverController.getLeftY())
-            ));*/
+  //arm position
+  m_operatorController.povDown().onTrue(new InstantCommand(m_arm::armpositionIntake));
+  m_operatorController.povRight().onTrue(new InstantCommand(m_arm::armpositionamp));    
+  m_operatorController.povUp().onTrue(new InstantCommand(m_arm::armpositionTrapPrep));
+  m_operatorController.povLeft().onTrue(new InstantCommand(m_arm::armpositionTrapClimb));
+  
+   m_operatorController.back().onTrue(new InstantCommand(m_arm::armclearfault));
 
 
   }
