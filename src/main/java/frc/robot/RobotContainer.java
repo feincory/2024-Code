@@ -16,7 +16,7 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 //import edu.wpi.first.wpilibj2.command.Command;
-//import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.LauncherConstants;
 import frc.robot.Constants.OperatorConstants;
@@ -72,9 +72,9 @@ public class RobotContainer {
   // private final PWMDrivetrain m_drivetrain = new PWMDrivetrain();
   //private final CANDrivetrain m_drivetrain = new CANDrivetrain();
   // private final PWMLauncher m_launcher = new PWMLauncher();
-  private final CANLauncher m_launcher = new CANLauncher();
-  private final arm m_arm = new arm();
-  private final climber m_climber = new climber();
+  public final CANLauncher m_launcher = new CANLauncher();
+  public final arm m_arm = new arm();
+  public final climber m_climber = new climber();
   /*The gamepad provided in the KOP shows up like an XBox controller if the mode switch is set to X mode using the
    * switch on the top.*/
 
@@ -134,19 +134,39 @@ public class RobotContainer {
     m_operatorController.b().onTrue(new InstantCommand(m_arm::armreverese))
                           .onFalse(new InstantCommand(m_arm::stop));
       
-   //climber                   
-   m_operatorController.leftTrigger(.5).onTrue(new InstantCommand(m_climber::climbup))
+   //climber
+   //m_operatorController.back().onTrue(new RunCommand(m_climber::climbrelease))
+   //                         .onFalse(new InstantCommand(m_climber::stop));
+   //m_operatorController.start().onTrue(new RunCommand(m_climber::climbauto))
+    //                        .onFalse(new InstantCommand(m_climber::stop));
+    //m_operatorController.leftStick().onTrue(new InstantCommand(m_climber::climbreset));
+    m_operatorController.a().onTrue(
+      new InstantCommand(m_climber::climberencoderreset)
+      .andThen(new InstantCommand(m_climber::climbReleaseCommand))
+      .andThen(new InstantCommand(m_arm::armpositionTrapPrep)))
+      .onFalse(new InstantCommand(m_climber::stop));
+
+     // .andThen(new RunCommand(m_arm::armpositionTrapPrep))
+     // .andThen(new RunCommand(m_climber::climbNotSafe)));
+                                
+   m_operatorController.leftTrigger(.5).onTrue(new InstantCommand(m_climber::climbupmanual))
                              .onFalse(new InstantCommand(m_climber::stop));
-   m_operatorController.rightTrigger(.5).onTrue(new InstantCommand(m_climber::climbdown))
+    m_operatorController.rightTrigger(.5).onTrue(new InstantCommand(m_climber::climbdownmanual))
                              .onFalse(new InstantCommand(m_climber::stop));
- 
+    
+    
   //arm position
-  m_operatorController.povDown().onTrue(new InstantCommand(m_arm::armpositionIntake));
+  // intake with note detect
+  if(m_launcher.m_ringDetect.get() == false){
+  m_launcher.stop();
+}else{
+    m_operatorController.povDown().onTrue(new InstantCommand(m_arm::armpositionIntake));}
+
   m_operatorController.povRight().onTrue(new InstantCommand(m_arm::armpositionamp));    
   m_operatorController.povUp().onTrue(new InstantCommand(m_arm::armpositionTrapPrep));
-  m_operatorController.povLeft().onTrue(new InstantCommand(m_arm::armpositionTrapClimb));
+  //m_operatorController.povLeft().onTrue(new InstantCommand(m_arm::armpositionTrapClimb));
   
-   m_operatorController.back().onTrue(new InstantCommand(m_arm::armclearfault));
+  // m_operatorController.back().onTrue(new InstantCommand(m_arm::armclearfault));
 
 
   }

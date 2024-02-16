@@ -21,9 +21,11 @@ import com.ctre.phoenix6.signals.FeedbackSensorSourceValue;
 import com.ctre.phoenix6.signals.GravityTypeValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.ctre.phoenix6.signals.SensorDirectionValue;
+import com.revrobotics.CANSparkMax;
 
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.generated.TunerConstants;
 
@@ -119,21 +121,21 @@ createDashboards();
       f_remoteSensorInvalid.refresh();
       sf_remoteSensorInvalid.refresh();
       boolean anyFault = sf_fusedSensorOutOfSync.getValue() || sf_remoteSensorInvalid.getValue();
-      if(anyFault) {
-        System.out.println("A fault has occurred:");
-        /* If we're live, indicate live, otherwise if we're sticky indicate sticky, otherwise do nothing */
-        if(f_fusedSensorOutOfSync.getValue()) {
-          System.out.println("Fused sensor out of sync live-faulted");
-        } else if (sf_fusedSensorOutOfSync.getValue()) {
-          System.out.println("Fused sensor out of sync sticky-faulted");
-        }
-        /* If we're live, indicate live, otherwise if we're sticky indicate sticky, otherwise do nothing */
-        if(f_remoteSensorInvalid.getValue()) {
-          System.out.println("Missing remote sensor live-faulted");
-        } else if (sf_remoteSensorInvalid.getValue()) {
-          System.out.println("Noah is a turd");
-        }
-      }
+      // if(anyFault) {
+      //   System.out.println("A fault has occurred:");
+      //   /* If we're live, indicate live, otherwise if we're sticky indicate sticky, otherwise do nothing */
+      //   if(f_fusedSensorOutOfSync.getValue()) {
+      //     System.out.println("Fused sensor out of sync live-faulted");
+      //   } else if (sf_fusedSensorOutOfSync.getValue()) {
+      //     System.out.println("Fused sensor out of sync sticky-faulted");
+      //   }
+      //   /* If we're live, indicate live, otherwise if we're sticky indicate sticky, otherwise do nothing */
+      //   if(f_remoteSensorInvalid.getValue()) {
+      //     System.out.println("Missing remote sensor live-faulted");
+      //   } else if (sf_remoteSensorInvalid.getValue()) {
+      //     System.out.println("Noah is a turd");
+      //   }
+      // }
 
       /* Print out current position and velocity */
       fx_pos.refresh(); fx_vel.refresh();
@@ -144,19 +146,30 @@ createDashboards();
     }
   }
 
+// public Command armpositionTrapPrepCommand(){
+//   return runOnce(() -> {
+//     m_fx.setControl(m_dutyPosition.withPosition(kTrapPrepPosition));
+//   });
+// }
+  public Command armpositionTrapPrep() {
+      return runOnce(() -> m_fx.setControl(m_dutyPosition.withPosition(kTrapPrepPosition)));
+     
+    }
 
+   
+  
   public void armpositionIntake(){
     m_fx.setControl(m_dutyPosition.withPosition(kIntakePosition));
   }
   public void armpositionamp(){
     m_fx.setControl(m_dutyPosition.withPosition(kampPosition));
   }
-  public void armpositionTrapPrep(){
+  /*public void armpositionTrapPrep(){
     m_fx.setControl(m_dutyPosition.withPosition(kTrapPrepPosition));
-  }
-  public void armpositionTrapClimb(){
+  }*/
+  /*public void armpositionTrapClimb(){
     m_fx.setControl(m_dutyPosition.withPosition(kTrapclimbPosition));
-  }
+  }*/
 public void armclearfault(){
  /* Clear sticky faults */  
   m_fx.clearStickyFaults();

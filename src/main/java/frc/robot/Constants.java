@@ -76,10 +76,12 @@ public static class armConstants{
   public static double kMinOutput=-.1;
   // position
   public static double kIntakePosition = -.164;
-  //set zero with t squre 24" from ground
-  public static double kampPosition = .090;
-  public static double kTrapPrepPosition = .240;
-  public static double kTrapclimbPosition = .170;
+  //set zero with t squre 24" from ground, ++ increases the distance from the ground
+  public static double kampPosition = .105;
+  public static double kTrapPrepPosition = -.155;//was .240
+  public static double kTrapclimbPosition = -0.095; //set for speaker shot right now
+  //shot from stage preset location -.155
+
 }
 
 
@@ -89,7 +91,16 @@ public static final int kclimberlead = 4;
 public static final int kclimberfollower = 5;
 // curant limiting
 public static final int karmcurrentLimit = 60;
-
+// pid
+public static double kPclimber = 0.5;//propotional
+public static double kIclimber = 0;//intergral (time error)
+public static double kDclimber = 0;//derivitieve(rate of aproch)
+public static double kIzclimber = 0;// ramp rate
+public static double kFFclimer = 0;//feed foward(unknow friction)
+public static double kMaxOutputclimer = .3;
+public static double kMinOutputclimer =-.3;
+public static double kMinOutputNotSafe= 0;
+public static double kMaxOutputNotSafe= 0.3;
 }
 
 

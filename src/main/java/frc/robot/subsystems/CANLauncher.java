@@ -10,6 +10,8 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 //import edu.wpi.first.wpilibj.CAN;
 //import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -18,7 +20,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class CANLauncher extends SubsystemBase {
   CANSparkMax m_launchWheel;
   CANSparkMax m_feedWheel;
-  DigitalInput m_ringDetect;
+  public DigitalInput m_ringDetect;
   public boolean hasnote;
 
   /** Creates a new Launcher. */
@@ -29,8 +31,9 @@ public class CANLauncher extends SubsystemBase {
     m_launchWheel.setSmartCurrentLimit(kLauncherCurrentLimit);
     m_feedWheel.setSmartCurrentLimit(kFeedCurrentLimit);
    m_ringDetect.get();
+   createDashboards();
   }
-
+ 
   /**
    * This method is an example of the 'subsystem factory' style of command creation. A method inside
    * the subsytem is created to return an instance of a command. This works for commands that
@@ -83,7 +86,16 @@ public class CANLauncher extends SubsystemBase {
     m_launchWheel.set(0);
     m_feedWheel.set(0);
   }
+  // creates a value for shuffle board
+public boolean getstate(){
+  return m_ringDetect.get();}
+
+
+  public void createDashboards() {
+  ShuffleboardTab shooterTab = Shuffleboard.getTab("Shooter");
+  shooterTab.add("ring detect", getstate());
   
+}
     
   }
   
