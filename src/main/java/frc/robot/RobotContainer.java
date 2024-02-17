@@ -146,6 +146,13 @@ public class RobotContainer {
       .andThen(new InstantCommand(m_arm::armpositionTrapPrep)))
       .onFalse(new InstantCommand(m_climber::stop));
 
+    m_operatorController.start().onTrue(
+      new InstantCommand(m_climber::climbwinchbottom))
+      .onFalse(new InstantCommand(m_climber::stop));      
+
+    m_operatorController.start().onTrue(
+      new InstantCommand(m_arm::armpositionTrapClimb)); 
+
      // .andThen(new RunCommand(m_arm::armpositionTrapPrep))
      // .andThen(new RunCommand(m_climber::climbNotSafe)));
                                 
@@ -161,11 +168,10 @@ public class RobotContainer {
   m_launcher.stop();
 }else{
     m_operatorController.povDown().onTrue(new InstantCommand(m_arm::armpositionIntake));}
-
   m_operatorController.povRight().onTrue(new InstantCommand(m_arm::armpositionamp));    
-  m_operatorController.povUp().onTrue(new InstantCommand(m_arm::armpositionTrapPrep));
-  //m_operatorController.povLeft().onTrue(new InstantCommand(m_arm::armpositionTrapClimb));
-  
+  m_operatorController.povUp().onTrue(new InstantCommand(m_arm::StageShot));
+  m_operatorController.povLeft().onTrue(new InstantCommand(m_arm::PresetShot));
+ 
   // m_operatorController.back().onTrue(new InstantCommand(m_arm::armclearfault));
 
 

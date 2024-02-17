@@ -73,7 +73,9 @@ public class arm extends SubsystemBase {
     fx_cfg.Feedback.RotorToSensorRatio = 135;
     fx_cfg.SoftwareLimitSwitch.ForwardSoftLimitEnable = true;
     fx_cfg.SoftwareLimitSwitch.ReverseSoftLimitEnable = true;
-    fx_cfg.SoftwareLimitSwitch.ForwardSoftLimitThreshold = .25;
+    fx_cfg.SoftwareLimitSwitch.ForwardSoftLimitThreshold = .27;
+    
+
     fx_cfg.SoftwareLimitSwitch.ReverseSoftLimitThreshold= -.164; 
     fx_cfg.OpenLoopRamps.DutyCycleOpenLoopRampPeriod = .3;
     fx_cfg.ClosedLoopRamps.DutyCycleClosedLoopRampPeriod = .15;
@@ -151,10 +153,10 @@ createDashboards();
 //     m_fx.setControl(m_dutyPosition.withPosition(kTrapPrepPosition));
 //   });
 // }
-  public Command armpositionTrapPrep() {
-      return runOnce(() -> m_fx.setControl(m_dutyPosition.withPosition(kTrapPrepPosition)));
+  // public Command armpositionTrapPrep() {
+  //     return runOnce(() -> m_fx.setControl(m_dutyPosition.withPosition(kTrapPrepPosition)));
      
-    }
+  //   }
 
    
   
@@ -164,16 +166,23 @@ createDashboards();
   public void armpositionamp(){
     m_fx.setControl(m_dutyPosition.withPosition(kampPosition));
   }
-  /*public void armpositionTrapPrep(){
+  public void armpositionTrapPrep(){
     m_fx.setControl(m_dutyPosition.withPosition(kTrapPrepPosition));
-  }*/
-  /*public void armpositionTrapClimb(){
+  }
+  public void armpositionTrapClimb(){
     m_fx.setControl(m_dutyPosition.withPosition(kTrapclimbPosition));
-  }*/
-public void armclearfault(){
- /* Clear sticky faults */  
-  m_fx.clearStickyFaults();
-}
+  }
+  public void StageShot(){
+    m_fx.setControl(m_dutyPosition.withPosition(kStageShot));
+  }
+  public void PresetShot(){
+    m_fx.setControl(m_dutyPosition.withPosition(kPresetShot));
+  }
+   
+// public void armclearfault(){
+//  /* Clear sticky faults */  
+// //   m_fx.clearStickyFaults();
+// // }
 
 public void  armmanual(){
   //m_fx.setControl(m_dutyCycleControl.withOutput(m_operatorController.getLeftY()));

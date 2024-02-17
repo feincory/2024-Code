@@ -126,37 +126,50 @@ public class climber extends SubsystemBase {
 
     public void climbReleaseCommand() {
       if(climberHomed == true){
-      m_climberPID.setReference(-75, CANSparkMax.ControlType.kPosition);
-      }else{}}
+      m_climberPID.setReference(-129, CANSparkMax.ControlType.kPosition);
+      }
+      else      {}
+      }
+
+    public void climbwinchbottom() {
+      if(climberHomed == true && !m_climbsensor.get()==false){
+      m_climberPID.setReference(150, CANSparkMax.ControlType.kPosition);
+      }
+      else{
+       m_climbmotorlead.set(0);
+      }
+      }      
+      
+
     
       //return runOnce(() -> m_climberPID.setReference(-10, CANSparkMax.ControlType.kPosition));}
         
     
-public Command autoclmbCommand() {
-      return runEnd(() -> {
-        if(m_climbencoder.getPosition() <= 10 /*&& m_climbsensor.get() == false*/) {
-          autolineup = true;
-        }
-        else  {}
-      }, () -> { m_climbmotorlead.set(0);});
-    }
-public Command climbrun() {
-      return runEnd(() -> {
-        if(autolineup == true /*&& m_climbsensor.get() == false*/  ) {
-          m_climberPID.setReference(10, CANSparkMax.ControlType.kPosition);
+// public Command autoclmbCommand() {
+//       return runEnd(() -> {
+//         if(m_climbencoder.getPosition() <= 10 /*&& m_climbsensor.get() == false*/) {
+//           autolineup = true;
+//         }
+//         else  {}
+//       }, () -> { m_climbmotorlead.set(0);});
+//     }
+// public Command climbrun() {
+//       return runEnd(() -> {
+//         if(autolineup == true /*&& m_climbsensor.get() == false*/  ) {
+//           m_climberPID.setReference(10, CANSparkMax.ControlType.kPosition);
 
           
-        }
-        else  {}
-      }, () -> { m_climbmotorlead.set(0);});
-    }
-public Command climbNotSafe(){
-  return run(() ->{
-    if(m_climbsensor.get() == false){
-      m_climberPID.setOutputRange(kMinOutputNotSafe, kMaxOutputNotSafe);
-      climbReleaseCommand();
-    }else{m_climbmotorlead.set(0);}});
-}
+//         }
+//         else  {}
+//       }, () -> { m_climbmotorlead.set(0);});
+//     }
+// public Command climbNotSafe(){
+//   return run(() ->{
+//     if(m_climbsensor.get() == false){
+//       m_climberPID.setOutputRange(kMinOutputNotSafe, kMaxOutputNotSafe);
+//       climbReleaseCommand();
+//     }else{m_climbmotorlead.set(0);}});
+// }
 
 // public void climbrelease(){
 //   //reset encoder to start release
@@ -235,11 +248,11 @@ public Command climbNotSafe(){
 
 //leave for manual control
 public void  climbupmanual(){
-  m_climbmotorlead.set(-.3);//was -.5
+  m_climbmotorlead.set(-.5);//was -.5
 }
 
 public void climbdownmanual(){
-m_climbmotorlead.set(.3);//was .5
+m_climbmotorlead.set(.5);//was .5
 }
 
 public void stop(){
