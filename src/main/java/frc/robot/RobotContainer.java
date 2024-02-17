@@ -55,11 +55,12 @@ public class RobotContainer {
   public final CommandSwerveDrivetrain drivetrain = TunerConstants.DriveTrain; // My drivetrain
 
   private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
-      .withDeadband(MaxSpeed * 0.1).withRotationalDeadband(MaxAngularRate * 0.1) // Add a 10% deadband
+      .withDeadband(MaxSpeed * 0.05).withRotationalDeadband(MaxAngularRate * 0.06) // Add a 10% deadband
       .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // I want field-centric
                                                                // driving in open loop
   private final SwerveRequest.SwerveDriveBrake brake = new SwerveRequest.SwerveDriveBrake();
   private final SwerveRequest.RobotCentric forwardStraight = new SwerveRequest.RobotCentric().withDriveRequestType(DriveRequestType.OpenLoopVoltage);
+  private final SwerveRequest.RobotCentric limelightrotate = new SwerveRequest.RobotCentric().withDriveRequestType(DriveRequestType.OpenLoopVoltage);
   private final SwerveRequest.PointWheelsAt point = new SwerveRequest.PointWheelsAt();
 
   /* Path follower */
@@ -75,6 +76,7 @@ public class RobotContainer {
   public final CANLauncher m_launcher = new CANLauncher();
   public final arm m_arm = new arm();
   public final climber m_climber = new climber();
+  public double kLLpcontroller;
   /*The gamepad provided in the KOP shows up like an XBox controller if the mode switch is set to X mode using the
    * switch on the top.*/
 
@@ -83,6 +85,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
+    kLLpcontroller = .18;
   }
 
   /**
@@ -101,29 +104,49 @@ public class RobotContainer {
         ).ignoringDisable(true));
 
     m_drivercontroller.button(15).whileTrue(drivetrain.applyRequest(() -> brake));    
-    m_drivercontroller.button(16).whileTrue(drivetrain
-        .applyRequest(() -> point.withModuleDirection(new Rotation2d(-m_drivercontroller.getRawAxis(0), m_drivercontroller.getRawAxis(1)))));
+
+    //m_drivercontroller.button(16).whileTrue(drivetrain
+    //    .applyRequest(() -> point.withModuleDirection(new Rotation2d(-m_drivercontroller.getRawAxis(0), m_drivercontroller.getRawAxis(1)))));
     
         
-      // reset the field-centric heading on left bumper press
+      // reset the field-centric heading on reset button of flight controller
     m_drivercontroller.button(14).whileTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));
 
  
     drivetrain.registerTelemetry(logger::telemeterize);
 
-    m_drivercontroller.button(22).whileTrue(drivetrain.applyRequest(() -> forwardStraight.withVelocityX(.75).withVelocityY(0)));
-    m_drivercontroller.button(21).whileTrue(drivetrain.applyRequest(() -> forwardStraight.withVelocityX(-0.75).withVelocityY(0)));
-    m_drivercontroller.button(19).whileTrue(drivetrain.applyRequest(() -> forwardStraight.withVelocityX(0).withVelocityY(0.75)));
-    m_drivercontroller.button(20).whileTrue(drivetrain.applyRequest(() -> forwardStraight.withVelocityX(0).withVelocityY(-0.75)));    
 
+    m_drivercontroller.button(22).whileTrue(drivetrain.applyRequest(() -> forwardStraight.withVelocityX(.4).withVelocityY(0)));
+    m_drivercontroller.button(21).whileTrue(drivetrain.applyRequest(() -> forwardStraight.withVelocityX(-0.4).withVelocityY(0)));
+    m_drivercontroller.button(19).whileTrue(drivetrain.applyRequest(() -> forwardStraight.withVelocityX(0).withVelocityY(0.4)));
+    m_drivercontroller.button(20).whileTrue(drivetrain.applyRequest(() -> forwardStraight.withVelocityX(0).withVelocityY(-0.4)));  
+    
+    
+    //limelight autoline up
+    m_drivercontroller.button(13).whileTrue(drivetrain.applyRequest(() -> 
+      drive.withVelocityX(m_drivercontroller.getRawAxis(1) * MaxSpeed) // Drive forward with
+      .withVelocityY(-m_drivercontroller.getRawAxis(0) * MaxSpeed) // Drive left with negative X (left)
+      .withRotationalRate(-LimelightHelpers.getTX(null)*kLLpcontroller))); 
+
+    //climber auto line up
+    m_drivercontroller.button(25).whileTrue(drivetrain.applyRequest(() -> 
+      drive.withVelocityX((-.7 - LimelightHelpers.getTX(null))*0) // Drive forward with
+      .withVelocityY((0-LimelightHelpers.getTY(null))*0) //
+      .withRotationalRate(0-drivetrain.getPigeon2().getYaw().getValueAsDouble() * .10 ))); //
 
     /*Create an inline sequence to run when the operator presses and holds the A (green) button. Run the PrepareLaunch
      * command for 1 seconds and then run the LaunchNote command */
+    // m_operatorController.rightBumper().whileTrue(
+    //         new PrepareLaunch(m_launcher)
+    //             .withTimeout(LauncherConstants.kLauncherDelay)
+    //             .andThen(new LaunchNote(m_launcher))
+    //             .handleInterrupt(() -> m_launcher.stop()));
+
     m_operatorController.rightBumper().whileTrue(
-            new PrepareLaunch(m_launcher)
-                .withTimeout(LauncherConstants.kLauncherDelay)
-                .andThen(new LaunchNote(m_launcher))
-                .handleInterrupt(() -> m_launcher.stop()));
+        new PrepareLaunch(m_launcher).handleInterrupt(() -> m_launcher.stop()));
+    
+    m_operatorController.leftStick().whileTrue(
+        new LaunchNote(m_launcher).handleInterrupt(() -> m_launcher.stop()));
                 
     // Set up a binding to run the intake command while the operator is pressing and holding the
     // left Bumper
@@ -169,7 +192,7 @@ public class RobotContainer {
 }else{
     m_operatorController.povDown().onTrue(new InstantCommand(m_arm::armpositionIntake));}
   m_operatorController.povRight().onTrue(new InstantCommand(m_arm::armpositionamp));    
-  m_operatorController.povUp().onTrue(new InstantCommand(m_arm::StageShot));
+  m_operatorController.rightBumper().onTrue(new InstantCommand(m_arm::StageShot));//was pov up
   m_operatorController.povLeft().onTrue(new InstantCommand(m_arm::PresetShot));
  
   // m_operatorController.back().onTrue(new InstantCommand(m_arm::armclearfault));

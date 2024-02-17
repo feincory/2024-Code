@@ -75,7 +75,7 @@ public static class armConstants{
   public static double kMaxOutput=.1;
   public static double kMinOutput=-.1;
   // position
-  public static double kIntakePosition = -.164;
+  public static double kIntakePosition = -.168;
   //set zero with t squre 24" from ground, ++ increases the distance from the ground
   public static double kampPosition = .105;
   public static double kTrapPrepPosition = .240;//was .240, -.155 for shooting from stage

@@ -115,7 +115,7 @@ public class climber extends SubsystemBase {
     //   });
     // }
     public void climberencoderreset(){
-      if(!m_climbsensor.get()== true){
+      if(!m_climbsensor.get()== true && climberHomed == false){
         m_climbencoder.setPosition(0);
         climberHomed = true;
 
@@ -131,9 +131,10 @@ public class climber extends SubsystemBase {
       else      {}
       }
 
+    
     public void climbwinchbottom() {
       if(climberHomed == true && !m_climbsensor.get()==false){
-      m_climberPID.setReference(150, CANSparkMax.ControlType.kPosition);
+      m_climberPID.setReference(161, CANSparkMax.ControlType.kPosition);
       }
       else{
        m_climbmotorlead.set(0);
