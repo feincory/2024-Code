@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import static frc.robot.Constants.LauncherConstants.*;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -20,17 +21,25 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class CANLauncher extends SubsystemBase {
   CANSparkMax m_launchWheel;
   CANSparkMax m_feedWheel;
+  CANSparkMax m_kickerWheel;
   public DigitalInput m_ringDetect;
   public boolean hasnote;
+  RelativeEncoder m_intakeencode;
 
   /** Creates a new Launcher. */
   public CANLauncher() {
     m_launchWheel = new CANSparkMax(kLauncherID, MotorType.kBrushless);
     m_feedWheel = new CANSparkMax(kFeederID, MotorType.kBrushless);
+    m_kickerWheel = new CANSparkMax(kKickerID, MotorType.kBrushless);
    m_ringDetect = new DigitalInput(1);
     m_launchWheel.setSmartCurrentLimit(kLauncherCurrentLimit);
     m_feedWheel.setSmartCurrentLimit(kFeedCurrentLimit);
+    m_kickerWheel.setSmartCurrentLimit(kFeedCurrentLimit);
+    m_launchWheel.restoreFactoryDefaults();
+    m_feedWheel.restoreFactoryDefaults();
+    m_kickerWheel.restoreFactoryDefaults();
    m_ringDetect.get();
+   m_intakeencode = m_feedWheel.getEncoder();
    createDashboards();
   }
  
@@ -49,11 +58,22 @@ public class CANLauncher extends SubsystemBase {
         () -> {
           setFeedWheel(kIntakeFeederSpeed);
           setLaunchWheel(kIntakeLauncherSpeed);
+          setKickerWheel(kIntakeKickerSpeed);
         },
         // When the command stops, stop the wheels
         () -> {
           stop();
         });
+  }
+ 
+   
+  
+  public void noteMoveForAmp(){
+    m_feedWheel.set(.5);
+  }
+  public void noteMoveForshot(){
+    m_feedWheel.set(-.2);
+    m_launchWheel.set(.4);
   }
 
   public Command getReverseNoteCommand() {
@@ -64,6 +84,7 @@ public class CANLauncher extends SubsystemBase {
         () -> {
           setFeedWheel(kIntakeFeederReverseSpeed);
           setLaunchWheel(kLauncherReverseSpeed);
+          setKickerWheel(-kIntakeKickerSpeed);
         },
         // When the command stops, stop the wheels
         () -> {
@@ -79,12 +100,15 @@ public class CANLauncher extends SubsystemBase {
   public void setFeedWheel(double speed) {
     m_feedWheel.set(speed);
   }
-
+ public void setKickerWheel(double speed) {
+    m_kickerWheel.set(speed);
+  }
   // A helper method to stop both wheels. You could skip having a method like this and call the
   // individual accessors with speed = 0 instead
   public void stop() {
     m_launchWheel.set(0);
     m_feedWheel.set(0);
+    m_kickerWheel.set(0);
   }
   // creates a value for shuffle board
 public boolean getstate(){

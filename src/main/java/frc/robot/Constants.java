@@ -40,6 +40,7 @@ public final class Constants {
     // PWM ports/CAN IDs for motor controllers
     public static final int kFeederID = 1;
     public static final int kLauncherID = 2;
+    public static final int kKickerID = 3;
 
     // Current limit for launcher and feed wheels
     public static final int kLauncherCurrentLimit = 40;
@@ -48,10 +49,11 @@ public final class Constants {
 
     // Speeds for wheels when intaking and launching. Intake speeds are negative to run the wheels
     // in reverse
-    public static final double kLauncherSpeed = -.8;
+    public static final double kLauncherSpeed = -1;
     public static final double kLaunchFeederSpeed = 1;
     public static final double kIntakeLauncherSpeed = 0;
     public static final double kIntakeFeederSpeed = .7;
+    public static final double kIntakeKickerSpeed = .5;
     public static final double kLauncherReverseSpeed = 0.4;
     public static final double kIntakeFeederReverseSpeed = -.25;
 
@@ -61,15 +63,15 @@ public final class Constants {
 
 public static class armConstants{
   // motor can ids
-  public static final int karmId = 3;
+  public static final int karmId = 15;// place holder
   // curant limiting
   public static final int karmcurrentLimit = 60;
     //rotate cancoder 
   public static final String drivecanbusname = "Drive CAN";
   public static final int armCANcoderId = 47;
   public static double kPc = 10;
-  public static double kIc = .5;
-  public static double kDc = .5;
+  public static double kIc = .6;
+  public static double kDc = .2;
   public static double kGc = 0; //Gravity
   //pid
   public static double kMaxOutput=.1;

@@ -5,6 +5,7 @@
 package frc.robot;
 
 import com.ctre.phoenix6.mechanisms.swerve.SwerveModule.DriveRequestType;
+import com.pathplanner.lib.commands.PathPlannerAuto;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest;
 
 import edu.wpi.first.wpilibj2.command.Command;
@@ -64,7 +65,7 @@ public class RobotContainer {
   private final SwerveRequest.PointWheelsAt point = new SwerveRequest.PointWheelsAt();
 
   /* Path follower */
-  private Command runAuto = drivetrain.getAutoPath("Tests");
+  private Command runAuto = drivetrain.getAutoPath("New Auto");
   //private Command runAuto = drivetrain.getAutoPath("SimplePath");
   private final Telemetry logger = new Telemetry(MaxSpeed);
 
@@ -97,9 +98,9 @@ public class RobotContainer {
     // Set the default command for the drivetrain to drive using the joysticks
     //swerve button bindings
         drivetrain.setDefaultCommand( // Drivetrain will execute this command periodically
-        drivetrain.applyRequest(() -> drive.withVelocityX(m_drivercontroller.getRawAxis(1) * MaxSpeed) // Drive forward with
+        drivetrain.applyRequest(() -> drive.withVelocityX(-m_drivercontroller.getRawAxis(1) * MaxSpeed) // Drive forward with
                                                                                           // negative Y (forward)
-            .withVelocityY(-m_drivercontroller.getRawAxis(0) * MaxSpeed) // Drive left with negative X (left)
+            .withVelocityY(m_drivercontroller.getRawAxis(0) * MaxSpeed) // Drive left with negative X (left)
             .withRotationalRate(-m_drivercontroller.getRawAxis(3) * MaxAngularRate) // Drive counterclockwise with negative X (left)
         ).ignoringDisable(true));
 
@@ -150,8 +151,12 @@ public class RobotContainer {
                 
     // Set up a binding to run the intake command while the operator is pressing and holding the
     // left Bumper
-    m_operatorController.leftBumper().whileTrue(m_launcher.getIntakeCommand());
-    m_operatorController.y().whileTrue(m_launcher.getReverseNoteCommand());
+    m_operatorController.leftBumper().whileTrue(m_launcher.getIntakeCommand())
+                                      .onFalse(new RunCommand(m_launcher::noteMoveForshot)
+                                      .withTimeout(.08)//was .05
+                                      .andThen(new InstantCommand(m_launcher::stop)));
+                                      
+    m_operatorController.y().whileTrue(m_launcher.getReverseNoteCommand().andThen(m_launcher::noteMoveForshot));
     m_operatorController.x().onTrue(new InstantCommand(m_arm::armfoward))
                           .onFalse(new InstantCommand(m_arm::stop));
     m_operatorController.b().onTrue(new InstantCommand(m_arm::armreverese))
@@ -177,21 +182,22 @@ public class RobotContainer {
       new InstantCommand(m_arm::armpositionTrapClimb)); 
 
      // .andThen(new RunCommand(m_arm::armpositionTrapPrep))
-     // .andThen(new RunCommand(m_climber::climbNotSafe)));
-                                
-   m_operatorController.leftTrigger(.5).onTrue(new InstantCommand(m_climber::climbupmanual))
+     // .andThen(new RunCommand(m_climber::climbNotSafe))                         
+  
+     m_operatorController.leftTrigger(.5).onTrue(new InstantCommand(m_climber::climbupmanual))
                              .onFalse(new InstantCommand(m_climber::stop));
     m_operatorController.rightTrigger(.5).onTrue(new InstantCommand(m_climber::climbdownmanual))
                              .onFalse(new InstantCommand(m_climber::stop));
     
     
   //arm position
-  // intake with note detect
-  if(m_launcher.m_ringDetect.get() == false){
-  m_launcher.stop();
-}else{
-    m_operatorController.povDown().onTrue(new InstantCommand(m_arm::armpositionIntake));}
-  m_operatorController.povRight().onTrue(new InstantCommand(m_arm::armpositionamp));    
+  
+  
+   m_operatorController.povDown().onTrue(new InstantCommand(m_arm::armpositionIntake));
+  m_operatorController.povRight().onTrue(new InstantCommand(m_arm::armpositionamp)
+                                        .andThen(new RunCommand( m_launcher::noteMoveForAmp))
+                                        .withTimeout(1)
+                                        .andThen(m_launcher::stop));    
   m_operatorController.rightBumper().onTrue(new InstantCommand(m_arm::StageShot));//was pov up
   m_operatorController.povLeft().onTrue(new InstantCommand(m_arm::PresetShot));
  
@@ -209,12 +215,14 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     return runAuto;
+   // return new PathPlannerAuto("New Auto");
     // An example command will be run in autonomous
     //return Autos.exampleAuto(m_drivetrain);
   }
 
   private void buildDashboard(){
     buildarmTab();
+    
 
   }
 
