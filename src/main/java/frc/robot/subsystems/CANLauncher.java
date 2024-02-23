@@ -40,6 +40,7 @@ public class CANLauncher extends SubsystemBase {
     m_kickerWheel.restoreFactoryDefaults();
    m_ringDetect.get();
    m_intakeencode = m_feedWheel.getEncoder();
+   m_kickerWheel.setOpenLoopRampRate(.2);
    createDashboards();
   }
  

@@ -80,6 +80,7 @@ public class climber extends SubsystemBase {
  //m_climberPID.setReference(position, CANSparkMax.ControlType.kPosition);
  autolineup =false;
  climberHomed = false;
+ climberreleased = false;
  
  createDashboards();
 
@@ -125,16 +126,25 @@ public class climber extends SubsystemBase {
 
 
     public void climbReleaseCommand() {
-      if(climberHomed == true){
-      m_climberPID.setReference(-129, CANSparkMax.ControlType.kPosition);
+      if(climberHomed == true && climberreleased == false){
+      m_climberPID.setReference(25, CANSparkMax.ControlType.kPosition);
+  
       }
-      else      {}
+
+      if(m_climbencoder.getPosition()>24 && climberreleased == false){
+      climberreleased = true;
+      }
+
+      if(climberHomed == true && climberreleased == true){
+      m_climberPID.setReference(-165, CANSparkMax.ControlType.kPosition);
+      }  
+      else{}
       }
 
     
     public void climbwinchbottom() {
       if(climberHomed == true && !m_climbsensor.get()==false){
-      m_climberPID.setReference(161, CANSparkMax.ControlType.kPosition);
+      m_climberPID.setReference(113, CANSparkMax.ControlType.kPosition);
       }
       else{
        m_climbmotorlead.set(0);

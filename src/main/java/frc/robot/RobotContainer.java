@@ -5,6 +5,7 @@
 package frc.robot;
 
 import com.ctre.phoenix6.mechanisms.swerve.SwerveModule.DriveRequestType;
+import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.commands.PathPlannerAuto;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest;
 
@@ -84,6 +85,10 @@ public class RobotContainer {
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+    NamedCommands.registerCommand("run intake", new InstantCommand(m_arm::armpositionIntake));
+    NamedCommands.registerCommand("run intake", m_launcher.getIntakeCommand());
+
+
     // Configure the trigger bindings
     configureBindings();
     kLLpcontroller = .18;
@@ -98,9 +103,9 @@ public class RobotContainer {
     // Set the default command for the drivetrain to drive using the joysticks
     //swerve button bindings
         drivetrain.setDefaultCommand( // Drivetrain will execute this command periodically
-        drivetrain.applyRequest(() -> drive.withVelocityX(-m_drivercontroller.getRawAxis(1) * MaxSpeed) // Drive forward with
+        drivetrain.applyRequest(() -> drive.withVelocityX(m_drivercontroller.getRawAxis(1) * MaxSpeed) // Drive forward with
                                                                                           // negative Y (forward)
-            .withVelocityY(m_drivercontroller.getRawAxis(0) * MaxSpeed) // Drive left with negative X (left)
+            .withVelocityY(-m_drivercontroller.getRawAxis(0) * MaxSpeed) // Drive left with negative X (left)
             .withRotationalRate(-m_drivercontroller.getRawAxis(3) * MaxAngularRate) // Drive counterclockwise with negative X (left)
         ).ignoringDisable(true));
 
@@ -117,10 +122,10 @@ public class RobotContainer {
     drivetrain.registerTelemetry(logger::telemeterize);
 
 
-    m_drivercontroller.button(22).whileTrue(drivetrain.applyRequest(() -> forwardStraight.withVelocityX(.4).withVelocityY(0)));
-    m_drivercontroller.button(21).whileTrue(drivetrain.applyRequest(() -> forwardStraight.withVelocityX(-0.4).withVelocityY(0)));
-    m_drivercontroller.button(19).whileTrue(drivetrain.applyRequest(() -> forwardStraight.withVelocityX(0).withVelocityY(0.4)));
-    m_drivercontroller.button(20).whileTrue(drivetrain.applyRequest(() -> forwardStraight.withVelocityX(0).withVelocityY(-0.4)));  
+    m_drivercontroller.button(22).whileTrue(drivetrain.applyRequest(() -> forwardStraight.withVelocityX(-.5).withVelocityY(0)));
+    m_drivercontroller.button(21).whileTrue(drivetrain.applyRequest(() -> forwardStraight.withVelocityX(0.5).withVelocityY(0)));
+    m_drivercontroller.button(19).whileTrue(drivetrain.applyRequest(() -> forwardStraight.withVelocityX(0).withVelocityY(-0.5)));
+    m_drivercontroller.button(20).whileTrue(drivetrain.applyRequest(() -> forwardStraight.withVelocityX(0).withVelocityY(0.5)));  
     
     
     //limelight autoline up
@@ -193,12 +198,18 @@ public class RobotContainer {
   //arm position
   
   
-   m_operatorController.povDown().onTrue(new InstantCommand(m_arm::armpositionIntake));
+   m_operatorController.povDown().onTrue(new InstantCommand(m_arm::armpositionIntake)
+                                        .andThen(new RunCommand( m_launcher::noteMoveForAmp))
+                                        .withTimeout(1)
+                                        .andThen(m_launcher::stop));
   m_operatorController.povRight().onTrue(new InstantCommand(m_arm::armpositionamp)
                                         .andThen(new RunCommand( m_launcher::noteMoveForAmp))
                                         .withTimeout(1)
                                         .andThen(m_launcher::stop));    
-  m_operatorController.rightBumper().onTrue(new InstantCommand(m_arm::StageShot));//was pov up
+  m_operatorController.rightBumper().onTrue(new InstantCommand(m_arm::StageShot))
+                                        .onFalse(new RunCommand(m_launcher::noteMoveForshot)
+                                      .withTimeout(.08)//was .05
+                                      .andThen(new InstantCommand(m_launcher::stop)));
   m_operatorController.povLeft().onTrue(new InstantCommand(m_arm::PresetShot));
  
   // m_operatorController.back().onTrue(new InstantCommand(m_arm::armclearfault));

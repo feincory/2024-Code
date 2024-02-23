@@ -12,9 +12,35 @@
     "data": {
       "commands": [
         {
-          "type": "path",
+          "type": "parallel",
           "data": {
-            "pathName": "2024-02-19 test"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "BLUE 1"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "run intake"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "sequential",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "New Path"
+                }
+              }
+            ]
           }
         }
       ]

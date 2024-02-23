@@ -53,7 +53,7 @@ public final class Constants {
     public static final double kLaunchFeederSpeed = 1;
     public static final double kIntakeLauncherSpeed = 0;
     public static final double kIntakeFeederSpeed = .7;
-    public static final double kIntakeKickerSpeed = .5;
+    public static final double kIntakeKickerSpeed = .8;
     public static final double kLauncherReverseSpeed = 0.4;
     public static final double kIntakeFeederReverseSpeed = -.25;
 
@@ -69,9 +69,9 @@ public static class armConstants{
     //rotate cancoder 
   public static final String drivecanbusname = "Drive CAN";
   public static final int armCANcoderId = 47;
-  public static double kPc = 10;
-  public static double kIc = .6;
-  public static double kDc = .2;
+  public static double kPc = 7;
+  public static double kIc = .3;
+  public static double kDc = .1;
   public static double kGc = 0; //Gravity
   //pid
   public static double kMaxOutput=.1;
