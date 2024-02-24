@@ -3,41 +3,41 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 6.908328852457228,
-        "y": 5.515804013063089
+        "x": 8.546530939215726,
+        "y": 5.545221859674489
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.115984036998368,
-        "y": 5.644074269603602
+        "x": 7.096090346026847,
+        "y": 5.515621031242063
       },
       "isLocked": false,
       "linkedName": "Mid-2"
     },
     {
       "anchor": {
-        "x": 4.243687723652298,
-        "y": 6.01924220554885
+        "x": 4.64908852894629,
+        "y": 6.946327738809324
       },
       "prevControl": {
-        "x": 5.677488123063409,
-        "y": 5.966138487052143
+        "x": 6.049996670060907,
+        "y": 6.636392309359189
       },
       "nextControl": {
-        "x": 3.710759497891311,
-        "y": 6.038980287984442
+        "x": 3.5341239913249067,
+        "y": 7.19300130907954
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 1.6579989245897349,
-        "y": 5.683694804143785
+        "x": 1.4324651726226545,
+        "y": 5.545221859674489
       },
       "prevControl": {
-        "x": 2.782830405021927,
-        "y": 5.979703088468048
+        "x": 2.7151677380277848,
+        "y": 6.245774799241906
       },
       "nextControl": null,
       "isLocked": false,
@@ -51,9 +51,16 @@
       "name": "New Event Marker",
       "waypointRelativePos": 0.0,
       "command": {
-        "type": "parallel",
+        "type": "race",
         "data": {
-          "commands": []
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "runintake"
+              }
+            }
+          ]
         }
       }
     }
@@ -66,13 +73,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -87.7093899573615,
+    "rotation": -1.1691393279074178,
     "rotateFast": false
   },
   "reversed": false,
   "folder": null,
   "previewStartingState": {
-    "rotation": 90.0,
+    "rotation": 1.0609116902642277,
     "velocity": 0
   },
   "useDefaultConstraints": true

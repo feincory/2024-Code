@@ -25,6 +25,7 @@ public class CANLauncher extends SubsystemBase {
   public DigitalInput m_ringDetect;
   public boolean hasnote;
   RelativeEncoder m_intakeencode;
+  
 
   /** Creates a new Launcher. */
   public CANLauncher() {

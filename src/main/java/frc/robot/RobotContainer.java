@@ -66,7 +66,7 @@ public class RobotContainer {
   private final SwerveRequest.PointWheelsAt point = new SwerveRequest.PointWheelsAt();
 
   /* Path follower */
-  private Command runAuto = drivetrain.getAutoPath("Blue Center");
+  private final Command runAuto;
   //private Command runAuto = drivetrain.getAutoPath("SimplePath");
   private final Telemetry logger = new Telemetry(MaxSpeed);
 
@@ -85,9 +85,11 @@ public class RobotContainer {
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    NamedCommands.registerCommand("run intake", new RunCommand(m_arm::armpositionIntake));
-    NamedCommands.registerCommand("run intake", m_launcher.getIntakeCommand());
+    //NamedCommands.registerCommand("run intake", new RunCommand(m_arm::armpositionIntake));
+    NamedCommands.registerCommand("runintake", m_launcher.getIntakeCommand());
+    //NamedCommands.registerCommand("run intake",new RunCommand(m_launcher.getIntakeCommand));
 
+     runAuto = drivetrain.getAutoPath("Blue Center");
 
     // Configure the trigger bindings
     configureBindings();
@@ -198,10 +200,10 @@ public class RobotContainer {
   //arm position
   
   
-   m_operatorController.povDown().onTrue(new InstantCommand(m_arm::armpositionIntake)
-                                        .andThen(new RunCommand( m_launcher::noteMoveForAmp))
-                                        .withTimeout(1)
-                                        .andThen(m_launcher::stop));
+   m_operatorController.povDown().onTrue(new InstantCommand(m_arm::armpositionIntake));
+                                        //.andThen(new RunCommand( m_launcher::noteMoveForAmp)));
+                                        //.withTimeout(.25)
+                                        //.andThen(m_launcher::stop));
   m_operatorController.povRight().onTrue(new InstantCommand(m_arm::armpositionamp)
                                         .andThen(new RunCommand( m_launcher::noteMoveForAmp))
                                         .withTimeout(1)
