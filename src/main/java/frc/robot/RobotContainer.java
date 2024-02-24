@@ -66,7 +66,7 @@ public class RobotContainer {
   private final SwerveRequest.PointWheelsAt point = new SwerveRequest.PointWheelsAt();
 
   /* Path follower */
-  private Command runAuto = drivetrain.getAutoPath("New Auto");
+  private Command runAuto = drivetrain.getAutoPath("Blue Center");
   //private Command runAuto = drivetrain.getAutoPath("SimplePath");
   private final Telemetry logger = new Telemetry(MaxSpeed);
 
@@ -85,7 +85,7 @@ public class RobotContainer {
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    NamedCommands.registerCommand("run intake", new InstantCommand(m_arm::armpositionIntake));
+    NamedCommands.registerCommand("run intake", new RunCommand(m_arm::armpositionIntake));
     NamedCommands.registerCommand("run intake", m_launcher.getIntakeCommand());
 
 
