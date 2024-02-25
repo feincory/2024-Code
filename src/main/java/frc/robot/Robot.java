@@ -33,7 +33,7 @@ import com.ctre.phoenix.led.*;
  */
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
-  private final static XboxController m_operatorController = new XboxController(OperatorConstants.kOperatorControllerPort);
+ // private final static XboxController m_operatorController = new XboxController(OperatorConstants.kOperatorControllerPort);
   private RobotContainer m_robotContainer;
   private final boolean UseLimelight = false;
   private final CANdle m_CANdle = new CANdle(kCANdleID, drivecanbusname);
@@ -116,11 +116,11 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    if(Timer.getMatchTime() >= 130){
-      m_operatorController.setRumble(RumbleType.kBothRumble, 1);
-    }else{
-      m_operatorController.setRumble(RumbleType.kBothRumble, 0);
-    }
+    // if(Timer.getMatchTime() <= 20){
+    //   m_operatorController.setRumble(RumbleType.kBothRumble, 1);
+    // }else{
+    //   m_operatorController.setRumble(RumbleType.kBothRumble, 0);
+    // }
   }
 
   @Override
