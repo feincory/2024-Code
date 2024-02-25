@@ -6,37 +6,44 @@ package frc.robot;
 
 import com.ctre.phoenix6.mechanisms.swerve.SwerveModule.DriveRequestType;
 import com.pathplanner.lib.auto.NamedCommands;
-import com.pathplanner.lib.commands.PathPlannerAuto;
+
 import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.Commands;
+
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+
 //import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.RunCommand;
+
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import frc.robot.Constants.LauncherConstants;
+
 import frc.robot.Constants.OperatorConstants;
 
 //import frc.robot.commands.Autos;
 import frc.robot.commands.LaunchNote;
 import frc.robot.commands.PrepareLaunch;
-//import frc.robot.subsystems.PWMDrivetrain;
-//import frc.robot.subsystems.PWMLauncher;
 import frc.robot.generated.TunerConstants;
-import frc.robot.Constants.OperatorConstants;
+
 
 //import frc.robot.commands.Autos;
-import frc.robot.commands.LaunchNote;
-import frc.robot.commands.PrepareLaunch;
+
 import frc.robot.subsystems.CANLauncher;
 import frc.robot.subsystems.arm;
 import frc.robot.subsystems.climber;
+// temporary to clean the problems 
+// import frc.robot.commands.LaunchNote;
+// import frc.robot.commands.PrepareLaunch;
+// import frc.robot.Constants.OperatorConstants;
+// import frc.robot.Constants.LauncherConstants;
+// import edu.wpi.first.wpilibj2.command.RunCommand;
+// import edu.wpi.first.math.geometry.Rotation2d;
+// import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+// import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+// import edu.wpi.first.wpilibj2.command.Commands;
+// import com.pathplanner.lib.commands.PathPlannerAuto;
+
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -233,15 +240,15 @@ public class RobotContainer {
     //return Autos.exampleAuto(m_drivetrain);
   }
 
-  private void buildDashboard(){
-    buildarmTab();
+  // private void buildDashboard(){
+  //   buildarmTab();
     
 
-  }
+  // }
 
-  private void buildarmTab(){
+  // private void buildarmTab(){
 
-    ShuffleboardTab armTab = Shuffleboard.getTab("arm");
+  //   ShuffleboardTab armTab = Shuffleboard.getTab("arm");
 
-  }
+  // }
 }

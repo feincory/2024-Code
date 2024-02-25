@@ -4,14 +4,26 @@
 
 package frc.robot;
 
+import frc.robot.Constants.ledConstants;
+import frc.robot.Constants.armConstants;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.Constants.OperatorConstants;
 import edu.wpi.first.cameraserver.CameraServer;
 //stuff addded for swerve
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
+
+import static frc.robot.Constants.armConstants.drivecanbusname;
+import static frc.robot.Constants.ledConstants.kCANdleID;
+
+
+import com.ctre.phoenix.led.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -21,10 +33,10 @@ import edu.wpi.first.wpilibj.Timer;
  */
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
-
+  private final static XboxController m_operatorController = new XboxController(OperatorConstants.kOperatorControllerPort);
   private RobotContainer m_robotContainer;
-
   private final boolean UseLimelight = false;
+  private final CANdle m_CANdle = new CANdle(kCANdleID, drivecanbusname);
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -35,6 +47,7 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
     CameraServer.startAutomaticCapture();
+    
 
     m_robotContainer.drivetrain.getDaqThread().setThreadPriority(99);
     // disables joystick warnings
@@ -103,6 +116,11 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
+    if(Timer.getMatchTime() >= 130){
+      m_operatorController.setRumble(RumbleType.kBothRumble, 1);
+    }else{
+      m_operatorController.setRumble(RumbleType.kBothRumble, 0);
+    }
   }
 
   @Override

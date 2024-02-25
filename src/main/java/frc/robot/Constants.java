@@ -107,5 +107,8 @@ public static double kMinOutputNotSafe= 0;
 public static double kMaxOutputNotSafe= 0.5;
 }
 
+public static class ledConstants{
+  public static int kCANdleID= 11;
+}
 
 }
