@@ -7,11 +7,14 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.cameraserver.CameraServer;
+import frc.robot.Constants.OperatorConstants;
+//import edu.wpi.first.cameraserver.CameraServer;
 //stuff addded for swerve
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -25,6 +28,10 @@ public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
 
   private final boolean UseLimelight = false;
+  private final static XboxController m_operatorController = new XboxController(OperatorConstants.kOperatorControllerPort);
+  
+  private final Timer m_Timer = new Timer();
+  
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -34,12 +41,13 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
-    CameraServer.startAutomaticCapture();
+    //CameraServer.startAutomaticCapture();
 
     m_robotContainer.drivetrain.getDaqThread().setThreadPriority(99);
     // disables joystick warnings
      DriverStation.silenceJoystickConnectionWarning(true);
-
+   
+   
   }
 
   /**
@@ -98,11 +106,21 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+    m_Timer.start();
+    
   }
 
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
+    //System.out.println(m_Timer.get());
+
+    if(m_Timer.get() >= 105 && m_Timer.get() <=106){
+      m_operatorController.setRumble(RumbleType.kBothRumble, 1);
+    }else{
+      m_operatorController.setRumble(RumbleType.kBothRumble, 0);
+    }
+    
   }
 
   @Override

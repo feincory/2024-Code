@@ -37,6 +37,7 @@ import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.CANLauncher;
 import frc.robot.subsystems.arm;
 import frc.robot.subsystems.climber;
+import frc.robot.subsystems.CANdleSystem;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -78,6 +79,7 @@ public class RobotContainer {
   public final CANLauncher m_launcher = new CANLauncher();
   public final arm m_arm = new arm();
   public final climber m_climber = new climber();
+  public final CANdleSystem m_led = new CANdleSystem(m_operatorController);
   public double kLLpcontroller;
   /*The gamepad provided in the KOP shows up like an XBox controller if the mode switch is set to X mode using the
    * switch on the top.*/
@@ -208,7 +210,7 @@ public class RobotContainer {
                                         .andThen(new RunCommand( m_launcher::noteMoveForAmp))
                                         .withTimeout(1)
                                         .andThen(m_launcher::stop));    
-  m_operatorController.rightBumper().onTrue(new InstantCommand(m_arm::StageShot))
+  m_operatorController.rightBumper()/* .onTrue(new InstantCommand(m_arm::StageShot))*/
                                         .onFalse(new RunCommand(m_launcher::noteMoveForshot)
                                       .withTimeout(.08)//was .05
                                       .andThen(new InstantCommand(m_launcher::stop)));

@@ -25,9 +25,11 @@ import com.ctre.phoenix6.signals.SensorDirectionValue;
 
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj2.command.Command;
 //import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.generated.TunerConstants;
+import frc.robot.LimelightHelpers;
 
 public class arm extends SubsystemBase {
   //Creates a new rotation. 
@@ -53,7 +55,7 @@ public class arm extends SubsystemBase {
 
 //soft limits
   //SoftwareLimitSwitchConfigs armlimit = new ForwardsSoftLimitEnable();
-
+   private double armAutoCalc;
   
   
   // CANcoder armCANenCaNcoder;
@@ -117,6 +119,9 @@ createDashboards();
     // This method will be called once per scheduler run
        if (printCount++ > 10) {
       printCount = 0;
+     
+      armAutoCalc =  LimelightHelpers.getTY(null)*20;
+      
       // If any faults happen, print them out. Sticky faults will always be present if live-fault occurs
       f_fusedSensorOutOfSync.refresh();
       sf_fusedSensorOutOfSync.refresh();
@@ -203,6 +208,10 @@ public void armreverese(){
 
 public void stop(){
   m_fx.setControl(m_dutyCycleControl.withOutput(0));
+}
+public void armAutoRotateCommand(double armAutoCalc){
+   m_fx.setControl(m_dutyCycleControl.withOutput(armAutoCalc));
+
 }
 
 // creates a value for shuffle board

@@ -1,0 +1,16 @@
+tx field snapp
+pipline with tag filters
+arm angle
+velocity control. maby
+
+
+
+shooter calibration points
+
+speaker shoot
+arm pos -.09
+LL Ty 8.08
+
+155 to frame 
+arm pos -.166
+ll Ty -11
