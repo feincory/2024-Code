@@ -12,8 +12,8 @@ import com.ctre.phoenix6.configs.CANcoderConfiguration;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.DutyCycleOut;
 import com.ctre.phoenix6.controls.PositionDutyCycle;
-import com.ctre.phoenix6.controls.PositionVoltage;
-import com.ctre.phoenix6.controls.StaticBrake;
+//import com.ctre.phoenix6.controls.PositionVoltage;
+//import com.ctre.phoenix6.controls.StaticBrake;
 import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.AbsoluteSensorRangeValue;
@@ -21,11 +21,11 @@ import com.ctre.phoenix6.signals.FeedbackSensorSourceValue;
 import com.ctre.phoenix6.signals.GravityTypeValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.ctre.phoenix6.signals.SensorDirectionValue;
-import com.revrobotics.CANSparkMax;
+//import com.revrobotics.CANSparkMax;
 
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
-import edu.wpi.first.wpilibj2.command.Command;
+//import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.generated.TunerConstants;
 
@@ -44,11 +44,11 @@ public class arm extends SubsystemBase {
   private final StatusSignal<Double> fx_vel = m_fx.getVelocity();
   private final StatusSignal<Double> cc_pos = m_cc.getPosition();
   private final StatusSignal<Double> cc_vel = m_cc.getVelocity();
-  private final StatusSignal<Double> fx_rotorPos = m_fx.getRotorPosition();
+  //private final StatusSignal<Double> fx_rotorPos = m_fx.getRotorPosition();
   private final DutyCycleOut m_dutyCycleControl = new DutyCycleOut(0);
   private int printCount = 0;
-  private final StaticBrake m_brake = new StaticBrake();
-  private final PositionVoltage m_voltagePosition = new PositionVoltage(0, 0, true, 0, 0, false, false, false);
+  //private final StaticBrake m_brake = new StaticBrake();
+  //private final PositionVoltage m_voltagePosition = new PositionVoltage(0, 0, true, 0, 0, false, false, false);
   private final PositionDutyCycle m_dutyPosition = new PositionDutyCycle(0, 0, true, 0, 0, false, false, false);
 
 //soft limits
@@ -122,7 +122,7 @@ createDashboards();
       sf_fusedSensorOutOfSync.refresh();
       f_remoteSensorInvalid.refresh();
       sf_remoteSensorInvalid.refresh();
-      boolean anyFault = sf_fusedSensorOutOfSync.getValue() || sf_remoteSensorInvalid.getValue();
+     // boolean anyFault = sf_fusedSensorOutOfSync.getValue() || sf_remoteSensorInvalid.getValue();
       // if(anyFault) {
       //   System.out.println("A fault has occurred:");
       //   /* If we're live, indicate live, otherwise if we're sticky indicate sticky, otherwise do nothing */
