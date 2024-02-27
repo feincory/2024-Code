@@ -5,10 +5,13 @@
 package frc.robot;
 
 import com.ctre.phoenix6.mechanisms.swerve.SwerveModule.DriveRequestType;
+import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 //import com.pathplanner.lib.commands.PathPlannerAuto;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest;
 
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 //import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -46,6 +49,10 @@ import frc.robot.subsystems.CANdleSystem;
  * subsystems, commands, and trigger mappings) should be declared here.
  */
 public class RobotContainer {
+  //sendable
+  private final SendableChooser<Command> autoChooser;
+  
+  
   //swerve section
   private double MaxSpeed = TunerConstants.kSpeedAt12VoltsMps; // kSpeedAt12VoltsMps desired top speed
   private double MaxAngularRate = 1.75 * Math.PI; // 3/4 of a rotation per second max angular velocity
@@ -87,6 +94,8 @@ public class RobotContainer {
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+   autoChooser = AutoBuilder.buildAutoChooser();
+   SmartDashboard.putData("Auto Chooser", autoChooser);
     //NamedCommands.registerCommand("run intake", new RunCommand(m_arm::armpositionIntake));
     NamedCommands.registerCommand("runintake", m_launcher.getIntakeCommand());
     NamedCommands.registerCommand("armintakepos", new RunCommand(m_arm::armpositionIntake));
@@ -236,7 +245,9 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return runAuto;
+    return autoChooser.getSelected();
+    //return runAuto;
+    
    // return new PathPlannerAuto("New Auto");
     // An example command will be run in autonomous
     //return Autos.exampleAuto(m_drivetrain);
