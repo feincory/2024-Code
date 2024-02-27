@@ -14,3 +14,11 @@ LL Ty 8.08
 155 to frame 
 arm pos -.166
 ll Ty -11
+
+
+differneces
+arm pos .076 (27.36 degrees)
+ll ty 19.08
+
+.076/19.08 = 
+1.433 degrees

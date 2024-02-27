@@ -120,8 +120,11 @@ createDashboards();
        if (printCount++ > 10) {
       printCount = 0;
      
-      armAutoCalc =  LimelightHelpers.getTY(null)*20;
-      
+      armAutoCalc =  
+      (((LimelightHelpers.getTY(null)+11) //limelight offset
+      *.0039) //calclate slope
+      -0.166);
+      //System.out.println(armAutoCalc);
       // If any faults happen, print them out. Sticky faults will always be present if live-fault occurs
       f_fusedSensorOutOfSync.refresh();
       sf_fusedSensorOutOfSync.refresh();
@@ -161,6 +164,7 @@ createDashboards();
   // public Command armpositionTrapPrep() {
   //     return runOnce(() -> m_fx.setControl(m_dutyPosition.withPosition(kTrapPrepPosition)));
      
+
   //   }
 
    
@@ -209,10 +213,13 @@ public void armreverese(){
 public void stop(){
   m_fx.setControl(m_dutyCycleControl.withOutput(0));
 }
-public void armAutoRotateCommand(double armAutoCalc){
-   m_fx.setControl(m_dutyCycleControl.withOutput(armAutoCalc));
-
+public void armAutoRotateCommand(){
+ 
+   m_fx.setControl(m_dutyPosition.withPosition(armAutoCalc));
+  
 }
+
+
 
 // creates a value for shuffle board
 public double getposition(){

@@ -89,13 +89,16 @@ public class RobotContainer {
   public RobotContainer() {
     //NamedCommands.registerCommand("run intake", new RunCommand(m_arm::armpositionIntake));
     NamedCommands.registerCommand("runintake", m_launcher.getIntakeCommand());
-    //NamedCommands.registerCommand("run intake",new RunCommand(m_launcher.getIntakeCommand));
+    NamedCommands.registerCommand("armintakepos", new RunCommand(m_arm::armpositionIntake));
+    NamedCommands.registerCommand("preparelaunch", m_launcher.setprepareCommand());
+    NamedCommands.registerCommand("launchnote", m_launcher.setlaunchCommand());
+    NamedCommands.registerCommand("autoaim", new RunCommand(m_arm::armAutoRotateCommand));
 
      runAuto = drivetrain.getAutoPath("Blue Center");
 
     // Configure the trigger bindings
     configureBindings();
-    kLLpcontroller = .18;
+    kLLpcontroller = .135;
   }
 
   /**
@@ -133,10 +136,14 @@ public class RobotContainer {
     
     
     //limelight autoline up
-    m_drivercontroller.button(13).whileTrue(drivetrain.applyRequest(() -> 
+    m_operatorController.rightStick().whileTrue(drivetrain.applyRequest(() -> 
       drive.withVelocityX(m_drivercontroller.getRawAxis(1) * MaxSpeed) // Drive forward with
       .withVelocityY(-m_drivercontroller.getRawAxis(0) * MaxSpeed) // Drive left with negative X (left)
-      .withRotationalRate(-LimelightHelpers.getTX(null)*kLLpcontroller))); 
+      .withRotationalRate((-LimelightHelpers.getTX(null)+2)*kLLpcontroller)))
+      .whileTrue(new RunCommand(m_arm::armAutoRotateCommand))
+      .onFalse(new InstantCommand(m_arm::stop))
+      .whileTrue(new PrepareLaunch(m_launcher)
+      .handleInterrupt(() -> m_launcher.stop())); 
 
     //climber auto line up
     m_drivercontroller.button(25).whileTrue(drivetrain.applyRequest(() -> 
