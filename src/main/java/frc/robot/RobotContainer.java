@@ -94,17 +94,16 @@ public class RobotContainer {
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-   autoChooser = AutoBuilder.buildAutoChooser();
-   SmartDashboard.putData("Auto Chooser", autoChooser);
-    //NamedCommands.registerCommand("run intake", new RunCommand(m_arm::armpositionIntake));
-    NamedCommands.registerCommand("runintake", m_launcher.getIntakeCommand());
+   
+    NamedCommands.registerCommand("runintake", m_launcher.intakeAutCommand());
     NamedCommands.registerCommand("armintakepos", new RunCommand(m_arm::armpositionIntake));
     NamedCommands.registerCommand("preparelaunch", m_launcher.setprepareCommand());
     NamedCommands.registerCommand("launchnote", m_launcher.setlaunchCommand());
     NamedCommands.registerCommand("autoaim", new RunCommand(m_arm::armAutoRotateCommand));
 
      runAuto = drivetrain.getAutoPath("Blue Center");
-
+    autoChooser = AutoBuilder.buildAutoChooser();
+    SmartDashboard.putData("Auto Chooser", autoChooser);
     // Configure the trigger bindings
     configureBindings();
     kLLpcontroller = .135;
@@ -175,11 +174,16 @@ public class RobotContainer {
         new LaunchNote(m_launcher).handleInterrupt(() -> m_launcher.stop()));
                 
     // Set up a binding to run the intake command while the operator is pressing and holding the
-    // left Bumper
+    //left Bumper
     m_operatorController.leftBumper().whileTrue(m_launcher.getIntakeCommand())
                                       .onFalse(new RunCommand(m_launcher::noteMoveForshot)
                                       .withTimeout(.08)//was .05
                                       .andThen(new InstantCommand(m_launcher::stop)));
+                         
+    //m_operatorController.leftBumper().onTrue(m_launcher.intakeAutCommand());                                  
+
+
+
                                       
     m_operatorController.y().whileTrue(m_launcher.getReverseNoteCommand().andThen(m_launcher::noteMoveForshot));
     m_operatorController.x().onTrue(new InstantCommand(m_arm::armfoward))

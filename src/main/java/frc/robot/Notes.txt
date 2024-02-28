@@ -4,7 +4,7 @@ arm angle
 velocity control. maby
 
 
-
+OLD SHOOTER 2/27/2024
 shooter calibration points
 
 speaker shoot
@@ -22,3 +22,34 @@ ll ty 19.08
 
 .076/19.08 = 
 1.433 degrees
+
+
+arm at bottom -.168
+
+
+NEW SHOOTER 2/27/2024
+shooter calibration points
+
+speaker shoot
+arm pos -.09
+LL Ty 8.08
+
+110 to frame 
+arm pos -.166
+ll Ty -7.15
+
+
+differneces
+arm pos .076 (27.36 degrees)
+ll ty 15.23
+
+.076/15.23 = 
+.0049
+
+
+arm at bottom -.168
+
+
+
+DEFENSESIVE SHOT pos
+.168

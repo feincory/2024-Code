@@ -49,7 +49,7 @@ public final class Constants {
 
     // Speeds for wheels when intaking and launching. Intake speeds are negative to run the wheels
     // in reverse
-    public static final double kLauncherSpeed = -1;
+    public static final double kLauncherSpeed = -1;//-1
     public static final double kLaunchFeederSpeed = 1;
     public static final double kIntakeLauncherSpeed = 0;
     public static final double kIntakeFeederSpeed = .7;
@@ -77,7 +77,7 @@ public static class armConstants{
   public static double kMaxOutput=.1;
   public static double kMinOutput=-.1;
   // position
-  public static double kIntakePosition = -.168;
+  public static double kIntakePosition = -.166;
   //arm at bottom of rotation -.168
   //set zero with t squre 24" from ground, ++ increases the distance from the ground
   public static double kampPosition = .105;
@@ -97,11 +97,11 @@ public static final int kclimberfollower = 5;
 // curant limiting
 public static final int karmcurrentLimit = 60;
 // pid
-public static double kPclimber = 0.5;//propotional
+public static double kPclimber = 0.5;//propotional (distance from target/setpoint)
 public static double kIclimber = 0;//intergral (time error)
-public static double kDclimber = 0;//derivitieve(rate of aproch)
+public static double kDclimber = 0;//derivitieve(rate of approach)
 public static double kIzclimber = 0;// ramp rate
-public static double kFFclimer = 0;//feed foward(unknow friction)
+public static double kFFclimer = 0;//feed foward(unknown friction)
 public static double kMaxOutputclimer = 1;
 public static double kMinOutputclimer =-1;
 public static double kMinOutputNotSafe= 0;

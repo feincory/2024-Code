@@ -68,12 +68,6 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "runintake"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
                   "name": "armintakepos"
                 }
               }
@@ -83,7 +77,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "M2 TO RIGHT SPEAKER"
+            "pathName": "M2 - SH"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "SH-M1"
           }
         }
       ]

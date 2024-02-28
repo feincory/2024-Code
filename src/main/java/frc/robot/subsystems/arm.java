@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 import static frc.robot.Constants.armConstants.*;
 
+
 import com.ctre.phoenix6.StatusCode;
 import com.ctre.phoenix6.StatusSignal;
 import com.ctre.phoenix6.configs.CANcoderConfiguration;
@@ -78,9 +79,9 @@ public class arm extends SubsystemBase {
     fx_cfg.SoftwareLimitSwitch.ForwardSoftLimitThreshold = .27;
     
 
-    fx_cfg.SoftwareLimitSwitch.ReverseSoftLimitThreshold= -.164; 
+    fx_cfg.SoftwareLimitSwitch.ReverseSoftLimitThreshold= -.166; 
     fx_cfg.OpenLoopRamps.DutyCycleOpenLoopRampPeriod = .3;
-    fx_cfg.ClosedLoopRamps.DutyCycleClosedLoopRampPeriod = .15;
+    fx_cfg.ClosedLoopRamps.DutyCycleClosedLoopRampPeriod = .1;
     // pid config
     fx_cfg.Slot0.GravityType =GravityTypeValue.Arm_Cosine;   
     fx_cfg.Slot0.kP = kPc;
@@ -121,8 +122,8 @@ createDashboards();
       printCount = 0;
      
       armAutoCalc =  
-      (((LimelightHelpers.getTY(null)+11) //limelight offset
-      *.0039) //calclate slope
+      (((LimelightHelpers.getTY(null)+6) //limelight offset
+      *.0049) //calclate slope .0039 OLD SLOPE
       -0.166);
       //System.out.println(armAutoCalc);
       // If any faults happen, print them out. Sticky faults will always be present if live-fault occurs

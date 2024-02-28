@@ -6,6 +6,8 @@ package frc.robot.subsystems;
 
 import static frc.robot.Constants.LauncherConstants.*;
 
+import frc.robot.commands.LaunchNote;
+
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkLowLevel.MotorType;
@@ -16,6 +18,8 @@ import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 //import edu.wpi.first.wpilibj.CAN;
 //import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class CANLauncher extends SubsystemBase {
@@ -67,7 +71,21 @@ public class CANLauncher extends SubsystemBase {
           stop();
         });
   }
- 
+ public Command intakeAutCommand(){
+  return runEnd(() -> {
+            if(!m_ringDetect.get()== true) {
+              stop();
+              intakeAutCommand().isFinished();
+              
+            }
+            else  {
+              m_feedWheel.set(.45);
+              setKickerWheel(kIntakeKickerSpeed);
+            }
+          }, () -> {
+            intakeAutCommand().isFinished();
+          });
+        }
    
   
   public void noteMoveForAmp(){
@@ -143,6 +161,10 @@ public class CANLauncher extends SubsystemBase {
     m_feedWheel.set(0);
     m_kickerWheel.set(0);
   }
+
+  
+   
+  
   // creates a value for shuffle board
 public boolean getstate(){
   return m_ringDetect.get();}
