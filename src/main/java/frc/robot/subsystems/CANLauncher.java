@@ -162,6 +162,22 @@ public class CANLauncher extends SubsystemBase {
     m_kickerWheel.set(0);
   }
 
+   public Command autoLaunch(){
+  return runEnd(() -> {
+            if(!m_ringDetect.get()== false) {
+              stop();
+              autoLaunch().isFinished();
+              
+            }
+            else  {
+              m_feedWheel.set(kIntakeLauncherSpeed);
+              m_launchWheel.set(kLauncherSpeed);
+            }
+          }, () -> {
+            autoLaunch().isFinished();
+          });
+        }
+   
   
    
   

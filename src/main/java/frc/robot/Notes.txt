@@ -53,3 +53,33 @@ arm at bottom -.168
 
 DEFENSESIVE SHOT pos
 .168
+
+
+
+
+new gvsu 
+
+
+
+speaker shoot
+arm pos -.09
++8.17
+110 to frame 
+arm pos -.165
+ll Ty -7.86
+
+
+differneces
+arm pos .076 (27.36 degrees)
+ll ty 16.03
+
+.076/16.03 = 
+.00474
+
+
+arm at bottom -.166
+
+
+
+DEFENSESIVE SHOT pos
+.168

@@ -122,8 +122,8 @@ createDashboards();
       printCount = 0;
      
       armAutoCalc =  
-      (((LimelightHelpers.getTY(null)+6) //limelight offset
-      *.0049) //calclate slope .0039 OLD SLOPE
+      (((LimelightHelpers.getTY(null)+8) //limelight offset
+      *.00474) //calclate slope .0039 OLD SLOPE  new shooter old slope .0049
       -0.166);
       //System.out.println(armAutoCalc);
       // If any faults happen, print them out. Sticky faults will always be present if live-fault occurs
@@ -217,6 +217,11 @@ public void stop(){
 public void armAutoRotateCommand(){
  
    m_fx.setControl(m_dutyPosition.withPosition(armAutoCalc));
+  
+}
+public void defenciveshot(){
+ 
+   m_fx.setControl(m_dutyPosition.withPosition(.168));
   
 }
 

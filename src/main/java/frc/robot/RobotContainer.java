@@ -83,6 +83,7 @@ public class RobotContainer {
   // private final PWMDrivetrain m_drivetrain = new PWMDrivetrain();
   //private final CANDrivetrain m_drivetrain = new CANDrivetrain();
   // private final PWMLauncher m_launcher = new PWMLauncher();
+
   public final CANLauncher m_launcher = new CANLauncher();
   public final arm m_arm = new arm();
   public final climber m_climber = new climber();
@@ -97,7 +98,7 @@ public class RobotContainer {
    
     NamedCommands.registerCommand("runintake", m_launcher.intakeAutCommand());
     NamedCommands.registerCommand("armintakepos", new RunCommand(m_arm::armpositionIntake));
-    NamedCommands.registerCommand("preparelaunch", m_launcher.setprepareCommand());
+    NamedCommands.registerCommand("preparelaunch", m_launcher.autoLaunch());
     NamedCommands.registerCommand("launchnote", m_launcher.setlaunchCommand());
     NamedCommands.registerCommand("autoaim", new RunCommand(m_arm::armAutoRotateCommand));
 
@@ -106,7 +107,7 @@ public class RobotContainer {
     SmartDashboard.putData("Auto Chooser", autoChooser);
     // Configure the trigger bindings
     configureBindings();
-    kLLpcontroller = .135;
+    kLLpcontroller = .1;
   }
 
   /**
@@ -192,11 +193,8 @@ public class RobotContainer {
                           .onFalse(new InstantCommand(m_arm::stop));
       
    //climber
-   //m_operatorController.back().onTrue(new RunCommand(m_climber::climbrelease))
-   //                         .onFalse(new InstantCommand(m_climber::stop));
-   //m_operatorController.start().onTrue(new RunCommand(m_climber::climbauto))
-    //                        .onFalse(new InstantCommand(m_climber::stop));
-    //m_operatorController.leftStick().onTrue(new InstantCommand(m_climber::climbreset));
+  //  m_operatorController.start().onTrue(new RunCommand(m_climber::climbauto))
+  //                          .onFalse(new InstantCommand(m_climber::stop));
     m_operatorController.a().onTrue(
       new InstantCommand(m_climber::climberencoderreset)
       .andThen(new InstantCommand(m_climber::climbReleaseCommand))
@@ -210,12 +208,15 @@ public class RobotContainer {
     m_operatorController.start().onTrue(
       new InstantCommand(m_arm::armpositionTrapClimb)); 
 
+    m_operatorController.povUp().onTrue(
+      new InstantCommand(m_arm::defenciveshot));
+
      // .andThen(new RunCommand(m_arm::armpositionTrapPrep))
      // .andThen(new RunCommand(m_climber::climbNotSafe))                         
   
-     m_operatorController.leftTrigger(.5).onTrue(new InstantCommand(m_climber::climbupmanual))
+     m_operatorController.leftTrigger(.8).onTrue(new InstantCommand(m_climber::climbupmanual))
                              .onFalse(new InstantCommand(m_climber::stop));
-    m_operatorController.rightTrigger(.5).onTrue(new InstantCommand(m_climber::climbdownmanual))
+    m_operatorController.rightTrigger(.8).onTrue(new InstantCommand(m_climber::climbdownmanual))
                              .onFalse(new InstantCommand(m_climber::stop));
     
     
@@ -230,7 +231,7 @@ public class RobotContainer {
                                         .andThen(new RunCommand( m_launcher::noteMoveForAmp))
                                         .withTimeout(1)
                                         .andThen(m_launcher::stop));    
-  m_operatorController.rightBumper()/* .onTrue(new InstantCommand(m_arm::StageShot))*/
+  m_operatorController.rightBumper().onTrue(new InstantCommand(m_arm::StageShot))
                                         .onFalse(new RunCommand(m_launcher::noteMoveForshot)
                                       .withTimeout(.08)//was .05
                                       .andThen(new InstantCommand(m_launcher::stop)));

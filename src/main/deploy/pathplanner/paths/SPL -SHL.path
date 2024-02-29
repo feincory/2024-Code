@@ -3,29 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 8.680135819615433,
-        "y": 0.9837102698456457
+        "x": 0.6933452953924437,
+        "y": 4.414985377759629
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.071824141453616,
-        "y": 1.2698516113590967
-      },
-      "isLocked": false,
-      "linkedName": "M5"
-    },
-    {
-      "anchor": {
-        "x": 4.2642777593247505,
-        "y": 1.9437877337293141
-      },
-      "prevControl": {
-        "x": 5.3817090326488355,
-        "y": 1.2161007014321723
-      },
-      "nextControl": {
-        "x": 3.1468464860006655,
-        "y": 2.671474766026456
+        "x": 1.3842846515935527,
+        "y": 3.80602187737899
       },
       "isLocked": false,
       "linkedName": null
@@ -36,8 +20,8 @@
         "y": 3.6186484926464857
       },
       "prevControl": {
-        "x": 2.8521225933047702,
-        "y": 3.13516829491686
+        "x": 1.6419230556007463,
+        "y": 4.286166175756032
       },
       "nextControl": null,
       "isLocked": false,
@@ -55,13 +39,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -40.03025927188971,
+    "rotation": -43.60281897270364,
     "rotateFast": false
   },
   "reversed": false,
   "folder": null,
   "previewStartingState": {
-    "rotation": 0,
+    "rotation": -59.03624346792648,
     "velocity": 0
   },
   "useDefaultConstraints": true
