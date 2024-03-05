@@ -84,7 +84,7 @@ public static class armConstants{
   public static double kTrapPrepPosition = .240;//was .240, -.155 for shooting from stage
   public static double kTrapclimbPosition = .230; //set for speaker shot right now
   public static double kStageShot = -0.095;
-  public static double kPresetShot = -.140;
+  public static double kPresetShot = -.140;// speaker
   //shot from stage preset location -.155
 
 }

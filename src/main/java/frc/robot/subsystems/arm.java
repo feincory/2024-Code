@@ -53,11 +53,11 @@ public class arm extends SubsystemBase {
   //private final StaticBrake m_brake = new StaticBrake();
   //private final PositionVoltage m_voltagePosition = new PositionVoltage(0, 0, true, 0, 0, false, false, false);
   private final PositionDutyCycle m_dutyPosition = new PositionDutyCycle(0, 0, true, 0, 0, false, false, false);
-
+  
 //soft limits
   //SoftwareLimitSwitchConfigs armlimit = new ForwardsSoftLimitEnable();
    private double armAutoCalc;
-  
+   private double armmanualcomp;
   
   // CANcoder armCANenCaNcoder;
   public arm() {
@@ -103,6 +103,8 @@ public class arm extends SubsystemBase {
     }
 
     m_fx.setNeutralMode(NeutralModeValue.Brake);
+    armmanualcomp = 0; //default value
+
  
   
 
@@ -122,7 +124,7 @@ createDashboards();
       printCount = 0;
      
       armAutoCalc =  
-      (((LimelightHelpers.getTY(null)+8) //limelight offset
+      (((LimelightHelpers.getTY(null)+8+armmanualcomp) //limelight offset
       *.00474) //calclate slope .0039 OLD SLOPE  new shooter old slope .0049
       -0.166);
       //System.out.println(armAutoCalc);
@@ -189,11 +191,12 @@ createDashboards();
     m_fx.setControl(m_dutyPosition.withPosition(kPresetShot));
   }
    
-// public void armclearfault(){
-//  /* Clear sticky faults */  
-// //   m_fx.clearStickyFaults();
-// // }
-
+ public Command armcommpUp() {
+     return runOnce(() -> armmanualcomp= armmanualcomp+.5);
+}
+public Command armcommpDown() {
+     return runOnce(() -> armmanualcomp= armmanualcomp-.5);
+}
 public void  armmanual(){
   //m_fx.setControl(m_dutyCycleControl.withOutput(m_operatorController.getLeftY()));
 
@@ -231,10 +234,18 @@ public void defenciveshot(){
 public double getposition(){
 return m_cc.getAbsolutePosition().getValue();}
 
+public double armcompvalue(){
+  return armmanualcomp;
+}
 
 public void createDashboards() {
   ShuffleboardTab armTab = Shuffleboard.getTab("Arm");
+
   armTab.addNumber("Arm Position", this::getposition)
+  .withSize(1,1)
+  .withPosition(0,0);
+
+  armTab.addNumber("arm comp", this::armcompvalue)
   .withSize(1,1)
   .withPosition(0,0);
 }

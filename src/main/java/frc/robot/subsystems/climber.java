@@ -140,11 +140,12 @@ public class climber extends SubsystemBase {
       }  
       else{}
       }
+    
 
     
     public void climbwinchbottom() {
       if(climberHomed == true && !m_climbsensor.get()==false){
-      m_climberPID.setReference(113, CANSparkMax.ControlType.kPosition);
+      m_climberPID.setReference(120, CANSparkMax.ControlType.kPosition);
       }
       else{
        m_climbmotorlead.set(0);

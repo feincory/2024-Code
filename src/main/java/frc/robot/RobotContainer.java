@@ -145,7 +145,7 @@ public class RobotContainer {
     
     
     //limelight autoline up
-    m_operatorController.rightStick().whileTrue(drivetrain.applyRequest(() -> 
+    m_operatorController.a().whileTrue(drivetrain.applyRequest(() -> 
       drive.withVelocityX(m_drivercontroller.getRawAxis(1) * MaxSpeed) // Drive forward with
       .withVelocityY(-m_drivercontroller.getRawAxis(0) * MaxSpeed) // Drive left with negative X (left)
       .withRotationalRate((-LimelightHelpers.getTX(null)+2)*kLLpcontroller)))
@@ -155,10 +155,10 @@ public class RobotContainer {
       .handleInterrupt(() -> m_launcher.stop())); 
 
     //climber auto line up
-    m_drivercontroller.button(25).whileTrue(drivetrain.applyRequest(() -> 
-      drive.withVelocityX((-.7 - LimelightHelpers.getTX(null))*0) // Drive forward with
-      .withVelocityY((0-LimelightHelpers.getTY(null))*0) //
-      .withRotationalRate(0-drivetrain.getPigeon2().getYaw().getValueAsDouble() * .10 ))); //
+    // m_drivercontroller.button(25).whileTrue(drivetrain.applyRequest(() -> 
+    //   drive.withVelocityX((-.7 - LimelightHelpers.getTX(null))*0) // Drive forward with
+    //   .withVelocityY((0-LimelightHelpers.getTY(null))*0) //
+    //   .withRotationalRate(0-drivetrain.getPigeon2().getYaw().getValueAsDouble() * .10 ))); //
 
     /*Create an inline sequence to run when the operator presses and holds the A (green) button. Run the PrepareLaunch
      * command for 1 seconds and then run the LaunchNote command */
@@ -187,25 +187,23 @@ public class RobotContainer {
 
                                       
     m_operatorController.y().whileTrue(m_launcher.getReverseNoteCommand().andThen(m_launcher::noteMoveForshot));
-    m_operatorController.x().onTrue(new InstantCommand(m_arm::armfoward))
-                          .onFalse(new InstantCommand(m_arm::stop));
-    m_operatorController.b().onTrue(new InstantCommand(m_arm::armreverese))
-                          .onFalse(new InstantCommand(m_arm::stop));
+    // m_operatorController.x().onTrue(new InstantCommand(m_arm::armfoward))
+    //                       .onFalse(new InstantCommand(m_arm::stop));
+    // m_operatorController.b().onTrue(new InstantCommand(m_arm::armreverese))
+    //                       .onFalse(new InstantCommand(m_arm::stop));
       
    //climber
-  //  m_operatorController.start().onTrue(new RunCommand(m_climber::climbauto))
-  //                          .onFalse(new InstantCommand(m_climber::stop));
-    m_operatorController.a().onTrue(
+    m_operatorController.b().onTrue(
       new InstantCommand(m_climber::climberencoderreset)
       .andThen(new InstantCommand(m_climber::climbReleaseCommand))
       .andThen(new InstantCommand(m_arm::armpositionTrapPrep)))
       .onFalse(new InstantCommand(m_climber::stop));
 
-    m_operatorController.start().onTrue(
+    m_operatorController.x().onTrue(
       new InstantCommand(m_climber::climbwinchbottom))
       .onFalse(new InstantCommand(m_climber::stop));      
 
-    m_operatorController.start().onTrue(
+    m_operatorController.x().onTrue(
       new InstantCommand(m_arm::armpositionTrapClimb)); 
 
     m_operatorController.povUp().onTrue(
@@ -222,6 +220,7 @@ public class RobotContainer {
     
   //arm position
   
+
   
    m_operatorController.povDown().onTrue(new InstantCommand(m_arm::armpositionIntake));
                                         //.andThen(new RunCommand( m_launcher::noteMoveForAmp)));
@@ -231,12 +230,15 @@ public class RobotContainer {
                                         .andThen(new RunCommand( m_launcher::noteMoveForAmp))
                                         .withTimeout(1)
                                         .andThen(m_launcher::stop));    
-  m_operatorController.rightBumper().onTrue(new InstantCommand(m_arm::StageShot))
-                                        .onFalse(new RunCommand(m_launcher::noteMoveForshot)
-                                      .withTimeout(.08)//was .05
-                                      .andThen(new InstantCommand(m_launcher::stop)));
-  m_operatorController.povLeft().onTrue(new InstantCommand(m_arm::PresetShot));
- 
+  // m_operatorController.rightBumper()/* .onTrue(new InstantCommand(m_arm::StageShot))*/
+  //                                       .onFalse(new RunCommand(m_launcher::noteMoveForshot)
+  //                                     .withTimeout(.08)//was .05
+  //                                     .andThen(new InstantCommand(m_launcher::stop)));
+  m_operatorController.povLeft().onTrue(new InstantCommand(m_arm::StageShot));//subwoofer/speaker shot
+  
+ m_operatorController.back().onTrue(m_arm.armcommpDown());
+  m_operatorController.start().onTrue(m_arm.armcommpUp());
+
   // m_operatorController.back().onTrue(new InstantCommand(m_arm::armclearfault));
 
 
