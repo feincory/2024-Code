@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 8.680135819615433,
-        "y": 0.9837102698456457
+        "x": 8.891873937594031,
+        "y": 0.8781579101619749
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.071824141453616,
-        "y": 1.2698516113590967
+        "x": 7.283562259432214,
+        "y": 1.164299251675426
       },
       "isLocked": false,
       "linkedName": "M5"
@@ -32,12 +32,12 @@
     },
     {
       "anchor": {
-        "x": 2.309440738710292,
-        "y": 3.6186484926464857
+        "x": 2.142885055000881,
+        "y": 3.818506867782967
       },
       "prevControl": {
-        "x": 2.8521225933047702,
-        "y": 3.13516829491686
+        "x": 2.685566909595359,
+        "y": 3.3350266700533413
       },
       "nextControl": null,
       "isLocked": false,
@@ -49,13 +49,13 @@
   "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 5.0,
-    "maxAcceleration": 3.5,
+    "maxAcceleration": 4.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -40.03025927188971,
+    "rotation": -41.0,
     "rotateFast": false
   },
   "reversed": false,

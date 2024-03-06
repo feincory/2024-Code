@@ -69,7 +69,7 @@ public static class armConstants{
     //rotate cancoder 
   public static final String drivecanbusname = "Drive CAN";
   public static final int armCANcoderId = 47;
-  public static double kPc = 10;
+  public static double kPc = 8;
   public static double kIc = 6;
   public static double kDc = 0;
   public static double kGc = 0; //Gravity

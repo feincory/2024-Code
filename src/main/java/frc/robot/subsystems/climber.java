@@ -145,7 +145,8 @@ public class climber extends SubsystemBase {
     
     public void climbwinchbottom() {
       if(climberHomed == true && !m_climbsensor.get()==false){
-      m_climberPID.setReference(120, CANSparkMax.ControlType.kPosition);
+      m_climberPID.setReference(128, CANSparkMax.ControlType.kPosition); //was 120 changed to accomidate rope streched
+    
       }
       else{
        m_climbmotorlead.set(0);

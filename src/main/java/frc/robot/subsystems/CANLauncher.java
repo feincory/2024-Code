@@ -79,7 +79,7 @@ public class CANLauncher extends SubsystemBase {
               
             }
             else  {
-              m_feedWheel.set(.45);
+              m_feedWheel.set(.4);
               setKickerWheel(kIntakeKickerSpeed);
             }
           }, () -> {

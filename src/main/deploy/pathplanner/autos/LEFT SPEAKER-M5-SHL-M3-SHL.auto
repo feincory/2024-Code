@@ -1,16 +1,16 @@
 {
   "version": 1.0,
-  "startingPose": {
-    "position": {
-      "x": 0.7220452902444284,
-      "y": 4.4499912076747234
-    },
-    "rotation": -58.1725534233269
-  },
+  "startingPose": null,
   "command": {
     "type": "sequential",
     "data": {
       "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "SPL -SHL"
+          }
+        },
         {
           "type": "race",
           "data": {
@@ -62,7 +62,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "LEFT SPEAKER TO M5"
+                  "pathName": "SHL - M5"
                 }
               },
               {

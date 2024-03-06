@@ -30,7 +30,76 @@
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 0.75
+                  "waitTime": 1.0
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "launchnote"
+                }
+              },
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 0.3
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "CENTER SPEAKER TO S2"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "armintakepos"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "runintake"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "autoaim"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "preparelaunch"
+                }
+              },
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 1.0
                 }
               }
             ]
@@ -62,7 +131,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "CENTER SPEAKER TO S2"
+                  "pathName": "S2 TO S1"
                 }
               },
               {
@@ -118,7 +187,7 @@
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 0.25
+                  "waitTime": 0.8
                 }
               }
             ]
@@ -131,13 +200,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "S2-M2"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "armintakepos"
+                  "pathName": "S1 - S3"
                 }
               },
               {
@@ -145,14 +208,14 @@
                 "data": {
                   "name": "runintake"
                 }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "armintakepos"
+                }
               }
             ]
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "M2 - SH"
           }
         },
         {
@@ -175,81 +238,6 @@
                 "type": "wait",
                 "data": {
                   "waitTime": 0.5
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "race",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "launchnote"
-                }
-              },
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 0.4
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "race",
-          "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "SH-M1"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "armintakepos"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "runintake"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "M1-SH"
-          }
-        },
-        {
-          "type": "race",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "preparelaunch"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "autoaim"
-                }
-              },
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 0.75
                 }
               }
             ]
