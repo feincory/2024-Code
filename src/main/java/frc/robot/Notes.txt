@@ -83,3 +83,23 @@ arm at bottom -.166
 
 DEFENSESIVE SHOT pos
 .168
+
+
+x lock 
+12
+climber
+4
+manual
+8
+
+to do 
+checkm kraken 
+check ctre updates
+back up  bolth teams 
+
+
+
+untested logic
+cimber safe
+x lock 
+suck note in for trap

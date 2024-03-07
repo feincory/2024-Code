@@ -1,3 +1,4 @@
+
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
@@ -58,7 +59,7 @@ public class RobotContainer {
   private double MaxAngularRate = 1.75 * Math.PI; // 3/4 of a rotation per second max angular velocity
 
   /* Setting up bindings for necessary control of the swerve drive platform */
-  public final CommandXboxController m_operatorController =
+  public static final CommandXboxController m_operatorController =
      new CommandXboxController(OperatorConstants.kOperatorControllerPort); // My joystick
   public final CommandJoystick m_drivercontroller = 
     new CommandJoystick(OperatorConstants.kDriverControllerPort); // My joystick
@@ -107,7 +108,7 @@ public class RobotContainer {
     SmartDashboard.putData("Auto Chooser", autoChooser);
     // Configure the trigger bindings
     configureBindings();
-    kLLpcontroller = .1;
+    kLLpcontroller = .075;
   }
 
   /**
@@ -125,7 +126,7 @@ public class RobotContainer {
             .withRotationalRate(-m_drivercontroller.getRawAxis(3) * MaxAngularRate) // Drive counterclockwise with negative X (left)
         ).ignoringDisable(true));
 
-    m_drivercontroller.button(15).whileTrue(drivetrain.applyRequest(() -> brake));    
+    m_drivercontroller.button(12).whileTrue(drivetrain.applyRequest(() -> brake));    
 
     //m_drivercontroller.button(16).whileTrue(drivetrain
     //    .applyRequest(() -> point.withModuleDirection(new Rotation2d(-m_drivercontroller.getRawAxis(0), m_drivercontroller.getRawAxis(1)))));
@@ -193,10 +194,18 @@ public class RobotContainer {
     //                       .onFalse(new InstantCommand(m_arm::stop));
       
    //climber
-    m_operatorController.b().onTrue(
+   m_drivercontroller.button(8).onTrue(new InstantCommand(m_climber::climberReleaseable));
+   m_drivercontroller.button(8).onFalse(new InstantCommand(m_climber::climberNotReleaseable));
+    
+   
+   
+   m_operatorController.b().onTrue(
       new InstantCommand(m_climber::climberencoderreset)
       .andThen(new InstantCommand(m_climber::climbReleaseCommand))
-      .andThen(new InstantCommand(m_arm::armpositionTrapPrep)))
+      .andThen(new InstantCommand(m_arm::armpositionTrapPrep))
+      .andThen(new InstantCommand(m_launcher::noteMoveForAmp))
+      .withTimeout(2)
+      .andThen(new InstantCommand(m_arm::stop)))
       .onFalse(new InstantCommand(m_climber::stop));
 
     m_operatorController.x().onTrue(
@@ -216,9 +225,11 @@ public class RobotContainer {
                              .onFalse(new InstantCommand(m_climber::stop));
     m_operatorController.rightTrigger(.8).onTrue(new InstantCommand(m_climber::climbdownmanual))
                              .onFalse(new InstantCommand(m_climber::stop));
-    
-    
-  //arm position
+    //servo
+    m_drivercontroller.button(6).onTrue(new InstantCommand(m_climber::servoPreDeploy));
+    m_drivercontroller.button(7).onTrue(new InstantCommand(m_climber::servoPostDeploy));
+    m_drivercontroller.button(4).onTrue(new InstantCommand())
+                                       .onFalse(new InstantCommand(m_arm::stop));    
   
 
   

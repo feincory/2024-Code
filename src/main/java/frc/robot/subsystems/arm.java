@@ -31,6 +31,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.generated.TunerConstants;
 import frc.robot.LimelightHelpers;
+import frc.robot.RobotContainer;
 
 public class arm extends SubsystemBase {
   //Creates a new rotation. 
@@ -198,9 +199,12 @@ public Command armcommpDown() {
      return runOnce(() -> armmanualcomp= armmanualcomp-.5);
 }
 public void  armmanual(){
-  //m_fx.setControl(m_dutyCycleControl.withOutput(m_operatorController.getLeftY()));
+  
+     m_fx.setControl(m_dutyCycleControl.withOutput(RobotContainer.m_operatorController.getLeftY()));
+  }
+ 
 
-}
+
 
 public void setarm(double speed){
 }
@@ -227,6 +231,8 @@ public void defenciveshot(){
    m_fx.setControl(m_dutyPosition.withPosition(.168));
   
 }
+
+
 
 
 

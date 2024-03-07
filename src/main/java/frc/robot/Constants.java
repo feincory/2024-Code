@@ -106,6 +106,9 @@ public static double kMaxOutputclimer = 1;
 public static double kMinOutputclimer =-1;
 public static double kMinOutputNotSafe= 0;
 public static double kMaxOutputNotSafe= 0.5;
+// design flaw
+public static double kpreDeploy= 5;
+public static double kpostDeploy= 115;
 }
 
 public static class ledConstants{

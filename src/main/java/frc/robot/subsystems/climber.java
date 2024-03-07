@@ -15,6 +15,7 @@ import static frc.robot.Constants.climberConstants.*;
 //import javax.swing.text.Position;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Servo;
 // import edu.wpi.first.wpilibj.Timer;
 // import edu.wpi.first.wpilibj.motorcontrol.Spark;
 // import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
@@ -34,6 +35,7 @@ public class climber extends SubsystemBase {
    CANSparkMax m_climbmotorlead;
    CANSparkMax m_climbmotorfollower;
    Integer m_climbstep;
+   Servo m_designFlaw;
    DigitalInput m_climbsensor;
    RelativeEncoder m_climbencoder;
    boolean climberreleased;
@@ -42,6 +44,8 @@ public class climber extends SubsystemBase {
    double position;
   boolean autolineup;
   boolean climberHomed;
+  boolean climberState;
+  boolean climbSafe;
   public Object cancel;  // CANcoder armCANenCaNcoder;
   public climber() {
 
@@ -66,7 +70,8 @@ public class climber extends SubsystemBase {
  
  m_climbstep = 0;
  m_climbsensor = new DigitalInput(0);
- 
+ //servo
+ m_designFlaw = new Servo(0);
  // pid sets
  m_climberPID.setP(kPclimber);
  m_climberPID.setI(kIclimber);
@@ -81,7 +86,8 @@ public class climber extends SubsystemBase {
  autolineup =false;
  climberHomed = false;
  climberreleased = false;
- 
+ climberState = false;
+ climbSafe = false;
  createDashboards();
 
  //climbtimer.start();
@@ -115,6 +121,16 @@ public class climber extends SubsystemBase {
 
     //   });
     // }
+    // servo reset
+     public void servoPreDeploy(){
+      m_designFlaw.setAngle(kpreDeploy);
+     }
+      public void servoPostDeploy(){
+      m_designFlaw.setAngle(kpostDeploy);
+     }
+
+
+
     public void climberencoderreset(){
       if(!m_climbsensor.get()== true && climberHomed == false){
         m_climbencoder.setPosition(0);
@@ -126,17 +142,19 @@ public class climber extends SubsystemBase {
 
 
     public void climbReleaseCommand() {
-      if(climberHomed == true && climberreleased == false){
+      if(climberHomed == true && climberreleased == false && climbSafe == true){
       m_climberPID.setReference(25, CANSparkMax.ControlType.kPosition);
   
       }
 
-      if(m_climbencoder.getPosition()>24 && climberreleased == false){
+      if(m_climbencoder.getPosition()>24 && climberreleased == false && climbSafe == true){
       climberreleased = true;
       }
 
-      if(climberHomed == true && climberreleased == true){
+      if(climberHomed == true && climberreleased == true && climbSafe == true){
       m_climberPID.setReference(-165, CANSparkMax.ControlType.kPosition);
+      m_designFlaw.set(kpostDeploy);
+
       }  
       else{}
       }
@@ -144,7 +162,7 @@ public class climber extends SubsystemBase {
 
     
     public void climbwinchbottom() {
-      if(climberHomed == true && !m_climbsensor.get()==false){
+      if(climberHomed == true && !m_climbsensor.get()==false && climberState && climbSafe == true ){
       m_climberPID.setReference(128, CANSparkMax.ControlType.kPosition); //was 120 changed to accomidate rope streched
     
       }
@@ -153,7 +171,12 @@ public class climber extends SubsystemBase {
       }
       }      
       
-
+    public void climberReleaseable(){
+       climbSafe = true;
+    }
+    public void climberNotReleaseable(){
+      climbSafe = false;
+    }
     
       //return runOnce(() -> m_climberPID.setReference(-10, CANSparkMax.ControlType.kPosition));}
         
