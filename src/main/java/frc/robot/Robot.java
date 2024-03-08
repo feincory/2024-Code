@@ -8,6 +8,11 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.subsystems.CANdleSystem;
+import frc.robot.subsystems.CANdleSystem.AnimationTypes;
+
+import com.ctre.phoenix.led.CANdle;
+
 import edu.wpi.first.cameraserver.CameraServer;
 //stuff addded for swerve
 import edu.wpi.first.math.geometry.Pose2d;
@@ -46,6 +51,7 @@ public class Robot extends TimedRobot {
     m_robotContainer.drivetrain.getDaqThread().setThreadPriority(99);
     // disables joystick warnings
      DriverStation.silenceJoystickConnectionWarning(true);
+
    
    
   }

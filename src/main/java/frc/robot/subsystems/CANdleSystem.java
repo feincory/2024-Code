@@ -79,6 +79,7 @@ public class CANdleSystem extends SubsystemBase {
       configAll.brightnessScalar = 0.1;
       configAll.vBatOutputMode = VBatOutputMode.Modulated;
       m_candle.configAllSettings(configAll, 100);
+      //changeAnimation(AnimationTypes.Rainbow);
   }
 
   public void toggle5VOverride() {

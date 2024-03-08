@@ -145,6 +145,7 @@ public class climber extends SubsystemBase {
       if(climberHomed == true && climberreleased == false && climbSafe == true){
       m_climberPID.setReference(25, CANSparkMax.ControlType.kPosition);
   
+    
       }
 
       if(m_climbencoder.getPosition()>24 && climberreleased == false && climbSafe == true){
@@ -152,7 +153,7 @@ public class climber extends SubsystemBase {
       }
 
       if(climberHomed == true && climberreleased == true && climbSafe == true){
-      m_climberPID.setReference(-165, CANSparkMax.ControlType.kPosition);
+      m_climberPID.setReference(-178, CANSparkMax.ControlType.kPosition);
       m_designFlaw.set(kpostDeploy);
 
       }  
@@ -162,8 +163,8 @@ public class climber extends SubsystemBase {
 
     
     public void climbwinchbottom() {
-      if(climberHomed == true && !m_climbsensor.get()==false && climberState && climbSafe == true ){
-      m_climberPID.setReference(128, CANSparkMax.ControlType.kPosition); //was 120 changed to accomidate rope streched
+      if(climberHomed == true && !m_climbsensor.get()==false && climbSafe == true ){
+      m_climberPID.setReference(120, CANSparkMax.ControlType.kPosition); //was 120 changed to accomidate rope streched
     
       }
       else{

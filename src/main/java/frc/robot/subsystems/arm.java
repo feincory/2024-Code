@@ -198,10 +198,10 @@ createDashboards();
 public Command armcommpDown() {
      return runOnce(() -> armmanualcomp= armmanualcomp-.5);
 }
-public void  armmanual(){
+// public void  armmanual(){
   
-     m_fx.setControl(m_dutyCycleControl.withOutput(RobotContainer.m_operatorController.getLeftY()));
-  }
+//      m_fx.setControl(m_dutyCycleControl.withOutput(RobotContainer.m_operatorController.getLeftY()));
+//   }
  
 
 
