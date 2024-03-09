@@ -125,7 +125,7 @@ createDashboards();
       printCount = 0;
      
       armAutoCalc =  
-      (((LimelightHelpers.getTY(null)+6+armmanualcomp) //limelight offset was 8 degrees add, lowering to 
+      (((LimelightHelpers.getTY(null)+5.5+armmanualcomp) //limelight offset was 8 degrees add, lowering to 
       *.00474) //calclate slope .0039 OLD SLOPE  new shooter old slope .0049
       -0.166);
       //System.out.println(armAutoCalc);

@@ -132,7 +132,7 @@ public class climber extends SubsystemBase {
 
 
     public void climberencoderreset(){
-      if(!m_climbsensor.get()== true && climberHomed == false){
+      if(!m_climbsensor.get()== true && climberHomed == false && climbSafe == true){
         m_climbencoder.setPosition(0);
         climberHomed = true;
 
@@ -143,12 +143,12 @@ public class climber extends SubsystemBase {
 
     public void climbReleaseCommand() {
       if(climberHomed == true && climberreleased == false && climbSafe == true){
-      m_climberPID.setReference(25, CANSparkMax.ControlType.kPosition);
+      m_climberPID.setReference(30, CANSparkMax.ControlType.kPosition);
   
     
       }
 
-      if(m_climbencoder.getPosition()>24 && climberreleased == false && climbSafe == true){
+      if(m_climbencoder.getPosition()>28 && climberreleased == false && climbSafe == true){
       climberreleased = true;
       }
 
