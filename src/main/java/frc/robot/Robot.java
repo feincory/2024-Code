@@ -121,7 +121,7 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     //System.out.println(m_Timer.get());
 
-    if(m_Timer.get() >= 105 && m_Timer.get() <=106){
+    if(m_Timer.get() >= 105 && m_Timer.get() <=107){
       m_operatorController.setRumble(RumbleType.kBothRumble, 1);
     }else{
       m_operatorController.setRumble(RumbleType.kBothRumble, 0);

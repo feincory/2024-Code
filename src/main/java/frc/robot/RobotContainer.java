@@ -89,6 +89,7 @@ public class RobotContainer {
   public final arm m_arm = new arm();
   public final climber m_climber = new climber();
   public final CANdleSystem m_led = new CANdleSystem(m_operatorController);
+
   public double kLLpcontroller;
   /*The gamepad provided in the KOP shows up like an XBox controller if the mode switch is set to X mode using the
    * switch on the top.*/
@@ -102,6 +103,7 @@ public class RobotContainer {
     NamedCommands.registerCommand("preparelaunch", m_launcher.autoLaunch());
     NamedCommands.registerCommand("launchnote", m_launcher.setlaunchCommand());
     NamedCommands.registerCommand("autoaim", new RunCommand(m_arm::armAutoRotateCommand));
+    NamedCommands.registerCommand("autoaimdrive", drivetrain.autoaimdrive(null));
 
      runAuto = drivetrain.getAutoPath("Blue Center");
     autoChooser = AutoBuilder.buildAutoChooser();
@@ -155,11 +157,14 @@ public class RobotContainer {
       .whileTrue(new PrepareLaunch(m_launcher)
       .handleInterrupt(() -> m_launcher.stop())); 
 
-    //climber auto line up
-    // m_drivercontroller.button(25).whileTrue(drivetrain.applyRequest(() -> 
-    //   drive.withVelocityX((-.7 - LimelightHelpers.getTX(null))*0) // Drive forward with
-    //   .withVelocityY((0-LimelightHelpers.getTY(null))*0) //
-    //   .withRotationalRate(0-drivetrain.getPigeon2().getYaw().getValueAsDouble() * .10 ))); //
+   // climber auto line up
+    m_drivercontroller.button(13).whileTrue(drivetrain.applyRequest(() -> 
+      forwardStraight.withVelocityX((-.7 - LimelightHelpers.getTX(null))*0) // Drive forward with
+      .withVelocityY((0-LimelightHelpers.getTX(null))*-.06) //
+      .withRotationalRate(0))); //
+
+    
+     //drivetrain.autoaimdrive(() -> drive.withRotationalRate((-LimelightHelpers.getTX(null)+2)*kLLpcontroller));
 
     /*Create an inline sequence to run when the operator presses and holds the A (green) button. Run the PrepareLaunch
      * command for 1 seconds and then run the LaunchNote command */

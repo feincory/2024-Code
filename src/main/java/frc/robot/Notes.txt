@@ -4,6 +4,23 @@ arm angle
 velocity control. maby
 
 
+
+to do
+//large wire on design flaw
+//clicker
+//double support for wire
+battery support
+velcro sides
+vrm power issue
+handles
+//3d strat board
+//taller servo mount
+zero gyro at end of auto
+
+
+
+
+
 OLD SHOOTER 2/27/2024
 shooter calibration points
 

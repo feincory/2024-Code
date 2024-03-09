@@ -125,7 +125,7 @@ createDashboards();
       printCount = 0;
      
       armAutoCalc =  
-      (((LimelightHelpers.getTY(null)+8+armmanualcomp) //limelight offset
+      (((LimelightHelpers.getTY(null)+6+armmanualcomp) //limelight offset was 8 degrees add, lowering to 
       *.00474) //calclate slope .0039 OLD SLOPE  new shooter old slope .0049
       -0.166);
       //System.out.println(armAutoCalc);
@@ -134,7 +134,7 @@ createDashboards();
       sf_fusedSensorOutOfSync.refresh();
       f_remoteSensorInvalid.refresh();
       sf_remoteSensorInvalid.refresh();
-     // boolean anyFault = sf_fusedSensorOutOfSync.getValue() || sf_remoteSensorInvalid.getValue();
+     // boolean anyFault = sf_fuseefSensorOutOfSync.getValue() || sf_remoteSensorInvalid.getValue();
       // if(anyFault) {
       //   System.out.println("A fault has occurred:");
       //   /* If we're live, indicate live, otherwise if we're sticky indicate sticky, otherwise do nothing */
@@ -228,7 +228,7 @@ public void armAutoRotateCommand(){
 }
 public void defenciveshot(){
  
-   m_fx.setControl(m_dutyPosition.withPosition(.168));
+   m_fx.setControl(m_dutyPosition.withPosition(.170));
   
 }
 

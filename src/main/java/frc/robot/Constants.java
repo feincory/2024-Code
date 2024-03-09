@@ -75,6 +75,7 @@ public static class armConstants{
   public static double kGc = 0; //Gravity
   //pid
   public static double kMaxOutput=.1;
+
   public static double kMinOutput=-.1;
   // position
   public static double kIntakePosition = -.166;
@@ -82,7 +83,7 @@ public static class armConstants{
   //set zero with t squre 24" from ground, ++ increases the distance from the ground
   public static double kampPosition = .105;
   public static double kTrapPrepPosition = .240;//was .240, -.155 for shooting from stage
-  public static double kTrapclimbPosition = .230; //set for speaker shot right now
+  public static double kTrapclimbPosition = .220; // was .230
   public static double kStageShot = -0.1033;
   public static double kPresetShot = -.140;// speaker
   //shot from stage preset location -.155
