@@ -206,20 +206,17 @@ public class RobotContainer {
    
    m_operatorController.b().onTrue(
       new InstantCommand(m_climber::climberencoderreset)
-      .andThen(new InstantCommand(m_climber::climbReleaseCommand))
+      .andThen(m_climber.climbRetract())
+      .andThen(m_climber.climbRelease())
       .andThen(new InstantCommand(m_arm::armpositionTrapPrep))
-      .andThen(new InstantCommand(m_launcher::noteMoveForAmp))
-      .withTimeout(1)
-      .andThen(m_launcher::stop))
+      .andThen(new InstantCommand(m_launcher::noteMoveForAmp)))
+      // .andThen(new RunCommand(m_climber::climb))
+      // .withTimeout(1)
+      // .andThen(m_launcher::stop))
       
       .onFalse(new InstantCommand(m_climber::stop));
 
-    m_operatorController.x().onTrue(
-      new InstantCommand(m_climber::climbwinchbottom))
-      .onFalse(new InstantCommand(m_climber::stop));      
-
-    m_operatorController.x().onTrue(
-      new InstantCommand(m_arm::armpositionTrapClimb)); 
+   
 
     m_operatorController.povUp().onTrue(
       new InstantCommand(m_arm::defenciveshot));

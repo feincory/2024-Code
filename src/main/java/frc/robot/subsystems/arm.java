@@ -74,13 +74,13 @@ public class arm extends SubsystemBase {
     fx_cfg.Feedback.FeedbackRemoteSensorID = m_cc.getDeviceID();
     fx_cfg.Feedback.FeedbackSensorSource = FeedbackSensorSourceValue.FusedCANcoder;
     fx_cfg.Feedback.SensorToMechanismRatio = 1.0;
-    fx_cfg.Feedback.RotorToSensorRatio = 135;
+    fx_cfg.Feedback.RotorToSensorRatio = 281.25;
     fx_cfg.SoftwareLimitSwitch.ForwardSoftLimitEnable = true;
     fx_cfg.SoftwareLimitSwitch.ReverseSoftLimitEnable = true;
     fx_cfg.SoftwareLimitSwitch.ForwardSoftLimitThreshold = .27;
     
 
-    fx_cfg.SoftwareLimitSwitch.ReverseSoftLimitThreshold= -.166; 
+    fx_cfg.SoftwareLimitSwitch.ReverseSoftLimitThreshold= -.177; //was -.166
     fx_cfg.OpenLoopRamps.DutyCycleOpenLoopRampPeriod = .3;
     fx_cfg.ClosedLoopRamps.DutyCycleClosedLoopRampPeriod = .1;
     // pid config

@@ -224,4 +224,8 @@ public class CANdleSystem extends SubsystemBase {
           }
       }
   }
+  public void position(){
+    m_candleChannel = 1;
+              m_toAnimate = new FireAnimation(0.5, 0.7, LEDS_PER_ANIMATION, 0.8, 0.5, m_animDirection, m_candleChannel * LEDS_PER_ANIMATION + 8);
+  }
 }

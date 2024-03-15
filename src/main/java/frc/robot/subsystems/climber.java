@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj.Servo;
 // import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 // import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
 // //import com.ctre.phoenix6.configs.CANcoderConfiguration;
 // //import com.ctre.phoenix6.hardware.CANcoder;
 // import edu.wpi.first.wpilibj2.command.Command;
@@ -98,6 +99,9 @@ public class climber extends SubsystemBase {
       SmartDashboard.putNumber("Climber encoder", m_climbencoder.getPosition());
     SmartDashboard.putNumber("climber step",m_climbstep);
     SmartDashboard.putBoolean("climb sensor", !m_climbsensor.get());
+    SmartDashboard.putBoolean("Climb Safe",climbSafe);
+ SmartDashboard.putBoolean("climberreleased",climberreleased);
+ SmartDashboard.putBoolean("climberHomed",climberHomed);
 
     // This method will be called once per scheduler run
     }
@@ -144,9 +148,7 @@ public class climber extends SubsystemBase {
     public void climbReleaseCommand() {
       if(climberHomed == true && climberreleased == false && climbSafe == true){
       m_climberPID.setReference(30, CANSparkMax.ControlType.kPosition);
-  
-    
-      }
+    }
 
       if(m_climbencoder.getPosition()>28 && climberreleased == false && climbSafe == true){
       climberreleased = true;
@@ -178,7 +180,49 @@ public class climber extends SubsystemBase {
     public void climberNotReleaseable(){
       climbSafe = false;
     }
+
+    // new code
+    public Command climbRetract() {
+    return run(()->{
+        if(climberHomed == true && climberreleased == false && climbSafe == true){
+          m_climberPID.setReference(30, CANSparkMax.ControlType.kPosition);
+        }
+
+
+        if(m_climbencoder.getPosition()<33 && m_climbencoder.getPosition()>28) {
+          
+          climbRetract().isFinished();
+          climberreleased = true;
+        }
+      }
+        );
+      }
+        
     
+    public Command climbRelease() {
+    return run(()->{
+        if(climberHomed == true && climberreleased == true && climbSafe == true){
+          m_climberPID.setReference(-178, CANSparkMax.ControlType.kPosition);
+          m_designFlaw.set(kpostDeploy);
+        }
+       
+       
+        if(m_climbencoder.getPosition()>-175 && m_climbencoder.getPosition()<-180) {
+          climbRelease().isFinished();}
+        });
+      }
+    
+          
+          
+    public Command climb() {
+    return run(()->{
+        if(climberHomed == true && !m_climbsensor.get()==false && climbSafe == true ){
+      m_climberPID.setReference(120, CANSparkMax.ControlType.kPosition); //was 120 changed to accomidate rope streched
+      }
+      if(m_climbencoder.getPosition()>118 && m_climbencoder.getPosition()<121) {
+          climb().isFinished();}});}
+  
+      
       //return runOnce(() -> m_climberPID.setReference(-10, CANSparkMax.ControlType.kPosition));}
         
     
@@ -306,6 +350,9 @@ public void createDashboards() {
  // SmartDashboard.putNumber("Climber encoder", m_climbencoder.getPosition());
  // SmartDashboard.putNumber("climber step",m_climbstep);
  // SmartDashboard.putBoolean("climb sensor", m_climbsensor.get());
+ SmartDashboard.putBoolean("Climb Safe",climbSafe);
+ SmartDashboard.putBoolean("climberreleased",climberreleased);
+ SmartDashboard.putBoolean("climberHomed",climberHomed);
 }
 
 public boolean climberreleased() {
