@@ -6,7 +6,7 @@ package frc.robot.subsystems;
 
 import static frc.robot.Constants.LauncherConstants.*;
 
-import frc.robot.commands.LaunchNote;
+//import frc.robot.commands.LaunchNote;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
@@ -18,8 +18,8 @@ import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 //import edu.wpi.first.wpilibj.CAN;
 //import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.RunCommand;
+//import edu.wpi.first.wpilibj2.command.InstantCommand;
+//import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class CANLauncher extends SubsystemBase {
@@ -27,9 +27,9 @@ public class CANLauncher extends SubsystemBase {
   CANSparkMax m_feedWheel;
   CANSparkMax m_kickerWheel;
   public DigitalInput m_ringDetect;
-  public boolean hasnote;
+  public static boolean hasnote;
   RelativeEncoder m_intakeencode;
-  
+  //leds
 
   /** Creates a new Launcher. */
   public CANLauncher() {
@@ -43,12 +43,18 @@ public class CANLauncher extends SubsystemBase {
     m_launchWheel.restoreFactoryDefaults();
     m_feedWheel.restoreFactoryDefaults();
     m_kickerWheel.restoreFactoryDefaults();
-   m_ringDetect.get();
    m_intakeencode = m_feedWheel.getEncoder();
    m_kickerWheel.setOpenLoopRampRate(.2);
    createDashboards();
   }
- 
+ @Override
+ public void periodic(){
+  if(!m_ringDetect.get() == true){
+    hasnote = true;
+  }else{
+    hasnote = false;
+  }
+ }
   /**
    * This method is an example of the 'subsystem factory' style of command creation. A method inside
    * the subsytem is created to return an instance of a command. This works for commands that

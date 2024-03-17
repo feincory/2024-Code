@@ -29,6 +29,7 @@
 
 package frc.robot.subsystems;
 
+import static frc.robot.subsystems.CANLauncher.hasnote;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -42,8 +43,9 @@ import com.ctre.phoenix.led.LarsonAnimation.BounceMode;
 import com.ctre.phoenix.led.TwinkleAnimation.TwinklePercent;
 import com.ctre.phoenix.led.TwinkleOffAnimation.TwinkleOffPercent;
 
+
 public class CANdleSystem extends SubsystemBase {
-  private final int LEDS_PER_ANIMATION = 30;
+  private final int LEDS_PER_ANIMATION = 35;//35
   private final CANdle m_candle = new CANdle(Constants.ledConstants.kCANdleID, "Drive CAN");
   private CommandXboxController joystick;
   private int m_candleChannel = 0;
@@ -51,6 +53,8 @@ public class CANdleSystem extends SubsystemBase {
   private boolean m_last5V = false;
   private boolean m_animDirection = false;
   private boolean m_setAnim = false;
+  
+  
 
   private Animation m_toAnimate = null;
 
@@ -79,9 +83,11 @@ public class CANdleSystem extends SubsystemBase {
       configAll.brightnessScalar = 0.1;
       configAll.vBatOutputMode = VBatOutputMode.Modulated;
       m_candle.configAllSettings(configAll, 100);
+      
+     
       //changeAnimation(AnimationTypes.Rainbow);
   }
-
+  
   public void toggle5VOverride() {
       System.out.println("State is: " + m_last5V);
       m_candle.configV5Enabled(m_last5V);
@@ -197,6 +203,14 @@ public class CANdleSystem extends SubsystemBase {
   @Override
   public void periodic() {
       // This method will be called once per scheduler run
+      if(hasnote == true){
+        m_toAnimate = new StrobeAnimation(240, 10, 180, 0, 0.01, LEDS_PER_ANIMATION, m_candleChannel * LEDS_PER_ANIMATION + 8);
+      }
+      
+
+
+
+
       if(m_toAnimate == null) {
           if(!m_setAnim) {
               /* Only setLEDs once, because every set will transmit a frame */
@@ -225,7 +239,14 @@ public class CANdleSystem extends SubsystemBase {
       }
   }
   public void position(){
-    m_candleChannel = 1;
-              m_toAnimate = new FireAnimation(0.5, 0.7, LEDS_PER_ANIMATION, 0.8, 0.5, m_animDirection, m_candleChannel * LEDS_PER_ANIMATION + 8);
-  }
+    m_candleChannel = 0;
+    m_toAnimate = new FireAnimation(1, 0.75, LEDS_PER_ANIMATION, 1, 0.3, m_animDirection, m_candleChannel * LEDS_PER_ANIMATION + 8);
+    }
+   
+    public void amp(){
+    m_candleChannel = 0;
+    m_toAnimate = new RainbowAnimation(1, 0.7, LEDS_PER_ANIMATION, m_animDirection, m_candleChannel * LEDS_PER_ANIMATION + 8);
+    }
+
+
 }

@@ -9,7 +9,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkPIDController;
-
+//import static frc.robot.subsystems.CANLauncher.hasnote;
 import static frc.robot.Constants.climberConstants.*;
 
 //import javax.swing.text.Position;
@@ -22,14 +22,17 @@ import edu.wpi.first.wpilibj.Servo;
 // import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+//import edu.wpi.first.wpilibj2.command.InstantCommand;
 // //import com.ctre.phoenix6.configs.CANcoderConfiguration;
 // //import com.ctre.phoenix6.hardware.CANcoder;
 // import edu.wpi.first.wpilibj2.command.Command;
 // import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+//import frc.robot.Constants.OperatorConstants;
 // import edu.wpi.first.wpilibj2.command.Command.InterruptionBehavior;
 // import edu.wpi.first.wpilibj2.command.button.Trigger;
 // import frc.robot.subsystems.arm.*;
+//import frc.robot.RobotContainer;
 
 public class climber extends SubsystemBase {
    //Creates a new rotation.
@@ -47,6 +50,7 @@ public class climber extends SubsystemBase {
   boolean climberHomed;
   boolean climberState;
   boolean climbSafe;
+ 
   public Object cancel;  // CANcoder armCANenCaNcoder;
   public climber() {
 
@@ -103,28 +107,60 @@ public class climber extends SubsystemBase {
  SmartDashboard.putBoolean("climberreleased",climberreleased);
  SmartDashboard.putBoolean("climberHomed",climberHomed);
 
+
     // This method will be called once per scheduler run
     }
 
-    // public enum States {DEFAULT, UP, DOWN}
-    // private States desiredState = States.DEFAULT;
-    // public Command defaultCommand() {
-    //   return run(() -> {
-    //     m_climbmotorlead.set(0);
-
-    //   switch(desiredState) {
-    //     case DEFAULT:
-    //       if(m_climbsensor.get()) {
-    //         m_climber.
-    //       }
-    //       break;
-    //     case UP:
+    public enum States {STOWED,RETRACT, DEPLOYED, BOTTOM}
+    public States desiredState = States.STOWED;
+    public Command climbstatemach() {
+      return runEnd(() -> {
         
-    //     break;
-    //   }
+      switch(desiredState) {
+        case STOWED:
+          if(!m_climbsensor.get()== true && climberHomed == false && climbSafe == true) {
+             m_climbencoder.setPosition(0);
+            climberHomed = true;
+            desiredState = States.RETRACT;
+            m_climbstep = 1;
+            
+          }
+          break;
+        
+          case RETRACT:
+        if(climberHomed == true && climberreleased == false && climbSafe == true) {
+             m_climberPID.setReference(30, CANSparkMax.ControlType.kPosition);
+             climberreleased = true;
+             desiredState = States.DEPLOYED;
+             m_climbstep = 2;
+          }
+           break;
+        
+        
+        case DEPLOYED:
+        if(m_climbencoder.getPosition()>28 && climberreleased == true && climbSafe == true){
+        m_climberPID.setReference(-178, CANSparkMax.ControlType.kPosition);
+        m_climbstep = 3;
+        m_designFlaw.set(kpostDeploy);
+        desiredState = States.BOTTOM;
+        }else{
+           m_climberPID.setReference(30, CANSparkMax.ControlType.kPosition);
+        }
+        break;
 
-    //   });
-    // }
+        case BOTTOM:
+        
+        m_climberPID.setReference(-178, CANSparkMax.ControlType.kPosition);
+        m_climbstep = 4;
+        climbstatemach().isFinished();
+        break;
+      
+      
+      
+      }}, () -> {m_climbmotorlead.set(0);});
+
+      
+    }
     // servo reset
      public void servoPreDeploy(){
       m_designFlaw.setAngle(kpreDeploy);
@@ -182,20 +218,17 @@ public class climber extends SubsystemBase {
     }
 
     // new code
-    public Command climbRetract() {
-    return run(()->{
-        if(climberHomed == true && climberreleased == false && climbSafe == true){
-          m_climberPID.setReference(30, CANSparkMax.ControlType.kPosition);
-        }
+    public void climbRetract() {
+  
+    if(climberHomed == true && climberreleased == false && climbSafe == true){
+      m_climberPID.setReference(30, CANSparkMax.ControlType.kPosition);
+    }
 
 
         if(m_climbencoder.getPosition()<33 && m_climbencoder.getPosition()>28) {
-          
-          climbRetract().isFinished();
-          climberreleased = true;
+        climberreleased = true;
         }
-      }
-        );
+      
       }
         
     

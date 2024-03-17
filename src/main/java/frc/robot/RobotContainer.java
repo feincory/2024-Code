@@ -193,28 +193,38 @@ public class RobotContainer {
 
                                       
     m_operatorController.y().whileTrue(m_launcher.getReverseNoteCommand().andThen(m_launcher::noteMoveForshot));
-    // m_operatorController.x().onTrue(new InstantCommand(m_arm::armfoward))
-    //                       .onFalse(new InstantCommand(m_arm::stop));
-    // m_operatorController.b().onTrue(new InstantCommand(m_arm::armreverese))
-    //                       .onFalse(new InstantCommand(m_arm::stop));
+
       
    //climber
    m_drivercontroller.button(8).onTrue(new InstantCommand(m_climber::climberReleaseable));
    m_drivercontroller.button(8).onFalse(new InstantCommand(m_climber::climberNotReleaseable));
     
+
+  m_operatorController.b().whileTrue(m_climber.climbstatemach());
+ //.onFalse(new InstantCommand(m_climber::stop));
+
+  m_operatorController.b().onTrue(new InstantCommand(m_arm::armpositionTrapPrep)
+      .andThen(new InstantCommand(m_launcher::noteMoveForAmp))
+      .withTimeout(1)
+     .andThen(m_launcher::stop));      
    
-   
-   m_operatorController.b().onTrue(
-      new InstantCommand(m_climber::climberencoderreset)
-      .andThen(m_climber.climbRetract())
-      .andThen(m_climber.climbRelease())
-      .andThen(new InstantCommand(m_arm::armpositionTrapPrep))
-      .andThen(new InstantCommand(m_launcher::noteMoveForAmp)))
-      // .andThen(new RunCommand(m_climber::climb))
-      // .withTimeout(1)
-      // .andThen(m_launcher::stop))
+
+  m_operatorController.x().onTrue(
+  new InstantCommand(m_climber::climbwinchbottom))
+  .onFalse(new InstantCommand(m_climber::stop));      
+
+  m_operatorController.x().onTrue(
+  new InstantCommand(m_arm::armpositionTrapClimb)); 
+  //  m_operatorController.b().onTrue(
+  //     new InstantCommand(m_climber::climberencoderreset)
+  //     .andThen(m_climber.climbRetract())
+  //     //.andThen(m_climber.climbRelease())
+  //     .andThen(new InstantCommand(m_arm::armpositionTrapPrep))
+  //     .andThen(new InstantCommand(m_launcher::noteMoveForAmp)))
+  //     // .andThen(new RunCommand(m_climber::climb))
+
       
-      .onFalse(new InstantCommand(m_climber::stop));
+  //     .onFalse(new InstantCommand(m_climber::stop));
 
    
 
@@ -236,7 +246,8 @@ public class RobotContainer {
   
 
   
-   m_operatorController.povDown().onTrue(new InstantCommand(m_arm::armpositionIntake));
+   m_operatorController.povDown().onTrue(new InstantCommand(m_arm::armpositionIntake)
+   .andThen(new InstantCommand(m_led::position)));
                                         //.andThen(new RunCommand( m_launcher::noteMoveForAmp)));
                                         //.withTimeout(.25)
                                         //.andThen(m_launcher::stop));
@@ -253,7 +264,11 @@ public class RobotContainer {
  m_operatorController.back().onTrue(m_arm.armcommpDown());
   m_operatorController.start().onTrue(m_arm.armcommpUp());
 
-  // m_operatorController.back().onTrue(new InstantCommand(m_arm::armclearfault));
+    
+//  m_operatorController.back().onTrue(new InstantCommand(m_arm::armfoward)).onFalse(new InstantCommand(m_arm::stop));
+//   m_operatorController.start().onTrue(new InstantCommand(m_arm::armreverese)).onFalse(new InstantCommand(m_arm::stop));
+
+
 
 
   }

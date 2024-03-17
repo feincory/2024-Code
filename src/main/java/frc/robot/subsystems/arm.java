@@ -20,6 +20,7 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.AbsoluteSensorRangeValue;
 import com.ctre.phoenix6.signals.FeedbackSensorSourceValue;
 import com.ctre.phoenix6.signals.GravityTypeValue;
+import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.ctre.phoenix6.signals.SensorDirectionValue;
 //import com.revrobotics.CANSparkMax;
@@ -31,7 +32,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.generated.TunerConstants;
 import frc.robot.LimelightHelpers;
-import frc.robot.RobotContainer;
+//import frc.robot.RobotContainer;
 
 public class arm extends SubsystemBase {
   //Creates a new rotation. 
@@ -71,16 +72,16 @@ public class arm extends SubsystemBase {
     m_cc.getConfigurator().apply(cc_cfg);
 
     TalonFXConfiguration fx_cfg = new TalonFXConfiguration();
+    fx_cfg.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
     fx_cfg.Feedback.FeedbackRemoteSensorID = m_cc.getDeviceID();
     fx_cfg.Feedback.FeedbackSensorSource = FeedbackSensorSourceValue.FusedCANcoder;
     fx_cfg.Feedback.SensorToMechanismRatio = 1.0;
-    fx_cfg.Feedback.RotorToSensorRatio = 281.25;
+    fx_cfg.Feedback.RotorToSensorRatio = 187.5;//was 281.25
+    
     fx_cfg.SoftwareLimitSwitch.ForwardSoftLimitEnable = true;
     fx_cfg.SoftwareLimitSwitch.ReverseSoftLimitEnable = true;
-    fx_cfg.SoftwareLimitSwitch.ForwardSoftLimitThreshold = .27;
-    
-
-    fx_cfg.SoftwareLimitSwitch.ReverseSoftLimitThreshold= -.177; //was -.166
+    fx_cfg.SoftwareLimitSwitch.ForwardSoftLimitThreshold = .27; //was .270
+        fx_cfg.SoftwareLimitSwitch.ReverseSoftLimitThreshold= -.175; //was -.166
     fx_cfg.OpenLoopRamps.DutyCycleOpenLoopRampPeriod = .3;
     fx_cfg.ClosedLoopRamps.DutyCycleClosedLoopRampPeriod = .1;
     // pid config
@@ -125,7 +126,7 @@ createDashboards();
       printCount = 0;
      
       armAutoCalc =  
-      (((LimelightHelpers.getTY(null)+5.5+armmanualcomp) //limelight offset was 8 degrees add, lowering to 
+      (((LimelightHelpers.getTY(null)+6.5+armmanualcomp) //limelight offset was 8 degrees add, lowering to 
       *.00474) //calclate slope .0039 OLD SLOPE  new shooter old slope .0049
       -0.166);
       //System.out.println(armAutoCalc);
@@ -198,10 +199,6 @@ createDashboards();
 public Command armcommpDown() {
      return runOnce(() -> armmanualcomp= armmanualcomp-.5);
 }
-// public void  armmanual(){
-  
-//      m_fx.setControl(m_dutyCycleControl.withOutput(RobotContainer.m_operatorController.getLeftY()));
-//   }
  
 
 
@@ -210,11 +207,11 @@ public void setarm(double speed){
 }
 
 public void  armfoward(){
-m_fx.setControl(m_dutyCycleControl.withOutput(.5));
+m_fx.setControl(m_dutyCycleControl.withOutput(-.3));
 }
 
 public void armreverese(){
-  m_fx.setControl(m_dutyCycleControl.withOutput(-.5));
+  m_fx.setControl(m_dutyCycleControl.withOutput(.3));
 
 }
 

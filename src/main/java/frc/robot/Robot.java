@@ -8,10 +8,10 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Constants.OperatorConstants;
-import frc.robot.subsystems.CANdleSystem;
-import frc.robot.subsystems.CANdleSystem.AnimationTypes;
+//import frc.robot.subsystems.CANdleSystem;
+//import frc.robot.subsystems.CANdleSystem.AnimationTypes;
 
-import com.ctre.phoenix.led.CANdle;
+//import com.ctre.phoenix.led.CANdle;
 
 import edu.wpi.first.cameraserver.CameraServer;
 //stuff addded for swerve
@@ -46,7 +46,7 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
-    //CameraServer.startAutomaticCapture();
+    CameraServer.startAutomaticCapture();
 
     m_robotContainer.drivetrain.getDaqThread().setThreadPriority(99);
     // disables joystick warnings
