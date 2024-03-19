@@ -82,7 +82,7 @@ public class RobotContainer {
 
   // The robot's subsystems are defined here.
   // private final PWMDrivetrain m_drivetrain = new PWMDrivetrain();
-  //private final CANDrivetrain m_drivetrain = new CANDrivetrain();
+  //private final CANDrivetrain m_drivetrain = new CANDrivetrain();` 
   // private final PWMLauncher m_launcher = new PWMLauncher();
 
   public final CANLauncher m_launcher = new CANLauncher();
@@ -104,7 +104,7 @@ public class RobotContainer {
     NamedCommands.registerCommand("launchnote", m_launcher.setlaunchCommand());
     NamedCommands.registerCommand("autoaim", new RunCommand(m_arm::armAutoRotateCommand));
     NamedCommands.registerCommand("autoaimdrive", drivetrain.autoaimdrive(null));
-
+  NamedCommands.registerCommand("`", m_launcher.getReverseNoteCommand());
      runAuto = drivetrain.getAutoPath("Blue Center");
     autoChooser = AutoBuilder.buildAutoChooser();
     SmartDashboard.putData("Auto Chooser", autoChooser);

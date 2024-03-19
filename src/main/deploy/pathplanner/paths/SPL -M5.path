@@ -3,45 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 8.617128220171933,
-        "y": 0.7804612792324187
+        "x": 0.48523866278501937,
+        "y": 4.01584572399914
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.008816542010116,
-        "y": 1.0666026207458699
+        "x": 3.278043901634934,
+        "y": 2.2236753790950705
       },
       "isLocked": false,
-      "linkedName": "M5"
+      "linkedName": "LEFT SPEAKER"
     },
     {
       "anchor": {
-        "x": 4.2642777593247505,
-        "y": 1.9437877337293141
+        "x": 8.617128220171933,
+        "y": 0.7804612792324187
       },
       "prevControl": {
-        "x": 5.3817090326488355,
-        "y": 1.2161007014321723
-      },
-      "nextControl": {
-        "x": 3.1468464860006655,
-        "y": 2.671474766026456
-      },
-      "isLocked": false,
-      "linkedName": null
-    },
-    {
-      "anchor": {
-        "x": 2.142885055000881,
-        "y": 3.818506867782967
-      },
-      "prevControl": {
-        "x": 2.6855669095953596,
-        "y": 3.3350266700533413
+        "x": 7.2585474748414285,
+        "y": 1.141785945543723
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "SH LEFT"
+      "linkedName": "M5"
     }
   ],
   "rotationTargets": [],
@@ -55,13 +39,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -41.0,
+    "rotation": -13.392497753751197,
     "rotateFast": false
   },
   "reversed": false,
   "folder": null,
   "previewStartingState": {
-    "rotation": 0,
+    "rotation": 0.0,
     "velocity": 0
   },
   "useDefaultConstraints": true

@@ -69,8 +69,8 @@ public static class armConstants{
     //rotate cancoder 
   public static final String drivecanbusname = "Drive CAN";
   public static final int armCANcoderId = 47;
-  public static double kPc = 11;
-  public static double kIc = 4;//was 6
+  public static double kPc = 8;// was 11
+  public static double kIc = 2;//was 4 was 6
   public static double kDc = 0;
   public static double kGc = 0; //Gravity
   //pid
@@ -82,7 +82,8 @@ public static class armConstants{
   //arm at bottom of rotation -.168
   //set zero with t squre 24" from ground, ++ increases the distance from the ground
   public static double kampPosition = .105;
-  public static double kTrapPrepPosition = .240;//was .240, -.155 for shooting from stage
+  public static double kTrapPrepPosition = .22
+  0;//was .240, -.155 for shooting from stage
   public static double kTrapclimbPosition = .220; // was .230
   public static double kStageShot = -0.1033;
   public static double kPresetShot = -.140;// speaker
