@@ -105,8 +105,8 @@ public class RobotContainer {
     NamedCommands.registerCommand("autoaim", new RunCommand(m_arm::armAutoRotateCommand));
     NamedCommands.registerCommand("autoaim", new RunCommand(m_arm::armAutoRotateCommand));
     NamedCommands.registerCommand("Reverse Intake", m_launcher.getReverseNoteCommand());
-  NamedCommands.registerCommand("`", m_launcher.getReverseNoteCommand());
-     runAuto = drivetrain.getAutoPath("Blue Center");
+
+    runAuto = drivetrain.getAutoPath("Blue Center");
     autoChooser = AutoBuilder.buildAutoChooser();
     SmartDashboard.putData("Auto Chooser", autoChooser);
     // Configure the trigger bindings

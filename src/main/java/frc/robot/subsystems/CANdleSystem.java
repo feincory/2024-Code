@@ -205,7 +205,7 @@ public class CANdleSystem extends SubsystemBase {
       // This method will be called once per scheduler run
       if(hasnote == true){
         m_toAnimate = new StrobeAnimation(240, 10, 180, 0, 0.01, LEDS_PER_ANIMATION, m_candleChannel * LEDS_PER_ANIMATION + 8);
-      }
+      }else{this.position();}
       
 
 

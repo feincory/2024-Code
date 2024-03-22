@@ -76,7 +76,7 @@ public class arm extends SubsystemBase {
     fx_cfg.Feedback.FeedbackRemoteSensorID = m_cc.getDeviceID();
     fx_cfg.Feedback.FeedbackSensorSource = FeedbackSensorSourceValue.FusedCANcoder;
     fx_cfg.Feedback.SensorToMechanismRatio = 1.0;
-    fx_cfg.Feedback.RotorToSensorRatio = 187.5;//was 281.25
+    fx_cfg.Feedback.RotorToSensorRatio = 150;//was 281.25
     
     fx_cfg.SoftwareLimitSwitch.ForwardSoftLimitEnable = true;
     fx_cfg.SoftwareLimitSwitch.ReverseSoftLimitEnable = true;
@@ -126,7 +126,7 @@ createDashboards();
       printCount = 0;
      
       armAutoCalc =  
-      (((LimelightHelpers.getTY(null)+6.5+armmanualcomp) //limelight offset was 8 degrees add, lowering to 
+      (((LimelightHelpers.getTY(null)+9+armmanualcomp) //limelight offset was 8 degrees add, lowering to 
       *.00474) //calclate slope .0039 OLD SLOPE  new shooter old slope .0049
       -0.166);
       //System.out.println(armAutoCalc);

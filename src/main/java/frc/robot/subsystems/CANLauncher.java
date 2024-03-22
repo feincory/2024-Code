@@ -10,6 +10,7 @@ import static frc.robot.Constants.LauncherConstants.*;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
+import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -43,6 +44,9 @@ public class CANLauncher extends SubsystemBase {
     m_launchWheel.restoreFactoryDefaults();
     m_feedWheel.restoreFactoryDefaults();
     m_kickerWheel.restoreFactoryDefaults();
+        m_launchWheel.setIdleMode(IdleMode.kCoast);
+
+        
    m_intakeencode = m_feedWheel.getEncoder();
    m_kickerWheel.setOpenLoopRampRate(.2);
    createDashboards();
@@ -161,7 +165,7 @@ public class CANLauncher extends SubsystemBase {
     m_kickerWheel.set(speed);
   }
   // A helper method to stop both wheels. You could skip having a method like this and call the
-  // individual accessors with speed = 0 instead
+  // individual accessors with speed = 0 insteadauto
   public void stop() {
     m_launchWheel.set(0);
     m_feedWheel.set(0);
@@ -195,6 +199,7 @@ public boolean getstate(){
   public void createDashboards() {
   ShuffleboardTab shooterTab = Shuffleboard.getTab("Shooter");
   shooterTab.add("ring detect", getstate());
+  shooterTab.add("temp", m_launchWheel.getMotorTemperature() );
   
 }
     

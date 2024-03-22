@@ -99,7 +99,7 @@
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 0.8
+                  "waitTime": 1.0
                 }
               }
             ]
@@ -162,19 +162,19 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "preparelaunch"
+                  "name": "autoaim"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "autoaim"
+                  "name": "preparelaunch"
                 }
               },
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 0.5
+                  "waitTime": 1.0
                 }
               }
             ]
@@ -193,7 +193,7 @@
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 0.4
+                  "waitTime": 0.25
                 }
               }
             ]
@@ -237,19 +237,19 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "preparelaunch"
+                  "name": "autoaim"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "autoaim"
+                  "name": "preparelaunch"
                 }
               },
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 0.75
+                  "waitTime": 1.0
                 }
               }
             ]
