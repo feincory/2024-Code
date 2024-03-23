@@ -108,6 +108,12 @@
                 "data": {
                   "waitTime": 1.0
                 }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "autoaimrotate"
+                }
               }
             ]
           }
@@ -127,8 +133,20 @@
                 "data": {
                   "waitTime": 0.5
                 }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "autoaimrotate"
+                }
               }
             ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "S2-M2"
           }
         }
       ]

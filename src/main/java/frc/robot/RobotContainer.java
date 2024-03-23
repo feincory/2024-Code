@@ -97,7 +97,7 @@ public class RobotContainer {
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-   
+    kLLpcontroller = .075;
     NamedCommands.registerCommand("runintake", m_launcher.intakeAutCommand());
     NamedCommands.registerCommand("armintakepos", new RunCommand(m_arm::armpositionIntake));
     NamedCommands.registerCommand("preparelaunch", m_launcher.autoLaunch());
@@ -106,6 +106,9 @@ public class RobotContainer {
     NamedCommands.registerCommand("autoaim", new RunCommand(m_arm::armAutoRotateCommand));
     NamedCommands.registerCommand("arm speaker", new RunCommand(m_arm::StageShot));
     NamedCommands.registerCommand("autoaim", new RunCommand(m_arm::armAutoRotateCommand));
+    
+    NamedCommands.registerCommand("autoaimrotate", drivetrain.applyRequest(() 
+    ->drive.withRotationalRate((-LimelightHelpers.getTX(null)+2)*kLLpcontroller)));
     NamedCommands.registerCommand("Reverse Intake", m_launcher.getReverseNoteCommand());
     NamedCommands.registerCommand("stop launcher", new InstantCommand(m_launcher::stop));
 
@@ -114,7 +117,7 @@ public class RobotContainer {
     SmartDashboard.putData("Auto Chooser", autoChooser);
     // Configure the trigger bindings
     configureBindings();
-    kLLpcontroller = .075;
+    
   }
 
   /**
@@ -266,11 +269,11 @@ public class RobotContainer {
   m_operatorController.povLeft().onTrue(new InstantCommand(m_arm::StageShot));//subwoofer/speaker shot
   
  m_operatorController.back().onTrue(m_arm.armcommpDown());
-  m_operatorController.start().onTrue(m_arm.armcommpUp());
+m_operatorController.start().onTrue(m_arm.armcommpUp());
 
     
-//  m_operatorController.back().onTrue(new InstantCommand(m_arm::armfoward)).onFalse(new InstantCommand(m_arm::stop));
-//   m_operatorController.start().onTrue(new InstantCommand(m_arm::armreverese)).onFalse(new InstantCommand(m_arm::stop));
+  //m_operatorController.back().onTrue(new InstantCommand(m_arm::armfoward)).onFalse(new InstantCommand(m_arm::stop));
+   //m_operatorController.start().onTrue(new InstantCommand(m_arm::armreverese)).onFalse(new InstantCommand(m_arm::stop));
 
 
 

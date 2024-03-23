@@ -2,21 +2,15 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.48523866278501937,
-      "y": 4.01584572399914
+      "x": 0.8305816611633238,
+      "y": 4.4795920361071495
     },
-    "rotation": 0
+    "rotation": -60.0
   },
   "command": {
     "type": "sequential",
     "data": {
       "commands": [
-        {
-          "type": "path",
-          "data": {
-            "pathName": "SPL -SHL"
-          }
-        },
         {
           "type": "race",
           "data": {
@@ -68,7 +62,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "SHL - M5"
+                  "pathName": "SPL -M5"
                 }
               },
               {

@@ -157,7 +157,7 @@ public class climber extends SubsystemBase {
       
       
       
-      }}, () -> {m_climbmotorlead.set(0);});
+      }}, () -> {m_climbmotorlead.set(.0);});
 
       
     }

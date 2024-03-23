@@ -60,6 +60,16 @@ public class arm extends SubsystemBase {
   //SoftwareLimitSwitchConfigs armlimit = new ForwardsSoftLimitEnable();
    private double armAutoCalc;
    private double armmanualcomp;
+
+//shooter calibration
+  private double speakerarmpos;
+  private double speakerllty;
+  private double longshotarmpos;
+  private double longshotllty;
+  private double armposdelta;
+  private double lltydelta;
+  private double calratecomp;   
+  private double newarmautocalc;
   
   // CANcoder armCANenCaNcoder;
   public arm() {
@@ -106,16 +116,17 @@ public class arm extends SubsystemBase {
 
     m_fx.setNeutralMode(NeutralModeValue.Brake);
     armmanualcomp = 0; //default value
-
  
-  
-
-
-
-
-
-
-createDashboards();
+  //shooter calibration
+    speakerarmpos = -.1035;
+    speakerllty = 5.73;
+    longshotarmpos = -.175;
+    longshotllty = -10.32;
+    armposdelta = -(speakerarmpos-longshotarmpos);
+    lltydelta = -(speakerllty-longshotllty);
+    calratecomp = armposdelta/lltydelta;
+    
+    createDashboards();
 }
 
 
@@ -129,6 +140,11 @@ createDashboards();
       (((LimelightHelpers.getTY(null)+9+armmanualcomp) //limelight offset was 8 degrees add, lowering to 
       *.00474) //calclate slope .0039 OLD SLOPE  new shooter old slope .0049
       -0.166);
+
+      newarmautocalc =  
+      (((LimelightHelpers.getTY(null)+speakerllty+5.5+armmanualcomp) //limelight offset was 8 degrees add, lowering to 
+      *calratecomp) //calclate slope .0039 OLD SLOPE  new shooter old slope .0049
+      +longshotarmpos);
       //System.out.println(armAutoCalc);
       // If any faults happen, print them out. Sticky faults will always be present if live-fault occurs
       f_fusedSensorOutOfSync.refresh();
@@ -207,11 +223,11 @@ public void setarm(double speed){
 }
 
 public void  armfoward(){
-m_fx.setControl(m_dutyCycleControl.withOutput(-.3));
+m_fx.setControl(m_dutyCycleControl.withOutput(-.1));
 }
 
 public void armreverese(){
-  m_fx.setControl(m_dutyCycleControl.withOutput(.3));
+  m_fx.setControl(m_dutyCycleControl.withOutput(.1));
 
 }
 
@@ -220,7 +236,7 @@ public void stop(){
 }
 public void armAutoRotateCommand(){
  
-   m_fx.setControl(m_dutyPosition.withPosition(armAutoCalc));
+   m_fx.setControl(m_dutyPosition.withPosition(newarmautocalc));
   
 }
 public void defenciveshot(){
