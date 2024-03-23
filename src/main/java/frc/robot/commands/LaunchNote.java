@@ -35,6 +35,7 @@ public class LaunchNote extends Command {
     // Set the wheels to launching speed
     m_launcher.setLaunchWheel(kLauncherSpeed);
     m_launcher.setFeedWheel(kLaunchFeederSpeed);
+    //m_launcher.setKickerWheel(kIntakeKickerSpeed);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

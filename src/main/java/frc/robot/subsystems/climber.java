@@ -129,7 +129,7 @@ public class climber extends SubsystemBase {
         
           case RETRACT:
         if(climberHomed == true && climberreleased == false && climbSafe == true) {
-             m_climberPID.setReference(30, CANSparkMax.ControlType.kPosition);
+             m_climberPID.setReference(22, CANSparkMax.ControlType.kPosition);
              climberreleased = true;
              desiredState = States.DEPLOYED;
              m_climbstep = 2;
@@ -138,19 +138,19 @@ public class climber extends SubsystemBase {
         
         
         case DEPLOYED:
-        if(m_climbencoder.getPosition()>28 && climberreleased == true && climbSafe == true){
-        m_climberPID.setReference(-178, CANSparkMax.ControlType.kPosition);
+        if(m_climbencoder.getPosition()>20 && climberreleased == true && climbSafe == true){
+        m_climberPID.setReference(-105.5, CANSparkMax.ControlType.kPosition);
         m_climbstep = 3;
         m_designFlaw.set(kpostDeploy);
         desiredState = States.BOTTOM;
         }else{
-           m_climberPID.setReference(30, CANSparkMax.ControlType.kPosition);
+           m_climberPID.setReference(22, CANSparkMax.ControlType.kPosition);
         }
         break;
 
         case BOTTOM:
         
-        m_climberPID.setReference(-178, CANSparkMax.ControlType.kPosition);
+        m_climberPID.setReference(-106.5, CANSparkMax.ControlType.kPosition);
         m_climbstep = 4;
         climbstatemach().isFinished();
         break;
@@ -162,6 +162,7 @@ public class climber extends SubsystemBase {
       
     }
     // servo reset
+    
      public void servoPreDeploy(){
       m_designFlaw.setAngle(kpreDeploy);
      }
@@ -183,15 +184,15 @@ public class climber extends SubsystemBase {
 
     public void climbReleaseCommand() {
       if(climberHomed == true && climberreleased == false && climbSafe == true){
-      m_climberPID.setReference(30, CANSparkMax.ControlType.kPosition);
+      m_climberPID.setReference(20, CANSparkMax.ControlType.kPosition);
     }
 
-      if(m_climbencoder.getPosition()>28 && climberreleased == false && climbSafe == true){
+      if(m_climbencoder.getPosition()>16 && climberreleased == false && climbSafe == true){
       climberreleased = true;
       }
 
       if(climberHomed == true && climberreleased == true && climbSafe == true){
-      m_climberPID.setReference(-178, CANSparkMax.ControlType.kPosition);
+      m_climberPID.setReference(-106, CANSparkMax.ControlType.kPosition);
       m_designFlaw.set(kpostDeploy);
 
       }  
@@ -202,7 +203,7 @@ public class climber extends SubsystemBase {
     
     public void climbwinchbottom() {
       if(climberHomed == true && !m_climbsensor.get()==false && climbSafe == true ){
-      m_climberPID.setReference(120, CANSparkMax.ControlType.kPosition); //was 120 changed to accomidate rope streched
+      m_climberPID.setReference(72, CANSparkMax.ControlType.kPosition); //was 120 changed to accomidate rope streched
     
       }
       else{
@@ -221,11 +222,11 @@ public class climber extends SubsystemBase {
     public void climbRetract() {
   
     if(climberHomed == true && climberreleased == false && climbSafe == true){
-      m_climberPID.setReference(30, CANSparkMax.ControlType.kPosition);
+      m_climberPID.setReference(20, CANSparkMax.ControlType.kPosition);
     }
 
 
-        if(m_climbencoder.getPosition()<33 && m_climbencoder.getPosition()>28) {
+        if(m_climbencoder.getPosition()<16 && m_climbencoder.getPosition()>28) {
         climberreleased = true;
         }
       
@@ -235,12 +236,12 @@ public class climber extends SubsystemBase {
     public Command climbRelease() {
     return run(()->{
         if(climberHomed == true && climberreleased == true && climbSafe == true){
-          m_climberPID.setReference(-178, CANSparkMax.ControlType.kPosition);
+          m_climberPID.setReference(-106.5, CANSparkMax.ControlType.kPosition);
           m_designFlaw.set(kpostDeploy);
         }
        
        
-        if(m_climbencoder.getPosition()>-175 && m_climbencoder.getPosition()<-180) {
+        if(m_climbencoder.getPosition()>-104 && m_climbencoder.getPosition()<-180) {
           climbRelease().isFinished();}
         });
       }
@@ -250,9 +251,9 @@ public class climber extends SubsystemBase {
     public Command climb() {
     return run(()->{
         if(climberHomed == true && !m_climbsensor.get()==false && climbSafe == true ){
-      m_climberPID.setReference(120, CANSparkMax.ControlType.kPosition); //was 120 changed to accomidate rope streched
+      m_climberPID.setReference(72, CANSparkMax.ControlType.kPosition); //was 120 changed to accomidate rope streched
       }
-      if(m_climbencoder.getPosition()>118 && m_climbencoder.getPosition()<121) {
+      if(m_climbencoder.getPosition()>70 && m_climbencoder.getPosition()<121) {
           climb().isFinished();}});}
   
       

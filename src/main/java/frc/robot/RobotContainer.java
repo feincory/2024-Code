@@ -101,10 +101,13 @@ public class RobotContainer {
     NamedCommands.registerCommand("runintake", m_launcher.intakeAutCommand());
     NamedCommands.registerCommand("armintakepos", new RunCommand(m_arm::armpositionIntake));
     NamedCommands.registerCommand("preparelaunch", m_launcher.autoLaunch());
-    NamedCommands.registerCommand("launchnote", m_launcher.setlaunchCommand());
+    NamedCommands.registerCommand("launchnote", m_launcher.autolaunchCommand());
+    NamedCommands.registerCommand("launchnotehalf", m_launcher.autolaunchhalfCommand());
     NamedCommands.registerCommand("autoaim", new RunCommand(m_arm::armAutoRotateCommand));
+    NamedCommands.registerCommand("arm speaker", new RunCommand(m_arm::StageShot));
     NamedCommands.registerCommand("autoaim", new RunCommand(m_arm::armAutoRotateCommand));
     NamedCommands.registerCommand("Reverse Intake", m_launcher.getReverseNoteCommand());
+    NamedCommands.registerCommand("stop launcher", new InstantCommand(m_launcher::stop));
 
     runAuto = drivetrain.getAutoPath("Blue Center");
     autoChooser = AutoBuilder.buildAutoChooser();

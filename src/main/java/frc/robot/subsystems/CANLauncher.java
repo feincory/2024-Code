@@ -151,6 +151,37 @@ public class CANLauncher extends SubsystemBase {
       });
       }  
 
+         public Command autolaunchCommand() {
+  // The startEnd helper method takes a method to call when the command is initialized and one to
+  // call when it ends
+  return this.startEnd(
+      // When the command is initialized, set the wheels to the intake speed values
+      () -> {
+        m_launchWheel.set(kLauncherSpeed);
+        m_feedWheel.set(kLaunchFeederSpeed);
+        m_kickerWheel.set(kIntakeKickerSpeed);
+      },
+      // When the command stops, stop the wheels
+      () -> {
+        stop();
+      });
+      }     
+
+         public Command autolaunchhalfCommand() {
+  // The startEnd helper method takes a method to call when the command is initialized and one to
+  // call when it ends
+  return this.startEnd(
+      // When the command is initialized, set the wheels to the intake speed values
+      () -> {
+        m_launchWheel.set(-.48);
+        m_feedWheel.set(kLaunchFeederSpeed);
+        m_kickerWheel.set(kIntakeKickerSpeed);
+      },
+      // When the command stops, stop the wheels
+      () -> {
+        stop();
+      });
+      }      
 
   // An accessor method to set the speed (technically the output percentage) of the launch wheel
   public void setLaunchWheel(double speed) {
@@ -173,6 +204,7 @@ public class CANLauncher extends SubsystemBase {
   }
 
    public Command autoLaunch(){
+
   return runEnd(() -> {
             if(!m_ringDetect.get()== false) {
               stop();

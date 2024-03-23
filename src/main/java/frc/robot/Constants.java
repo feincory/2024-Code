@@ -98,7 +98,7 @@ public static final int kclimberfollower = 5;
 // curant limiting
 public static final int karmcurrentLimit = 60;
 // pid
-public static double kPclimber = 0.5;//propotional (distance from target/setpoint)
+public static double kPclimber = 0.3;//propotional (distance from target/setpoint)
 public static double kIclimber = 0;//intergral (time error)
 public static double kDclimber = 0;//derivitieve(rate of approach)
 public static double kIzclimber = 0;// ramp rate

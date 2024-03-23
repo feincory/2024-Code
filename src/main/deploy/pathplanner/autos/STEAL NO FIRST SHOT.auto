@@ -2,15 +2,40 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.7417791758660457,
-      "y": 4.430257322053106
+      "x": 0.48255023756837656,
+      "y": 2.143083087878016
     },
-    "rotation": -60.0
+    "rotation": 0
   },
   "command": {
     "type": "sequential",
     "data": {
       "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "STEELER NO FIRST SHOT"
+          }
+        },
+        {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "STEELER NO FIRST SHOT"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "armintakepos"
+                }
+              }
+            ]
+          }
+        },
         {
           "type": "race",
           "data": {
@@ -18,7 +43,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "arm speaker"
+                  "name": "autoaim"
                 }
               },
               {
@@ -53,43 +78,6 @@
                 }
               }
             ]
-          }
-        },
-        {
-          "type": "race",
-          "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "SPL -M5"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "armintakepos"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "M5-SHL"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "SHL-M3"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "M3-SHL"
           }
         }
       ]

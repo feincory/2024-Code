@@ -2,19 +2,89 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.4721592269660398,
-      "y": 4.023876956519567
+      "x": 0.7401886415755699,
+      "y": 4.42669621430541
     },
-    "rotation": 0
+    "rotation": -60.0
   },
   "command": {
     "type": "sequential",
     "data": {
       "commands": [
         {
-          "type": "path",
+          "type": "race",
           "data": {
-            "pathName": "SPL -SHL"
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "arm speaker"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "preparelaunch"
+                }
+              },
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 0.75
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 0.5
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "launchnote"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "armintakepos"
+                }
+              },
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 0.2
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "STEELER SPL -M5"
+                }
+              }
+            ]
           }
         },
         {
@@ -47,34 +117,15 @@
           "data": {
             "commands": [
               {
-                "type": "wait",
-                "data": {
-                  "waitTime": 0.5
-                }
-              },
-              {
                 "type": "named",
                 "data": {
                   "name": "launchnote"
                 }
-              }
-            ]
-          }
-        },
-        {
-          "type": "race",
-          "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "STEELER SPL -M5"
-                }
               },
               {
-                "type": "named",
+                "type": "wait",
                 "data": {
-                  "name": "armintakepos"
+                  "waitTime": 0.5
                 }
               }
             ]
