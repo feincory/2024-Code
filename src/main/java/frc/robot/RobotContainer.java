@@ -108,7 +108,7 @@ public class RobotContainer {
     NamedCommands.registerCommand("autoaim", new RunCommand(m_arm::armAutoRotateCommand));
     
     NamedCommands.registerCommand("autoaimrotate", drivetrain.applyRequest(() 
-    ->drive.withRotationalRate((-LimelightHelpers.getTX(null)+2)*kLLpcontroller)));
+    ->drive.withRotationalRate((-LimelightHelpers.getTX(null)-2)*kLLpcontroller)));
     NamedCommands.registerCommand("Reverse Intake", m_launcher.getReverseNoteCommand());
     NamedCommands.registerCommand("stop launcher", new InstantCommand(m_launcher::stop));
 
@@ -166,7 +166,7 @@ public class RobotContainer {
 
    // climber auto line up
     m_drivercontroller.button(13).whileTrue(drivetrain.applyRequest(() -> 
-      forwardStraight.withVelocityX((-.7 - LimelightHelpers.getTX(null))*0) // Drive forward with
+      forwardStraight.withVelocityX((-2 - LimelightHelpers.getTX(null))*0) // Drive forward with
       .withVelocityY((0-LimelightHelpers.getTX(null))*-.06) //
       .withRotationalRate(0))); //
 
@@ -183,7 +183,12 @@ public class RobotContainer {
 
     m_operatorController.rightBumper().whileTrue(
         new PrepareLaunch(m_launcher).handleInterrupt(() -> m_launcher.stop()));
-    
+
+    m_operatorController.rightStick().whileTrue(
+    new InstantCommand(m_launcher::feed)).onFalse(new InstantCommand(m_launcher::stop));
+    m_operatorController.rightStick().onTrue(new InstantCommand(m_arm::armfeed)).onFalse(new InstantCommand(m_arm::armpositionIntake));
+
+
     m_operatorController.leftStick().whileTrue(
         new LaunchNote(m_launcher).handleInterrupt(() -> m_launcher.stop()));
                 
@@ -260,6 +265,7 @@ public class RobotContainer {
                                         //.andThen(m_launcher::stop));
   m_operatorController.povRight().onTrue(new InstantCommand(m_arm::armpositionamp)
                                         .andThen(new RunCommand( m_launcher::noteMoveForAmp))
+                                        .andThen(new InstantCommand(m_led::amp))
                                         .withTimeout(1)
                                         .andThen(m_launcher::stop));    
   // m_operatorController.rightBumper()/* .onTrue(new InstantCommand(m_arm::StageShot))*/

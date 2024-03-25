@@ -5,7 +5,7 @@
 package frc.robot.subsystems;
 
 import static frc.robot.Constants.armConstants.*;
-
+import static frc.robot.subsystems.climber.climberreleased;
 
 import com.ctre.phoenix6.StatusCode;
 import com.ctre.phoenix6.StatusSignal;
@@ -191,22 +191,27 @@ public class arm extends SubsystemBase {
    
   
   public void armpositionIntake(){
-    m_fx.setControl(m_dutyPosition.withPosition(kIntakePosition));
+    if(climberreleased == false){
+    m_fx.setControl(m_dutyPosition.withPosition(kIntakePosition));}
   }
   public void armpositionamp(){
-    m_fx.setControl(m_dutyPosition.withPosition(kampPosition));
+    if(climberreleased == false){
+    m_fx.setControl(m_dutyPosition.withPosition(kampPosition));}
   }
   public void armpositionTrapPrep(){
+    
     m_fx.setControl(m_dutyPosition.withPosition(kTrapPrepPosition));
   }
   public void armpositionTrapClimb(){
     m_fx.setControl(m_dutyPosition.withPosition(kTrapclimbPosition));
   }
   public void StageShot(){
-    m_fx.setControl(m_dutyPosition.withPosition(kStageShot));
+    if(climberreleased == false){
+    m_fx.setControl(m_dutyPosition.withPosition(kStageShot));}
   }
   public void PresetShot(){
-    m_fx.setControl(m_dutyPosition.withPosition(kPresetShot));
+    if(climberreleased == false){
+    m_fx.setControl(m_dutyPosition.withPosition(kPresetShot));}
   }
    
  public Command armcommpUp() {
@@ -216,7 +221,10 @@ public Command armcommpDown() {
      return runOnce(() -> armmanualcomp= armmanualcomp-.5);
 }
  
-
+public void armfeed(){
+  if(climberreleased == false){
+    m_fx.setControl(m_dutyPosition.withPosition(kfeed));}
+}
 
 
 public void setarm(double speed){
@@ -240,8 +248,8 @@ public void armAutoRotateCommand(){
   
 }
 public void defenciveshot(){
- 
-   m_fx.setControl(m_dutyPosition.withPosition(.170));
+ if(climberreleased == false){
+   m_fx.setControl(m_dutyPosition.withPosition(.170));}
   
 }
 

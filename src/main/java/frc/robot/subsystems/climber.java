@@ -42,7 +42,7 @@ public class climber extends SubsystemBase {
    Servo m_designFlaw;
    DigitalInput m_climbsensor;
    RelativeEncoder m_climbencoder;
-   boolean climberreleased;
+    static boolean climberreleased;
   SparkPIDController m_climberPID;
    double kP,kI,kD,kIz,kFF, kMaxOutput, kMinOutput;
    double position;
@@ -50,7 +50,7 @@ public class climber extends SubsystemBase {
   boolean climberHomed;
   boolean climberState;
   boolean climbSafe;
- 
+ public static boolean trap;
   public Object cancel;  // CANcoder armCANenCaNcoder;
   public climber() {
 
@@ -93,6 +93,7 @@ public class climber extends SubsystemBase {
  climberreleased = false;
  climberState = false;
  climbSafe = false;
+ trap = false;
  createDashboards();
 
  //climbtimer.start();
@@ -104,8 +105,14 @@ public class climber extends SubsystemBase {
     SmartDashboard.putNumber("climber step",m_climbstep);
     SmartDashboard.putBoolean("climb sensor", !m_climbsensor.get());
     SmartDashboard.putBoolean("Climb Safe",climbSafe);
- SmartDashboard.putBoolean("climberreleased",climberreleased);
- SmartDashboard.putBoolean("climberHomed",climberHomed);
+  SmartDashboard.putBoolean("climberreleased",climberreleased);
+  SmartDashboard.putBoolean("climberHomed",climberHomed);
+
+         if(m_climbencoder.getPosition()> 70) {
+        trap = true;}
+              else{
+        trap = false;
+      }
 
 
     // This method will be called once per scheduler run
@@ -129,7 +136,7 @@ public class climber extends SubsystemBase {
         
           case RETRACT:
         if(climberHomed == true && climberreleased == false && climbSafe == true) {
-             m_climberPID.setReference(22, CANSparkMax.ControlType.kPosition);
+             m_climberPID.setReference(25, CANSparkMax.ControlType.kPosition);
              climberreleased = true;
              desiredState = States.DEPLOYED;
              m_climbstep = 2;
@@ -138,7 +145,7 @@ public class climber extends SubsystemBase {
         
         
         case DEPLOYED:
-        if(m_climbencoder.getPosition()>20 && climberreleased == true && climbSafe == true){
+        if(m_climbencoder.getPosition()>22 && climberreleased == true && climbSafe == true){
         m_climberPID.setReference(-105.5, CANSparkMax.ControlType.kPosition);
         m_climbstep = 3;
         m_designFlaw.set(kpostDeploy);
@@ -151,13 +158,15 @@ public class climber extends SubsystemBase {
         case BOTTOM:
         
         m_climberPID.setReference(-106.5, CANSparkMax.ControlType.kPosition);
+
+
         m_climbstep = 4;
         climbstatemach().isFinished();
         break;
       
       
       
-      }}, () -> {m_climbmotorlead.set(.0);});
+      }}, () -> {m_climbmotorlead.set(-.01);});
 
       
     }
@@ -209,6 +218,8 @@ public class climber extends SubsystemBase {
       else{
        m_climbmotorlead.set(0);
       }
+
+
       }      
       
     public void climberReleaseable(){

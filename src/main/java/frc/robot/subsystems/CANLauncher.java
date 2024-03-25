@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import static frc.robot.Constants.LauncherConstants.*;
+import static frc.robot.subsystems.climber.trap;
 
 //import frc.robot.commands.LaunchNote;
 
@@ -29,6 +30,8 @@ public class CANLauncher extends SubsystemBase {
   CANSparkMax m_kickerWheel;
   public DigitalInput m_ringDetect;
   public static boolean hasnote;
+  
+
   RelativeEncoder m_intakeencode;
   //leds
 
@@ -53,11 +56,14 @@ public class CANLauncher extends SubsystemBase {
   }
  @Override
  public void periodic(){
-  if(!m_ringDetect.get() == true){
+     if(!m_ringDetect.get() == true ){
     hasnote = true;
   }else{
     hasnote = false;
   }
+  if(trap == true){setFeedWheel(kIntakeFeederReverseSpeed);
+          setLaunchWheel(kLauncherReverseSpeed);
+          setKickerWheel(-kIntakeKickerSpeed);}
  }
   /**
    * This method is an example of the 'subsystem factory' style of command creation. A method inside
@@ -75,10 +81,12 @@ public class CANLauncher extends SubsystemBase {
           setFeedWheel(kIntakeFeederSpeed);
           setLaunchWheel(kIntakeLauncherSpeed);
           setKickerWheel(kIntakeKickerSpeed);
+          
         },
         // When the command stops, stop the wheels
         () -> {
           stop();
+         
         });
   }
  public Command intakeAutCommand(){
@@ -183,6 +191,12 @@ public class CANLauncher extends SubsystemBase {
       });
       }      
 
+
+       public void feed() {
+  
+        m_launchWheel.set(-.75);
+        
+       }
   // An accessor method to set the speed (technically the output percentage) of the launch wheel
   public void setLaunchWheel(double speed) {
     m_launchWheel.set(speed);
@@ -220,7 +234,7 @@ public class CANLauncher extends SubsystemBase {
           });
         }
    
-  
+        
    
   
   // creates a value for shuffle board

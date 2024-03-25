@@ -53,6 +53,7 @@ public class CANdleSystem extends SubsystemBase {
   private boolean m_last5V = false;
   private boolean m_animDirection = false;
   private boolean m_setAnim = false;
+  private int count = 0;
   
   
 
@@ -203,9 +204,13 @@ public class CANdleSystem extends SubsystemBase {
   @Override
   public void periodic() {
       // This method will be called once per scheduler run
+     
+        
       if(hasnote == true){
-        m_toAnimate = new StrobeAnimation(240, 10, 180, 0, 0.01, LEDS_PER_ANIMATION, m_candleChannel * LEDS_PER_ANIMATION + 8);
-      }else{this.position();}
+        m_toAnimate = new StrobeAnimation(0, 0, 255, 0, 0.01, LEDS_PER_ANIMATION, m_candleChannel * LEDS_PER_ANIMATION + 8);}
+      
+       else{this.position();
+    count = 0; }
       
 
 
@@ -243,10 +248,21 @@ public class CANdleSystem extends SubsystemBase {
     m_toAnimate = new FireAnimation(1, 0.75, LEDS_PER_ANIMATION, 1, 0.3, m_animDirection, m_candleChannel * LEDS_PER_ANIMATION + 8);
     }
    
-    public void amp(){
+    public void endgame(){
     m_candleChannel = 0;
     m_toAnimate = new RainbowAnimation(1, 0.7, LEDS_PER_ANIMATION, m_animDirection, m_candleChannel * LEDS_PER_ANIMATION + 8);
     }
+    
+    public void amp(){
+    m_candleChannel = 0;  
+    m_toAnimate = new StrobeAnimation(255, 155, 0, 0, 0.01, LEDS_PER_ANIMATION, m_candleChannel * LEDS_PER_ANIMATION + 8);
+    }
+
+    public void shoot(){
+        m_candleChannel = 0;  
+    m_toAnimate = new StrobeAnimation(255, 0,0, 0, 0.01, LEDS_PER_ANIMATION, m_candleChannel * LEDS_PER_ANIMATION + 8);
+    }
+
 
 
 }

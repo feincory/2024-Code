@@ -51,7 +51,7 @@ public final class Constants {
     // in reverse
     public static final double kLauncherSpeed = -1;//-1
     public static final double kLaunchFeederSpeed = 1;
-    public static final double kIntakeLauncherSpeed = 0;
+    public static final double kIntakeLauncherSpeed = -.01;
     public static final double kIntakeFeederSpeed = .7;
     public static final double kIntakeKickerSpeed = .8;
     public static final double kLauncherReverseSpeed = 0.4;
@@ -85,7 +85,9 @@ public static class armConstants{
   public static double kTrapPrepPosition = .220;//was .240, -.155 for shooting from stage
   public static double kTrapclimbPosition = .220; // was .230
   public static double kStageShot = -0.1033;
-  public static double kPresetShot = -.140;// speaker
+  public static double kPresetShot = -.140;
+  public static double kfeed = -.145;
+  // speaker
   //shot from stage preset location -.155
 
 }
