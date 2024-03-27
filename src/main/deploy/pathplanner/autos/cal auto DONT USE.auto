@@ -16,18 +16,25 @@
           "data": {
             "commands": [
               {
-                "type": "path",
+                "type": "deadline",
                 "data": {
-                  "pathName": "01 test"
+                  "commands": [
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "cal path"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "runintake"
+                      }
+                    }
+                  ]
                 }
               }
             ]
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "autoaimrotate"
           }
         }
       ]
