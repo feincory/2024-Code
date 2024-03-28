@@ -16,16 +16,16 @@
     },
     {
       "anchor": {
-        "x": 5.32990758289209,
-        "y": 1.7957835915671831
+        "x": 5.484959541347655,
+        "y": 1.5978809100475346
       },
       "prevControl": {
-        "x": 6.944227349993162,
-        "y": 1.624962144155058
+        "x": 7.164924721720856,
+        "y": 1.2727263590075593
       },
       "nextControl": {
-        "x": 3.715587815791017,
-        "y": 1.9666050389793082
+        "x": 4.12162995754563,
+        "y": 1.8617511520737338
       },
       "isLocked": false,
       "linkedName": null
@@ -46,7 +46,25 @@
   ],
   "rotationTargets": [],
   "constraintZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "New Event Marker",
+      "waypointRelativePos": 0.0,
+      "command": {
+        "type": "race",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "Disable Note Detect"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
   "globalConstraints": {
     "maxVelocity": 5.0,
     "maxAcceleration": 4.5,

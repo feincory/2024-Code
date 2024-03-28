@@ -16,16 +16,16 @@
     },
     {
       "anchor": {
-        "x": 5.458177839432603,
-        "y": 1.5392430784861582
+        "x": 5.602235204470409,
+        "y": 1.5245836205958134
       },
       "prevControl": {
-        "x": 4.400859996313523,
-        "y": 1.6371428787749616
+        "x": 4.544917361351329,
+        "y": 1.6224834208846168
       },
       "nextControl": {
-        "x": 6.523807662999943,
-        "y": 1.4405736503780713
+        "x": 6.667865028037749,
+        "y": 1.4259141924877266
       },
       "isLocked": false,
       "linkedName": null
@@ -45,8 +45,38 @@
     }
   ],
   "rotationTargets": [],
-  "constraintZones": [],
-  "eventMarkers": [],
+  "constraintZones": [
+    {
+      "name": "New Constraints Zone",
+      "minWaypointRelativePos": 1.35,
+      "maxWaypointRelativePos": 2.0,
+      "constraints": {
+        "maxVelocity": 2.0,
+        "maxAcceleration": 2.0,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 720.0
+      }
+    }
+  ],
+  "eventMarkers": [
+    {
+      "name": "New Event Marker",
+      "waypointRelativePos": 1.45,
+      "command": {
+        "type": "race",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "Enable Note Detect"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
   "globalConstraints": {
     "maxVelocity": 5.0,
     "maxAcceleration": 4.5,
