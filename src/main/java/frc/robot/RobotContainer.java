@@ -41,7 +41,6 @@ import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.CANLauncher;
 import frc.robot.subsystems.arm;
 import frc.robot.subsystems.climber;
-import frc.robot.subsystems.notedetect;
 import frc.robot.subsystems.CANdleSystem;
 
 /**
@@ -90,10 +89,8 @@ public class RobotContainer {
   public final arm m_arm = new arm();
   public final climber m_climber = new climber();
   public final CANdleSystem m_led = new CANdleSystem(m_operatorController);
-  public final notedetect m_Notedetect = new notedetect();
 
   public double kLLpcontroller;
-  public double kLLpcontrollerintake;
   /*The gamepad provided in the KOP shows up like an XBox controller if the mode switch is set to X mode using the
    * switch on the top.*/
 
@@ -101,7 +98,6 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     kLLpcontroller = .075;
-    kLLpcontrollerintake = .1;
     NamedCommands.registerCommand("runintake", m_launcher.intakeAutCommand());
     NamedCommands.registerCommand("armintakepos", new RunCommand(m_arm::armpositionIntake));
     NamedCommands.registerCommand("preparelaunch", m_launcher.autoLaunch());
@@ -110,10 +106,9 @@ public class RobotContainer {
     NamedCommands.registerCommand("autoaim", new RunCommand(m_arm::armAutoRotateCommand));
     NamedCommands.registerCommand("arm speaker", new RunCommand(m_arm::StageShot));
     NamedCommands.registerCommand("autoaim", new RunCommand(m_arm::armAutoRotateCommand));
-    NamedCommands.registerCommand("Enable Note Detect", new InstantCommand(m_Notedetect::Enable));
-    NamedCommands.registerCommand("Disable Note Detect", new InstantCommand(m_Notedetect::Disable));
-
-    NamedCommands.registerCommand("autoaimrotate", drivetrain.applyRequest(()->drive.withRotationalRate((-LimelightHelpers.getTX(null)-2)*kLLpcontroller)));
+    
+    NamedCommands.registerCommand("autoaimrotate", drivetrain.applyRequest(() 
+    ->drive.withRotationalRate((-LimelightHelpers.getTX(null)-2)*kLLpcontroller)));
     NamedCommands.registerCommand("Reverse Intake", m_launcher.getReverseNoteCommand());
     NamedCommands.registerCommand("stop launcher", new InstantCommand(m_launcher::stop));
 
@@ -169,18 +164,11 @@ public class RobotContainer {
       .whileTrue(new PrepareLaunch(m_launcher)
       .handleInterrupt(() -> m_launcher.stop())); 
 
-
-    //limelight autoline up
+   // climber auto line up
     m_drivercontroller.button(13).whileTrue(drivetrain.applyRequest(() -> 
-      drive.withVelocityX(m_drivercontroller.getRawAxis(1) * MaxSpeed) // Drive forward with
-      .withVelocityY(-m_drivercontroller.getRawAxis(0) * MaxSpeed) // Drive left with negative X (left)
-      .withRotationalRate((-LimelightHelpers.getTX("limelight-rear"))*kLLpcontrollerintake)));
-
-  //  // climber auto line up
-  //   m_drivercontroller.button(13).whileTrue(drivetrain.applyRequest(() -> 
-  //     forwardStraight.withVelocityX((-2 - LimelightHelpers.getTX(null))*0) // Drive forward with
-  //     .withVelocityY((0-LimelightHelpers.getTX(null))*-.06) //
-  //     .withRotationalRate(0))); //
+      forwardStraight.withVelocityX((-2 - LimelightHelpers.getTX(null))*0) // Drive forward with
+      .withVelocityY((0-LimelightHelpers.getTX(null))*-.06) //
+      .withRotationalRate(0))); //
 
     
      //drivetrain.autoaimdrive(() -> drive.withRotationalRate((-LimelightHelpers.getTX(null)+2)*kLLpcontroller));

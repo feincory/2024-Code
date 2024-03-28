@@ -1,4 +1,5 @@
 package frc.robot;
+
 import java.util.Optional;
 import java.util.function.Supplier;
 
@@ -23,8 +24,6 @@ import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.generated.TunerConstants;
-import frc.robot.subsystems.notedetect;
-
 
 /**
  * Class that extends the Phoenix SwerveDrivetrain class and implements subsystem
@@ -34,7 +33,7 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
     private static final double kSimLoopPeriod = 0.005; // 5 ms
     private Notifier m_simNotifier = null;
     private double m_lastSimTime;
-    //private boolean rotationoverride;
+    private boolean rotationoverride;
     public double kLLpcontroller;
 
     private final SwerveRequest.ApplyChassisSpeeds autoRequest = new SwerveRequest.ApplyChassisSpeeds();
@@ -42,22 +41,27 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
     public CommandSwerveDrivetrain(SwerveDrivetrainConstants driveTrainConstants, double OdometryUpdateFrequency, SwerveModuleConstants... modules) {
         super(driveTrainConstants, OdometryUpdateFrequency, modules);
         configurePathPlanner();
-        periodic();
+        
         if (Utils.isSimulation()) {
             startSimThread();
         }
         // Set the method that will be used to get rotation overrides
-        kLLpcontroller = .8;
+        kLLpcontroller = .075;
         
     }
 
     public Optional<Rotation2d> getRotationTargetOverride(){
     // Some condition that should decide if we want to override rotation
-    if(notedetect.notedetectenable==true) {
+    if(rotationoverride==true) {
         var currentPose = super.m_odometry.getEstimatedPosition();
 
-        //return Optional.of(currentPose.getRotation().rotateBy(Rotation2d.fromDegrees(5)));
-        return Optional.of(currentPose.getRotation().rotateBy(Rotation2d.fromDegrees((-LimelightHelpers.getTX("limelight-rear")*.5))));
+
+        return Optional.of(currentPose.getRotation().rotateBy(Rotation2d.fromDegrees((-LimelightHelpers.getTX(null))*kLLpcontroller)));
+//          return Optional.of(currentPose.getRotation().rotateBy(Rotation2d.fromDegrees(-LimelightHelpers.getTX(null))));
+
+        // Return an optional containing the rotation override (this should be a field relative rotation)
+        //return Optional.of(Limelight.getRobotToGamePieceRotation());
+        //return Optional.of((-LimelightHelpers.getTX(null)+2)*kLLpcontroller);
     } else {
         // return an empty optional when we don't want to override the path's rotation
         return Optional.empty();
@@ -90,7 +94,7 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
                                             new ReplanningConfig()),
             ()->DriverStation.getAlliance().orElse(Alliance.Blue)==Alliance.Red, // Assume the path needs to be flipped for Red vs Blue, this is normally the case
             this); // Subsystem for requirements
-            //PPHolonomicDriveController.setRotationTargetOverride(this::getRotationTargetOverride);
+            PPHolonomicDriveController.setRotationTargetOverride(this::getRotationTargetOverride);
 
     }
 
@@ -128,10 +132,4 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
         });
         m_simNotifier.startPeriodic(kSimLoopPeriod);
     }
-    public void periodic() {
-        PPHolonomicDriveController.setRotationTargetOverride(this::getRotationTargetOverride);
-
 }
-}
-
-
