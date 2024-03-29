@@ -2,8 +2,8 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.8305816611633238,
-      "y": 4.4795920361071495
+      "x": 0.7417791758660457,
+      "y": 4.430257322053106
     },
     "rotation": -60.0
   },
@@ -18,7 +18,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "autoaim"
+                  "name": "arm speaker"
                 }
               },
               {
@@ -30,7 +30,7 @@
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 0.75
+                  "waitTime": 1.0
                 }
               }
             ]
@@ -41,15 +41,15 @@
           "data": {
             "commands": [
               {
-                "type": "named",
+                "type": "wait",
                 "data": {
-                  "name": "launchnote"
+                  "waitTime": 0.5
                 }
               },
               {
-                "type": "wait",
+                "type": "named",
                 "data": {
-                  "waitTime": 0.25
+                  "name": "launchnote"
                 }
               }
             ]
@@ -70,12 +70,6 @@
                 "data": {
                   "name": "armintakepos"
                 }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "runintake"
-                }
               }
             ]
           }
@@ -87,122 +81,15 @@
           }
         },
         {
-          "type": "race",
+          "type": "path",
           "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "autoaim"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "preparelaunch"
-                }
-              },
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 0.8
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "race",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "launchnote"
-                }
-              },
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 0.25
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "deadline",
-          "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "SHL-M3"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "armintakepos"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "runintake"
-                }
-              }
-            ]
+            "pathName": "SHL-M3"
           }
         },
         {
           "type": "path",
           "data": {
             "pathName": "M3-SHL"
-          }
-        },
-        {
-          "type": "race",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "preparelaunch"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "autoaim"
-                }
-              },
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 0.75
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "race",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "launchnote"
-                }
-              },
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 0.4
-                }
-              }
-            ]
           }
         }
       ]
