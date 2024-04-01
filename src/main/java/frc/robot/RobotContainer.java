@@ -263,8 +263,8 @@ public class RobotContainer {
     m_operatorController.rightTrigger(.8).onTrue(new InstantCommand(m_climber::climbdownmanual))
                              .onFalse(new InstantCommand(m_climber::stop));
     //servo
-   // m_drivercontroller.button(6).onTrue(new InstantCommand(m_climber::servoPreDeploy));
-   // m_drivercontroller.button(7).onTrue(new InstantCommand(m_climber::servoPostDeploy));
+    m_drivercontroller.button(6).onTrue(new InstantCommand(m_climber::servoPreDeploy));
+    m_drivercontroller.button(7).onTrue(new InstantCommand(m_climber::servoPostDeploy));
     m_drivercontroller.button(4).onTrue(new InstantCommand())
                                        .onFalse(new InstantCommand(m_arm::stop));    
   

@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 8.289990426134699,
-        "y": 7.567945135890272
+        "x": 8.461170410712915,
+        "y": 7.372212526178183
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.241350924905965,
-        "y": 7.553206722212368
+        "x": 6.412530909484182,
+        "y": 7.357474112500279
       },
       "isLocked": false,
       "linkedName": "M1"
     },
     {
       "anchor": {
-        "x": 2.8533049373791073,
-        "y": 6.196440085187864
+        "x": 2.7631256693640407,
+        "y": 5.683359059025811
       },
       "prevControl": {
-        "x": 4.179762168390517,
-        "y": 7.463943661487656
+        "x": 4.089582900375454,
+        "y": 6.950862635325605
       },
       "nextControl": null,
       "isLocked": false,
@@ -30,7 +30,25 @@
   ],
   "rotationTargets": [],
   "constraintZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "New Event Marker",
+      "waypointRelativePos": 0,
+      "command": {
+        "type": "race",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "Disable Note Detect"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
   "globalConstraints": {
     "maxVelocity": 5.0,
     "maxAcceleration": 4.5,

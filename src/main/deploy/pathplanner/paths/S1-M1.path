@@ -3,53 +3,49 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 8.398526797053595,
-        "y": 5.8313632011879415
+        "x": 2.857533627155167,
+        "y": 6.9663748607106495
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.098623940471848,
-        "y": 6.416905028477017
+        "x": 3.857533627155167,
+        "y": 6.9663748607106495
       },
       "isLocked": false,
-      "linkedName": "Mid-2"
+      "linkedName": "S1"
     },
     {
       "anchor": {
-        "x": 5.7524266831700555,
-        "y": 6.67517683109546
+        "x": 8.461170410712915,
+        "y": 7.372212526178183
       },
       "prevControl": {
-        "x": 6.47178540344955,
-        "y": 6.682124861972757
-      },
-      "nextControl": {
-        "x": 5.033067962890561,
-        "y": 6.668228800218162
-      },
-      "isLocked": false,
-      "linkedName": null
-    },
-    {
-      "anchor": {
-        "x": 2.7631256693640407,
-        "y": 5.683359059025811
-      },
-      "prevControl": {
-        "x": 3.6708844079584413,
-        "y": 5.939899572106838
+        "x": 7.461170410712915,
+        "y": 7.372212526178183
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "SH"
+      "linkedName": "M1"
     }
   ],
   "rotationTargets": [],
-  "constraintZones": [],
+  "constraintZones": [
+    {
+      "name": "New Constraints Zone",
+      "minWaypointRelativePos": 0.65,
+      "maxWaypointRelativePos": 1.0,
+      "constraints": {
+        "maxVelocity": 2.0,
+        "maxAcceleration": 2.0,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 720.0
+      }
+    }
+  ],
   "eventMarkers": [
     {
       "name": "New Event Marker",
-      "waypointRelativePos": 0.05,
+      "waypointRelativePos": 0.65,
       "command": {
         "type": "race",
         "data": {
@@ -57,7 +53,7 @@
             {
               "type": "named",
               "data": {
-                "name": "Disable Note Detect"
+                "name": "Enable Note Detect"
               }
             }
           ]
@@ -73,13 +69,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 10.784297867562472,
+    "rotation": 0,
     "rotateFast": false
   },
   "reversed": false,
   "folder": null,
   "previewStartingState": {
-    "rotation": -12.994616791916496,
+    "rotation": 0,
     "velocity": 0
   },
   "useDefaultConstraints": true
