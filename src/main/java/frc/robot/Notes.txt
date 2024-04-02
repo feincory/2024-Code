@@ -120,3 +120,18 @@ untested logic
 cimber safe
 x lock 
 suck note in for trap
+
+
+arm postion at bottom
+4/1/2024 
+-.17777
+
+
+CALIBRATION PATH auto BEFORE WHEEL CHANGE
+95.5
+95.75
+95.75
+
+new wheels
+103.5
+103.5

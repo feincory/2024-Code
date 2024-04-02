@@ -213,6 +213,16 @@ public class arm extends SubsystemBase {
     if(climberreleased == false){
     m_fx.setControl(m_dutyPosition.withPosition(kPresetShot));}
   }
+
+  public void armmovingshot1(){
+    if(climberreleased == false){
+    m_fx.setControl(m_dutyPosition.withPosition(karmmovingshot1));}
+  }
+  public void armmovingshot2(){
+    if(climberreleased == false){
+    m_fx.setControl(m_dutyPosition.withPosition(karmmovingshot2));}
+  }
+  
    
  public Command armcommpUp() {
      return runOnce(() -> armmanualcomp= armmanualcomp+.5);

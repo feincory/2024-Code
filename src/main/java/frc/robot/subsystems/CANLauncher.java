@@ -47,7 +47,8 @@ public class CANLauncher extends SubsystemBase {
     m_launchWheel.restoreFactoryDefaults();
     m_feedWheel.restoreFactoryDefaults();
     m_kickerWheel.restoreFactoryDefaults();
-        m_launchWheel.setIdleMode(IdleMode.kCoast);
+    m_launchWheel.setIdleMode(IdleMode.kCoast);
+    m_feedWheel.setIdleMode(IdleMode.kBrake);
 
         
    m_intakeencode = m_feedWheel.getEncoder();

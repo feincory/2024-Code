@@ -1,0 +1,177 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 1.3633965729469937,
+        "y": 5.555088802485298
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 1.9949579936251087,
+        "y": 5.555088802485298
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 3.465055391649246,
+        "y": 5.555088802485298
+      },
+      "prevControl": {
+        "x": 3.05055372726285,
+        "y": 5.550324415538328
+      },
+      "nextControl": {
+        "x": 4.323479416189603,
+        "y": 5.564955745296107
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 5.424523259888173,
+        "y": 6.5463576290918635
+      },
+      "prevControl": {
+        "x": 4.645034777834287,
+        "y": 6.516756800659437
+      },
+      "nextControl": {
+        "x": 6.313276871273844,
+        "y": 6.580107766233091
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 8.293678213604645,
+        "y": 5.742560715890662
+      },
+      "prevControl": {
+        "x": 7.293678213604645,
+        "y": 5.742560715890662
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": null
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [
+    {
+      "name": "SLOW START",
+      "minWaypointRelativePos": 0.0,
+      "maxWaypointRelativePos": 0.65,
+      "constraints": {
+        "maxVelocity": 1.0,
+        "maxAcceleration": 2.5,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 720.0
+      }
+    }
+  ],
+  "eventMarkers": [
+    {
+      "name": "START SHOOTER AND ARM POSITION",
+      "waypointRelativePos": 0.0,
+      "command": {
+        "type": "race",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "preparelaunch"
+              }
+            },
+            {
+              "type": "named",
+              "data": {
+                "name": "arm moving shot 1"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "TRIGGER LAUNCH 1",
+      "waypointRelativePos": 0.35,
+      "command": {
+        "type": "race",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "launchnotehalf"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "ARM TO MOVE POS 2",
+      "waypointRelativePos": 0.44999999999999996,
+      "command": {
+        "type": "race",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "arm moving shot 2"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "TURN ON INTAKE",
+      "waypointRelativePos": 1.9500000000000002,
+      "command": {
+        "type": "race",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "armintakepos"
+              }
+            },
+            {
+              "type": "named",
+              "data": {
+                "name": "runintake"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 5.0,
+    "maxAcceleration": 4.5,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 0,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": null,
+  "previewStartingState": {
+    "rotation": 0,
+    "velocity": 0
+  },
+  "useDefaultConstraints": true
+}

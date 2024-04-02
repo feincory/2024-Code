@@ -24,12 +24,6 @@
                       "data": {
                         "pathName": "cal path"
                       }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "runintake"
-                      }
                     }
                   ]
                 }

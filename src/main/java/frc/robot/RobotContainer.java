@@ -11,6 +11,8 @@ import com.pathplanner.lib.auto.NamedCommands;
 //import com.pathplanner.lib.commands.PathPlannerAuto;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest;
 
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -104,6 +106,8 @@ public class RobotContainer {
     kLLpcontrollerintake = .1;
     NamedCommands.registerCommand("runintake", m_launcher.intakeAutCommand());
     NamedCommands.registerCommand("armintakepos", new RunCommand(m_arm::armpositionIntake));
+    NamedCommands.registerCommand("arm moving shot 1", new RunCommand(m_arm::armmovingshot1));    
+    NamedCommands.registerCommand("arm moving shot 2", new RunCommand(m_arm::armmovingshot2));    
     NamedCommands.registerCommand("preparelaunch", m_launcher.autoLaunch());
     NamedCommands.registerCommand("launchnote", m_launcher.autolaunchCommand());
     NamedCommands.registerCommand("launchnotehalf", m_launcher.autolaunchhalfCommand());
@@ -119,11 +123,23 @@ public class RobotContainer {
 
     runAuto = drivetrain.getAutoPath("Blue Center");
     autoChooser = AutoBuilder.buildAutoChooser();
-    SmartDashboard.putData("Auto Chooser", autoChooser);
+    //SmartDashboard.putData("Auto Chooser", autoChooser);
     // Configure the trigger bindings
+    createautoDashboards();
     configureBindings();
     
   }
+
+public void createautoDashboards() {
+  ShuffleboardTab autotab = Shuffleboard.getTab("Auto");
+
+  autotab.add("Auto Chooser", autoChooser)
+  .withSize(1,1)
+  .withPosition(4,0);
+
+
+}
+
 
   /**
    * Use this method to define your trigger->command mappings. Triggers can be accessed via the
@@ -238,6 +254,8 @@ public class RobotContainer {
   .onFalse(new InstantCommand(m_climber::stop));      
 
   m_operatorController.x().onTrue(
+
+    
   new InstantCommand(m_arm::armpositionTrapClimb)); 
   //  m_operatorController.b().onTrue(
   //     new InstantCommand(m_climber::climberencoderreset)
@@ -269,9 +287,16 @@ public class RobotContainer {
                                        .onFalse(new InstantCommand(m_arm::stop));    
   
 
+
   
    m_operatorController.povDown().onTrue(new InstantCommand(m_arm::armpositionIntake)
-   .andThen(new InstantCommand(m_led::position)));
+   .andThen(new RunCommand(m_launcher::noteMoveForAmp))
+   .withTimeout(.6)
+   .andThen(new RunCommand(m_launcher::noteMoveForshot)
+   .withTimeout(.1)
+   .andThen(m_launcher::stop)));
+
+
                                         //.andThen(new RunCommand( m_launcher::noteMoveForAmp)));
                                         //.withTimeout(.25)
                                         //.andThen(m_launcher::stop));
@@ -284,7 +309,13 @@ public class RobotContainer {
   //                                       .onFalse(new RunCommand(m_launcher::noteMoveForshot)
   //                                     .withTimeout(.08)//was .05
   //                                     .andThen(new InstantCommand(m_launcher::stop)));
-  m_operatorController.povLeft().onTrue(new InstantCommand(m_arm::StageShot));//subwoofer/speaker shot
+ 
+  m_operatorController.povLeft().onTrue(new InstantCommand(m_arm::StageShot)
+     .andThen(new RunCommand(m_launcher::noteMoveForAmp))
+   .withTimeout(.4)
+   .andThen(new RunCommand(m_launcher::noteMoveForshot)
+   .withTimeout(.1)
+   .andThen(m_launcher::stop)));//subwoofer/speaker shot
   
  m_operatorController.back().onTrue(m_arm.armcommpDown());
 m_operatorController.start().onTrue(m_arm.armcommpUp());
