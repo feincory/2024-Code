@@ -280,7 +280,7 @@ public void createDashboards() {
 
   armTab.addNumber("Arm Position", this::getposition)
   .withSize(1,1)
-  .withPosition(0,0);
+  .withPosition(1,0);
 
   armTab.addNumber("arm comp", this::armcompvalue)
   .withSize(1,1)

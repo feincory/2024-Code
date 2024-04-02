@@ -210,7 +210,7 @@ public void createautoDashboards() {
     //             .handleInterrupt(() -> m_launcher.stop()));
 
     m_operatorController.rightBumper().whileTrue(
-        new PrepareLaunch(m_launcher).handleInterrupt(() -> m_launcher.stop()));
+        new PrepareLaunch(m_launcher).handleInterrupt(() -> m_launcher.stop()).andThen(new InstantCommand(m_led::shootspoolup)));
 
     m_operatorController.rightStick().whileTrue(
     new InstantCommand(m_launcher::feed)).onFalse(new InstantCommand(m_launcher::stop));

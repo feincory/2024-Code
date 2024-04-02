@@ -54,6 +54,7 @@ public class CANdleSystem extends SubsystemBase {
   private boolean m_animDirection = false;
   private boolean m_setAnim = false;
   private int count = 0;
+  private boolean hasnoteprevious = false;
   
   
 
@@ -84,8 +85,12 @@ public class CANdleSystem extends SubsystemBase {
       configAll.brightnessScalar = 0.1;
       configAll.vBatOutputMode = VBatOutputMode.Modulated;
       m_candle.configAllSettings(configAll, 100);
-      
-     
+      m_candleChannel = 0;
+    // m_toAnimate = new FireAnimation(1, 0.75, LEDS_PER_ANIMATION, 1, 0.3, m_animDirection, m_candleChannel * LEDS_PER_ANIMATION + 8);
+      //m_toAnimate = new ColorFlowAnimation(232, 52, 220, 0, 0.7, LEDS_PER_ANIMATION, Direction.Forward, m_candleChannel * LEDS_PER_ANIMATION + 8);
+     //m_toAnimate = new RgbFadeAnimation(0.7, 0.4, LEDS_PER_ANIMATION, m_candleChannel * LEDS_PER_ANIMATION + 8);  
+    //m_toAnimate = new TwinkleAnimation(255, 255, 255, 0, 0.4, LEDS_PER_ANIMATION, TwinklePercent.Percent42, m_candleChannel * LEDS_PER_ANIMATION + 8);
+    m_toAnimate = new RainbowAnimation(1, 1, LEDS_PER_ANIMATION, m_animDirection, m_candleChannel * LEDS_PER_ANIMATION + 8);   
       //changeAnimation(AnimationTypes.Rainbow);
   }
   
@@ -206,11 +211,16 @@ public class CANdleSystem extends SubsystemBase {
       // This method will be called once per scheduler run
      
         
-      if(hasnote == true){
-        m_toAnimate = new StrobeAnimation(0, 0, 255, 0, 0.01, LEDS_PER_ANIMATION, m_candleChannel * LEDS_PER_ANIMATION + 8);}
-      
-       else{this.position();
-    count = 0; }
+      if(hasnote == true && hasnoteprevious ==false){
+        m_toAnimate = new StrobeAnimation(0, 0, 255, 0, 0.01, LEDS_PER_ANIMATION, m_candleChannel * LEDS_PER_ANIMATION + 8);
+        hasnoteprevious = true;
+        }
+        else{
+            if (hasnote == false && hasnoteprevious == true) {
+                hasnoteprevious = false;
+            }
+        //this.position();
+        count = 0; }
       
 
 
@@ -258,7 +268,7 @@ public class CANdleSystem extends SubsystemBase {
     m_toAnimate = new StrobeAnimation(255, 155, 0, 0, 0.01, LEDS_PER_ANIMATION, m_candleChannel * LEDS_PER_ANIMATION + 8);
     }
 
-    public void shoot(){
+    public void shootspoolup(){
         m_candleChannel = 0;  
     m_toAnimate = new StrobeAnimation(255, 0,0, 0, 0.01, LEDS_PER_ANIMATION, m_candleChannel * LEDS_PER_ANIMATION + 8);
     }
