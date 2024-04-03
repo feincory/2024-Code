@@ -70,6 +70,8 @@ public class arm extends SubsystemBase {
   private double lltydelta;
   private double calratecomp;   
   private double newarmautocalc;
+  private Integer armstate;
+  public boolean armamptospeaker;
   
   // CANcoder armCANenCaNcoder;
   public arm() {
@@ -188,11 +190,19 @@ public class arm extends SubsystemBase {
 
   //   }
 
+
+  //arm state
+  //intake 0
+  //speaker shot 1
+  //amp 2
+  // defense shot 3
    
   
   public void armpositionIntake(){
     if(climberreleased == false){
-    m_fx.setControl(m_dutyPosition.withPosition(kIntakePosition));}
+    m_fx.setControl(m_dutyPosition.withPosition(kIntakePosition));
+      
+  }
   }
   public void armpositionamp(){
     if(climberreleased == false){

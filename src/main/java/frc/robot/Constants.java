@@ -87,8 +87,8 @@ public static class armConstants{
   public static double kStageShot = -0.1033;
   public static double kPresetShot = -.140;
   public static double kfeed = -.145;
-  public static double karmmovingshot1 = -.145;
-  public static double karmmovingshot2 = -.160;
+  public static double karmmovingshot1 = -.140;
+  public static double karmmovingshot2 = -.165;
   // speaker
   //shot from stage preset location -.155
 

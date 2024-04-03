@@ -289,19 +289,19 @@ public void createautoDashboards() {
 
 
   
-   m_operatorController.povDown().onTrue(new InstantCommand(m_arm::armpositionIntake)
-   .andThen(new RunCommand(m_launcher::noteMoveForAmp))
-   .withTimeout(.6)
-   .andThen(new RunCommand(m_launcher::noteMoveForshot)
-   .withTimeout(.1)
-   .andThen(m_launcher::stop)));
+   m_operatorController.povDown().onTrue(new InstantCommand(m_arm::armpositionIntake));
+  //  .andThen(new RunCommand(m_launcher::noteMoveForAmp))
+  //  .withTimeout(.6)
+  //  .andThen(new RunCommand(m_launcher::noteMoveForshot)
+  //  .withTimeout(.1)
+  //  .andThen(m_launcher::stop)));
 
 
                                         //.andThen(new RunCommand( m_launcher::noteMoveForAmp)));
                                         //.withTimeout(.25)
                                         //.andThen(m_launcher::stop));
   m_operatorController.povRight().onTrue(new InstantCommand(m_arm::armpositionamp)
-                                        .andThen(new RunCommand( m_launcher::noteMoveForAmp))
+                                         .andThen(new RunCommand( m_launcher::noteMoveForAmp))
                                         .andThen(new InstantCommand(m_led::amp))
                                         .withTimeout(1)
                                         .andThen(m_launcher::stop));    
@@ -310,12 +310,12 @@ public void createautoDashboards() {
   //                                     .withTimeout(.08)//was .05
   //                                     .andThen(new InstantCommand(m_launcher::stop)));
  
-  m_operatorController.povLeft().onTrue(new InstantCommand(m_arm::StageShot)
-     .andThen(new RunCommand(m_launcher::noteMoveForAmp))
-   .withTimeout(.4)
-   .andThen(new RunCommand(m_launcher::noteMoveForshot)
-   .withTimeout(.1)
-   .andThen(m_launcher::stop)));//subwoofer/speaker shot
+  m_operatorController.povLeft().onTrue(new InstantCommand(m_arm::StageShot));
+  //    .andThen(new RunCommand(m_launcher::noteMoveForAmp))
+  //  .withTimeout(.4)
+  //  .andThen(new RunCommand(m_launcher::noteMoveForshot)
+  //  .withTimeout(.1)
+  //  .andThen(m_launcher::stop)));//subwoofer/speaker shot
   
  m_operatorController.back().onTrue(m_arm.armcommpDown());
 m_operatorController.start().onTrue(m_arm.armcommpUp());
