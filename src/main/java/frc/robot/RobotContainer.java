@@ -117,7 +117,7 @@ public class RobotContainer {
     NamedCommands.registerCommand("Enable Note Detect", new InstantCommand(m_Notedetect::Enable));
     NamedCommands.registerCommand("Disable Note Detect", new InstantCommand(m_Notedetect::Disable));
 
-    NamedCommands.registerCommand("autoaimrotate", drivetrain.applyRequest(()->drive.withRotationalRate((-LimelightHelpers.getTX(null)-2)*kLLpcontroller)));
+    NamedCommands.registerCommand("autoaimrotate", drivetrain.applyRequest(()->drive.withRotationalRate((-LimelightHelpers.getTX(null)+3.8)*kLLpcontroller)));
     NamedCommands.registerCommand("Reverse Intake", m_launcher.getReverseNoteCommand());
     NamedCommands.registerCommand("stop launcher", new InstantCommand(m_launcher::stop));
 
@@ -179,7 +179,7 @@ public void createautoDashboards() {
     m_operatorController.a().whileTrue(drivetrain.applyRequest(() -> 
       drive.withVelocityX(m_drivercontroller.getRawAxis(1) * MaxSpeed) // Drive forward with
       .withVelocityY(-m_drivercontroller.getRawAxis(0) * MaxSpeed) // Drive left with negative X (left)
-      .withRotationalRate((-LimelightHelpers.getTX(null)+2)*kLLpcontroller)))
+      .withRotationalRate((-LimelightHelpers.getTX(null)+3.8)*kLLpcontroller)))
       .whileTrue(new RunCommand(m_arm::armAutoRotateCommand))
       .onFalse(new InstantCommand(m_arm::stop))
       .whileTrue(new PrepareLaunch(m_launcher)
@@ -210,7 +210,11 @@ public void createautoDashboards() {
     //             .handleInterrupt(() -> m_launcher.stop()));
 
     m_operatorController.rightBumper().whileTrue(
-        new PrepareLaunch(m_launcher).handleInterrupt(() -> m_launcher.stop()).andThen(new InstantCommand(m_led::shootspoolup)));
+        new PrepareLaunch(m_launcher).handleInterrupt(() -> m_launcher.stop())
+        .andThen(new InstantCommand(m_led::shootspoolup)));
+
+    m_operatorController.rightBumper().whileTrue(        
+        new InstantCommand(m_led::shootspoolup));        
 
     m_operatorController.rightStick().whileTrue(
     new InstantCommand(m_launcher::feed)).onFalse(new InstantCommand(m_launcher::stop));
@@ -271,7 +275,8 @@ public void createautoDashboards() {
    
 
     m_operatorController.povUp().onTrue(
-      new InstantCommand(m_arm::defenciveshot));
+      new InstantCommand(m_arm::defenciveshot)
+      .andThen(new InstantCommand(m_led::defense)));
 
      // .andThen(new RunCommand(m_arm::armpositionTrapPrep))
      // .andThen(new RunCommand(m_climber::climbNotSafe))                         
@@ -289,7 +294,8 @@ public void createautoDashboards() {
 
 
   
-   m_operatorController.povDown().onTrue(new InstantCommand(m_arm::armpositionIntake));
+   m_operatorController.povDown().onTrue(new InstantCommand(m_arm::armpositionIntake)
+   .andThen(new InstantCommand(m_led::amp)));
   //  .andThen(new RunCommand(m_launcher::noteMoveForAmp))
   //  .withTimeout(.6)
   //  .andThen(new RunCommand(m_launcher::noteMoveForshot)

@@ -49,7 +49,7 @@ public class CANLauncher extends SubsystemBase {
     m_kickerWheel.restoreFactoryDefaults();
     m_launchWheel.setIdleMode(IdleMode.kCoast);
     m_feedWheel.setIdleMode(IdleMode.kBrake);
-
+    m_kickerWheel.setIdleMode(IdleMode.kBrake);
         
    m_intakeencode = m_feedWheel.getEncoder();
    m_kickerWheel.setOpenLoopRampRate(.2);
@@ -98,8 +98,8 @@ public class CANLauncher extends SubsystemBase {
               
             }
             else  {
-              m_feedWheel.set(.3);//was.4
-              setKickerWheel(kIntakeKickerSpeed);
+              m_feedWheel.set(.27);//was.4
+              setKickerWheel(kIntakeKickerSpeed+.2);
             }
           }, () -> {
             intakeAutCommand().isFinished();
@@ -221,7 +221,7 @@ public class CANLauncher extends SubsystemBase {
    public Command autoLaunch(){
 
   return runEnd(() -> {
-            if(!m_ringDetect.get()== false) {
+            if(false/*!m_ringDetect.get()== false*/) {
               stop();
               autoLaunch().isFinished();
               

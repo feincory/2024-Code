@@ -3,65 +3,53 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.6841875081753006,
-        "y": 5.808574926707628
+        "x": 8.28012348332389,
+        "y": 5.880697915241985
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.6785251956589082,
-        "y": 6.260508701647766
+        "x": 6.980220626742144,
+        "y": 6.4662397425310605
       },
       "isLocked": false,
-      "linkedName": "SH"
+      "linkedName": "Mid-2"
     },
     {
       "anchor": {
-        "x": 5.553342461891771,
-        "y": 6.979658581285779
+        "x": 5.248860711701451,
+        "y": 6.90939356201109
       },
       "prevControl": {
-        "x": 4.649999285241448,
-        "y": 6.944247026849452
+        "x": 5.963221740994123,
+        "y": 6.733731013824368
       },
       "nextControl": {
-        "x": 6.456685638542094,
-        "y": 7.015070135722106
+        "x": 4.550279238395526,
+        "y": 7.0811758915125464
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 8.28012348332389,
-        "y": 5.880697915241985
+        "x": 2.67569996678455,
+        "y": 6.571383911998593
       },
       "prevControl": {
-        "x": 7.241315067678889,
-        "y": 6.6254436409197845
+        "x": 3.533628729258331,
+        "y": 6.93081651059604
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Mid-2"
+      "linkedName": "SHR"
     }
   ],
   "rotationTargets": [],
-  "constraintZones": [
-    {
-      "name": "New Constraints Zone",
-      "minWaypointRelativePos": 1.45,
-      "maxWaypointRelativePos": 2.0,
-      "constraints": {
-        "maxVelocity": 2.5,
-        "maxAcceleration": 4.0,
-        "maxAngularVelocity": 540.0,
-        "maxAngularAcceleration": 720.0
-      }
-    }
-  ],
+  "constraintZones": [],
   "eventMarkers": [
     {
       "name": "New Event Marker",
-      "waypointRelativePos": 1.55,
+      "waypointRelativePos": 0.05,
       "command": {
         "type": "race",
         "data": {
@@ -69,7 +57,7 @@
             {
               "type": "named",
               "data": {
-                "name": "Enable Note Detect"
+                "name": "Disable Note Detect"
               }
             }
           ]
@@ -85,13 +73,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -34.08102312414436,
+    "rotation": 12.339087278326177,
     "rotateFast": false
   },
   "reversed": false,
   "folder": null,
   "previewStartingState": {
-    "rotation": 0,
+    "rotation": -12.994616791916496,
     "velocity": 0
   },
   "useDefaultConstraints": true

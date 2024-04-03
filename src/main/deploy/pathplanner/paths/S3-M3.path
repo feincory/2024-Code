@@ -3,59 +3,83 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.635485377420293,
-        "y": 4.279188632039623
+        "x": 2.6139224889061072,
+        "y": 4.3798528681257025
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.3634160278306275,
-        "y": 6.031080821077477
+        "x": 3.341853139316442,
+        "y": 6.131745057163557
       },
       "isLocked": false,
       "linkedName": "S3"
     },
     {
       "anchor": {
-        "x": 5.038065653877384,
-        "y": 4.279188632039623
+        "x": 4.991222307694258,
+        "y": 4.3798528681257025
       },
       "prevControl": {
-        "x": 4.124620403306426,
-        "y": 4.934995478603388
+        "x": 4.189855836132652,
+        "y": 5.16869798856916
       },
       "nextControl": {
-        "x": 5.840772668798528,
-        "y": 3.7028861597885445
+        "x": 5.7407158466242745,
+        "y": 3.6420701657414667
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 8.317099886696207,
-        "y": 4.098792791023527
+        "x": 8.399075742516676,
+        "y": 4.04023860829462
       },
       "prevControl": {
-        "x": 7.485630491945719,
-        "y": 4.087081954477744
+        "x": 7.567606347766188,
+        "y": 4.028527771748837
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": null
     }
   ],
-  "rotationTargets": [
+  "rotationTargets": [],
+  "constraintZones": [
     {
-      "waypointRelativePos": 0.95,
-      "rotationDegrees": -102.99433474220471,
-      "rotateFast": false
+      "name": "New Constraints Zone",
+      "minWaypointRelativePos": 1.45,
+      "maxWaypointRelativePos": 2.0,
+      "constraints": {
+        "maxVelocity": 2.0,
+        "maxAcceleration": 2.0,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 720.0
+      }
     }
   ],
-  "constraintZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "New Event Marker",
+      "waypointRelativePos": 1.55,
+      "command": {
+        "type": "race",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "Enable Note Detect"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
   "globalConstraints": {
-    "maxVelocity": 5.0,
-    "maxAcceleration": 4.5,
+    "maxVelocity": 5.5,
+    "maxAcceleration": 4.75,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },

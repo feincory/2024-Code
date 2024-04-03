@@ -270,9 +270,12 @@ public class CANdleSystem extends SubsystemBase {
 
     public void shootspoolup(){
         m_candleChannel = 0;  
-    m_toAnimate = new StrobeAnimation(255, 0,0, 0, 0.01, LEDS_PER_ANIMATION, m_candleChannel * LEDS_PER_ANIMATION + 8);
+    m_toAnimate = new StrobeAnimation(0, 255,0, 0, 0.01, LEDS_PER_ANIMATION, m_candleChannel * LEDS_PER_ANIMATION + 8);
     }
 
-
+    public void defense(){
+        m_candleChannel = 0;  
+    m_toAnimate = new StrobeAnimation(232, 50,220, 0, 0.01, LEDS_PER_ANIMATION, m_candleChannel * LEDS_PER_ANIMATION + 8);
+    }
 
 }

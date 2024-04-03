@@ -1,0 +1,217 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 1.3633965729469937,
+        "y": 5.555088802485298
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 1.9949579936251087,
+        "y": 5.555088802485298
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 3.3517051912848466,
+        "y": 5.555088802485298
+      },
+      "prevControl": {
+        "x": 2.9372093383412556,
+        "y": 5.549843132400677
+      },
+      "nextControl": {
+        "x": 3.9489578551197027,
+        "y": 5.562647359246215
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 4.827270596053316,
+        "y": 4.251033666118688
+      },
+      "prevControl": {
+        "x": 4.071010052231276,
+        "y": 4.8071075953996
+      },
+      "nextControl": {
+        "x": 5.623607481166459,
+        "y": 3.665491838829612
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 8.281967377058862,
+        "y": 4.11050362756931
+      },
+      "prevControl": {
+        "x": 6.724426116469921,
+        "y": 4.157346973752435
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "2056 M3"
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.75,
+      "rotationDegrees": -3.0,
+      "rotateFast": false
+    }
+  ],
+  "constraintZones": [
+    {
+      "name": "SLOW START",
+      "minWaypointRelativePos": 0.0,
+      "maxWaypointRelativePos": 0.75,
+      "constraints": {
+        "maxVelocity": 1.82,
+        "maxAcceleration": 2.5,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 720.0
+      }
+    },
+    {
+      "name": "NOTE PICKUP",
+      "minWaypointRelativePos": 2.7,
+      "maxWaypointRelativePos": 3.0,
+      "constraints": {
+        "maxVelocity": 2.5,
+        "maxAcceleration": 3.0,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 720.0
+      }
+    }
+  ],
+  "eventMarkers": [
+    {
+      "name": "START SHOOTER AND ARM POSITION",
+      "waypointRelativePos": 0.0,
+      "command": {
+        "type": "race",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "preparelaunch"
+              }
+            },
+            {
+              "type": "named",
+              "data": {
+                "name": "arm moving shot 1"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "TRIGGER LAUNCH 1",
+      "waypointRelativePos": 0.4,
+      "command": {
+        "type": "race",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "launchnotehalf"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "ARM TO MOVE POS 2",
+      "waypointRelativePos": 0.44999999999999996,
+      "command": {
+        "type": "race",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "arm moving shot 2"
+              }
+            },
+            {
+              "type": "named",
+              "data": {
+                "name": "launchnote"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "TURN ON INTAKE",
+      "waypointRelativePos": 1.9,
+      "command": {
+        "type": "race",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "armintakepos"
+              }
+            },
+            {
+              "type": "named",
+              "data": {
+                "name": "runintake"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "AUTO NOTE DETECT",
+      "waypointRelativePos": 2.65,
+      "command": {
+        "type": "race",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "Enable Note Detect"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 5.5,
+    "maxAcceleration": 5.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 0,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": null,
+  "previewStartingState": {
+    "rotation": 0,
+    "velocity": 0
+  },
+  "useDefaultConstraints": false
+}

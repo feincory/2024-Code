@@ -16,68 +16,18 @@
           "data": {
             "commands": [
               {
-                "type": "named",
-                "data": {
-                  "name": "arm speaker"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "preparelaunch"
-                }
-              },
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 0.8
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "race",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "launchnote"
-                }
-              },
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 0.25
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "race",
-          "data": {
-            "commands": [
-              {
                 "type": "path",
                 "data": {
-                  "pathName": "CENTER SPEAKER TO S2"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "armintakepos"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "runintake"
+                  "pathName": "2056 M3"
                 }
               }
             ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "2056 M3 SH"
           }
         },
         {
@@ -143,7 +93,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "S2-M2"
+                  "pathName": "SH-M2"
                 }
               },
               {
@@ -243,68 +193,6 @@
                 "type": "named",
                 "data": {
                   "name": "runintake"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "M1-SH"
-          }
-        },
-        {
-          "type": "race",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "autoaim"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "preparelaunch"
-                }
-              },
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 0.8
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "autoaimrotate"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "race",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "launchnote"
-                }
-              },
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 0.4
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "autoaimrotate"
                 }
               }
             ]
