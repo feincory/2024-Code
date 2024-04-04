@@ -45,7 +45,7 @@ public class TunerConstants {
 
     private static final double kDriveGearRatio = 5.357142857142857;
     private static final double kSteerGearRatio = 21.428571428571427;
-    private static final double kWheelRadiusInches = 1.69;//2024-04-04 1.65 before wheel swap, 1.76 is exact match at end of kentwood
+    private static final double kWheelRadiusInches = 1.61;//2024-04-04 1.65 before wheel swap, 1.76 is exact match at end of kentwood
 
     private static final boolean kSteerMotorReversed = true;
     private static final boolean kInvertLeftSide = false;

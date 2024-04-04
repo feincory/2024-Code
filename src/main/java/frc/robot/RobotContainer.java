@@ -108,6 +108,7 @@ public class RobotContainer {
     NamedCommands.registerCommand("armintakepos", new RunCommand(m_arm::armpositionIntake));
     NamedCommands.registerCommand("arm moving shot 1", new RunCommand(m_arm::armmovingshot1));    
     NamedCommands.registerCommand("arm moving shot 2", new RunCommand(m_arm::armmovingshot2));    
+    NamedCommands.registerCommand("arm moving shot 3", new RunCommand(m_arm::armmovingshot3));    
     NamedCommands.registerCommand("preparelaunch", m_launcher.autoLaunch());
     NamedCommands.registerCommand("launchnote", m_launcher.autolaunchCommand());
     NamedCommands.registerCommand("launchnotehalf", m_launcher.autolaunchhalfCommand());
@@ -283,6 +284,11 @@ public void createautoDashboards() {
   
      m_operatorController.leftTrigger(.8).onTrue(new InstantCommand(m_climber::climbupmanual))
                              .onFalse(new InstantCommand(m_climber::stop));
+
+                             
+     //test button on flight controller                        
+     //m_drivercontroller.button(9).onTrue(m_launcher.intakeAutCommand());
+
     m_operatorController.rightTrigger(.8).onTrue(new InstantCommand(m_climber::climbdownmanual))
                              .onFalse(new InstantCommand(m_climber::stop));
     //servo

@@ -233,6 +233,10 @@ public class arm extends SubsystemBase {
     m_fx.setControl(m_dutyPosition.withPosition(karmmovingshot2));}
   }
   
+    public void armmovingshot3(){
+    if(climberreleased == false){
+    m_fx.setControl(m_dutyPosition.withPosition(karmmovingshot3));}
+  }
    
  public Command armcommpUp() {
      return runOnce(() -> armmanualcomp= armmanualcomp+.5);

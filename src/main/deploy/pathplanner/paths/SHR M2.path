@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.67569996678455,
-        "y": 6.571383911998593
+        "x": 2.7337543047179125,
+        "y": 6.667299774671107
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.6700376542681576,
-        "y": 7.023317686938731
+        "x": 3.72809199220152,
+        "y": 7.119233549611245
       },
       "isLocked": false,
       "linkedName": "SHR"
@@ -32,12 +32,12 @@
     },
     {
       "anchor": {
-        "x": 8.28012348332389,
-        "y": 5.880697915241985
+        "x": 8.12339971728244,
+        "y": 5.874272929225644
       },
       "prevControl": {
-        "x": 7.241315067678889,
-        "y": 6.6254436409197845
+        "x": 7.084591301637439,
+        "y": 6.619018654903444
       },
       "nextControl": null,
       "isLocked": false,
@@ -78,8 +78,8 @@
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 5.5,
-    "maxAcceleration": 4.75,
+    "maxVelocity": 4.9,
+    "maxAcceleration": 4.5,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },

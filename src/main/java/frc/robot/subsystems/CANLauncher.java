@@ -29,6 +29,7 @@ public class CANLauncher extends SubsystemBase {
   CANSparkMax m_feedWheel;
   CANSparkMax m_kickerWheel;
   public DigitalInput m_ringDetect;
+  public DigitalInput m_ringDetect1;
   public static boolean hasnote;
   
 
@@ -41,6 +42,7 @@ public class CANLauncher extends SubsystemBase {
     m_feedWheel = new CANSparkMax(kFeederID, MotorType.kBrushless);
     m_kickerWheel = new CANSparkMax(kKickerID, MotorType.kBrushless);
    m_ringDetect = new DigitalInput(1);
+    m_ringDetect1 = new DigitalInput(2);
     m_launchWheel.setSmartCurrentLimit(kLauncherCurrentLimit);
     m_feedWheel.setSmartCurrentLimit(kFeedCurrentLimit);
     m_kickerWheel.setSmartCurrentLimit(kFeedCurrentLimit);
@@ -57,7 +59,7 @@ public class CANLauncher extends SubsystemBase {
   }
  @Override
  public void periodic(){
-     if(!m_ringDetect.get() == true ){
+     if(!m_ringDetect.get() == true || !m_ringDetect1.get() == true){
     hasnote = true;
   }else{
     hasnote = false;
@@ -92,14 +94,14 @@ public class CANLauncher extends SubsystemBase {
   }
  public Command intakeAutCommand(){
   return runEnd(() -> {
-            if(!m_ringDetect.get()== true) {
+            if(!m_ringDetect.get()== true || !m_ringDetect1.get() == true) {
               stop();
               intakeAutCommand().isFinished();
               
             }
             else  {
-              m_feedWheel.set(.27);//was.4
-              setKickerWheel(kIntakeKickerSpeed+.2);
+              m_feedWheel.set(.33);//was.4
+              setKickerWheel(kIntakeKickerSpeed);
             }
           }, () -> {
             intakeAutCommand().isFinished();
@@ -241,11 +243,13 @@ public class CANLauncher extends SubsystemBase {
   // creates a value for shuffle board
 public boolean getstate(){
   return m_ringDetect.get();}
-
+public boolean getstate1(){
+  return m_ringDetect1.get();}
 
   public void createDashboards() {
   ShuffleboardTab shooterTab = Shuffleboard.getTab("Shooter");
   shooterTab.add("ring detect", getstate());
+  shooterTab.add("ring detect 1", getstate1());
   shooterTab.add("temp", m_launchWheel.getMotorTemperature() );
   
 }

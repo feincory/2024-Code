@@ -136,7 +136,7 @@ public class climber extends SubsystemBase {
         
           case RETRACT:
         if(climberHomed == true && climberreleased == false && climbSafe == true) {
-             m_climberPID.setReference(25, CANSparkMax.ControlType.kPosition);
+             m_climberPID.setReference(27, CANSparkMax.ControlType.kPosition);
              climberreleased = true;
              desiredState = States.DEPLOYED;
              m_climbstep = 2;
@@ -151,7 +151,7 @@ public class climber extends SubsystemBase {
         m_designFlaw.set(kpostDeploy);
         desiredState = States.BOTTOM;
         }else{
-           m_climberPID.setReference(22, CANSparkMax.ControlType.kPosition);
+           m_climberPID.setReference(27, CANSparkMax.ControlType.kPosition);
         }
         break;
 

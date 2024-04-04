@@ -32,12 +32,12 @@
     },
     {
       "anchor": {
-        "x": 8.281967377058862,
-        "y": 7.483224552754384
+        "x": 8.035285623344055,
+        "y": 7.416269573147376
       },
       "prevControl": {
-        "x": 6.537052731737417,
-        "y": 7.366116187296569
+        "x": 6.290370978022611,
+        "y": 7.2991612076895604
       },
       "nextControl": null,
       "isLocked": false,
@@ -47,7 +47,7 @@
   "rotationTargets": [
     {
       "waypointRelativePos": 0.65,
-      "rotationDegrees": 26.0,
+      "rotationDegrees": 28.0,
       "rotateFast": true
     },
     {
@@ -131,7 +131,7 @@
             {
               "type": "named",
               "data": {
-                "name": "armintakepos"
+                "name": "arm moving shot 3"
               }
             },
             {
