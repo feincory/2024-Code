@@ -32,11 +32,11 @@
     },
     {
       "anchor": {
-        "x": 8.152771081928568,
+        "x": 8.431799046066786,
         "y": 7.4309552554704394
       },
       "prevControl": {
-        "x": 6.407856436607124,
+        "x": 6.686884400745341,
         "y": 7.313846890012624
       },
       "nextControl": null,
@@ -106,7 +106,7 @@
     },
     {
       "name": "TRIGGER LAUNCH 1",
-      "waypointRelativePos": 0.25,
+      "waypointRelativePos": 0.35,
       "command": {
         "type": "race",
         "data": {
@@ -123,7 +123,7 @@
     },
     {
       "name": "ARM TO MOVE POS 2",
-      "waypointRelativePos": 0.4,
+      "waypointRelativePos": 0.45,
       "command": {
         "type": "race",
         "data": {

@@ -144,7 +144,7 @@ public class arm extends SubsystemBase {
       -0.166);
 
       newarmautocalc =  
-      (((LimelightHelpers.getTY(null)+speakerllty+6.5+armmanualcomp) //limelight offset was 8 degrees add, lowering to 
+      (((LimelightHelpers.getTY(null)+speakerllty+5+armmanualcomp) //limelight offset was 8 degrees add, lowering to 
       *calratecomp) //calclate slope .0039 OLD SLOPE  new shooter old slope .0049
       +longshotarmpos);
       //System.out.println(armAutoCalc);

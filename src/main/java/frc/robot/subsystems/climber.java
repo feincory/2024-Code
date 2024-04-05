@@ -11,6 +11,8 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkPIDController;
 //import static frc.robot.subsystems.CANLauncher.hasnote;
 import static frc.robot.Constants.climberConstants.*;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 
 //import javax.swing.text.Position;
 
@@ -388,16 +390,14 @@ public void stop(){
 
 
 public void createDashboards() {
- /* ShuffleboardTab climberTab = Shuffleboard.getTab("climber");
-  climberTab.addNumber("climber encoder", m_climbencoder.getPosition())
-  .withSize(1,1)
-  .withPosition(0,0);*/
- // SmartDashboard.putNumber("Climber encoder", m_climbencoder.getPosition());
- // SmartDashboard.putNumber("climber step",m_climbstep);
- // SmartDashboard.putBoolean("climb sensor", m_climbsensor.get());
- SmartDashboard.putBoolean("Climb Safe",climbSafe);
- SmartDashboard.putBoolean("climberreleased",climberreleased);
- SmartDashboard.putBoolean("climberHomed",climberHomed);
+  ShuffleboardTab climberTab = Shuffleboard.getTab("climber");
+  climberTab.add("climber encoder", m_climbencoder.getPosition());
+  climberTab.add("climber step",m_climbstep);
+  climberTab.add("climb sensor", m_climbsensor.get());
+
+//  SmartDashboard.putBoolean("Climb Safe",climbSafe);
+//  SmartDashboard.putBoolean("climberreleased",climberreleased);
+//  SmartDashboard.putBoolean("climberHomed",climberHomed);
 }
 
 public boolean climberreleased() {

@@ -135,3 +135,5 @@ CALIBRATION PATH auto BEFORE WHEEL CHANGE
 new wheels
 103.5
 103.5
+
+hook position 8.75
