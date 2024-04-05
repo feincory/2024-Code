@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 8.546530939215726,
-        "y": 2.5358043023778354
+        "x": 8.167456764251632,
+        "y": 2.393766218659451
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.737441628729414,
-        "y": 2.2397960180535734
+        "x": 7.35836745376532,
+        "y": 2.097757934335189
       },
       "isLocked": false,
       "linkedName": "M4"
@@ -49,7 +49,7 @@
   "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 4.9,
-    "maxAcceleration": 4.5,
+    "maxAcceleration": 4.25,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },
