@@ -91,6 +91,7 @@ public class TunerConstants {
     private static final int kFrontLeftSteerMotorId = 17;
     private static final int kFrontLeftEncoderId = 18;
     private static final double kFrontLeftEncoderOffset = 0.284912109375;
+    //private static final double kFrontLeftEncoderOffset = 0.289412109375;
 
     private static final double kFrontLeftXPosInches = 9.25;
     private static final double kFrontLeftYPosInches = 15.25;
@@ -99,8 +100,8 @@ public class TunerConstants {
     private static final int kFrontRightDriveMotorId = 43;
     private static final int kFrontRightSteerMotorId = 14;
     private static final int kFrontRightEncoderId = 15;
-    private static final double kFrontRightEncoderOffset = 0.419677734375;
-
+    private static final double kFrontRightEncoderOffset = 0.41967773437511-.308;
+    //private static final double kFrontRightEncoderOffset = 0.414677734375;
     private static final double kFrontRightXPosInches = 9.25;
     private static final double kFrontRightYPosInches = -15.25;
 
@@ -108,8 +109,8 @@ public class TunerConstants {
     private static final int kBackLeftDriveMotorId = 10;
     private static final int kBackLeftSteerMotorId = 11;
     private static final int kBackLeftEncoderId = 12;
-    private static final double kBackLeftEncoderOffset = 0.448057; //pre 2024-03-05 value 0.45361328125;
-
+   private static final double kBackLeftEncoderOffset = 0.448057; //pre 2024-03-05 value 0.45361328125;
+    //private static final double kBackLeftEncoderOffset = 0.443057; //pre 2024-03-05 value 0.45361328125;
     private static final double kBackLeftXPosInches = -9.25;
     private static final double kBackLeftYPosInches = 15.25;
 
@@ -118,7 +119,6 @@ public class TunerConstants {
     private static final int kBackRightSteerMotorId = 42;
     private static final int kBackRightEncoderId = 41;
     private static final double kBackRightEncoderOffset = -0.492431640625;
-
     private static final double kBackRightXPosInches = -9.25;
     private static final double kBackRightYPosInches = -15.25;
 

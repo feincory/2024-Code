@@ -3,37 +3,49 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 8.328999269805339,
-        "y": 7.386898208501248
-      },
-      "prevControl": null,
-      "nextControl": {
-        "x": 6.785561684960234,
-        "y": 7.3084553093790845
-      },
-      "isLocked": false,
-      "linkedName": "M1"
-    },
-    {
-      "anchor": {
         "x": 2.821868398656297,
         "y": 6.711356821640298
       },
+      "prevControl": null,
+      "nextControl": {
+        "x": 3.8162060861399048,
+        "y": 7.1632905965804365
+      },
+      "isLocked": false,
+      "linkedName": "SHR"
+    },
+    {
+      "anchor": {
+        "x": 8.458145366994959,
+        "y": 7.414382152707968
+      },
       "prevControl": {
-        "x": 4.683891409435557,
-        "y": 7.367163668204062
+        "x": 7.136433957919189,
+        "y": 7.311582376446519
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "SHR"
+      "linkedName": null
     }
   ],
   "rotationTargets": [],
-  "constraintZones": [],
+  "constraintZones": [
+    {
+      "name": "New Constraints Zone",
+      "minWaypointRelativePos": 0.75,
+      "maxWaypointRelativePos": 1.0,
+      "constraints": {
+        "maxVelocity": 2.5,
+        "maxAcceleration": 4.0,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 720.0
+      }
+    }
+  ],
   "eventMarkers": [
     {
       "name": "New Event Marker",
-      "waypointRelativePos": 0,
+      "waypointRelativePos": 0.8,
       "command": {
         "type": "race",
         "data": {
@@ -41,7 +53,7 @@
             {
               "type": "named",
               "data": {
-                "name": "Disable Note Detect"
+                "name": "Enable Note Detect"
               }
             }
           ]
@@ -57,13 +69,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 12.200468727380757,
+    "rotation": 7.779873899980488,
     "rotateFast": false
   },
   "reversed": false,
   "folder": null,
   "previewStartingState": {
-    "rotation": 6.842773412630886,
+    "rotation": 22.38013505195955,
     "velocity": 0
   },
   "useDefaultConstraints": true

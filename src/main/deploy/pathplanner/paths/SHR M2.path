@@ -4,40 +4,40 @@
     {
       "anchor": {
         "x": 2.821868398656297,
-        "y": 6.623242727701913
+        "y": 6.711356821640298
       },
       "prevControl": null,
       "nextControl": {
         "x": 3.8162060861399048,
-        "y": 7.0751765026420514
+        "y": 7.1632905965804365
       },
       "isLocked": false,
       "linkedName": "SHR"
     },
     {
       "anchor": {
-        "x": 5.553342461891771,
-        "y": 6.979658581285779
+        "x": 5.538719628423157,
+        "y": 7.063813197393838
       },
       "prevControl": {
-        "x": 4.649999285241448,
-        "y": 6.944247026849452
+        "x": 4.640498824982635,
+        "y": 7.16619611225252
       },
       "nextControl": {
-        "x": 6.456685638542094,
-        "y": 7.015070135722106
+        "x": 6.346495005046132,
+        "y": 6.971739625625126
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 8.37305631677453,
-        "y": 5.771473152964195
+        "x": 8.270256540513081,
+        "y": 5.595244965087426
       },
       "prevControl": {
-        "x": 7.334247901129529,
-        "y": 6.516218878641995
+        "x": 7.23144812486808,
+        "y": 6.339990690765226
       },
       "nextControl": null,
       "isLocked": false,
@@ -58,25 +58,7 @@
       }
     }
   ],
-  "eventMarkers": [
-    {
-      "name": "New Event Marker",
-      "waypointRelativePos": 1.55,
-      "command": {
-        "type": "race",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "Enable Note Detect"
-              }
-            }
-          ]
-        }
-      }
-    }
-  ],
+  "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 4.9,
     "maxAcceleration": 4.25,

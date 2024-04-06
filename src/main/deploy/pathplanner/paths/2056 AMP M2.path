@@ -32,16 +32,16 @@
     },
     {
       "anchor": {
-        "x": 8.490541775359043,
-        "y": 7.4309552554704394
+        "x": 8.270256540513081,
+        "y": 5.595244965087426
       },
       "prevControl": {
-        "x": 6.745627130037598,
-        "y": 7.313846890012624
+        "x": 6.610774438006837,
+        "y": 6.300157716594503
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Mid-2"
     }
   ],
   "rotationTargets": [
@@ -169,7 +169,7 @@
     },
     {
       "name": "AUTO NOTE DETECT",
-      "waypointRelativePos": 1.8,
+      "waypointRelativePos": 1.75,
       "command": {
         "type": "race",
         "data": {
@@ -193,7 +193,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0,
+    "rotation": -24.775140568831944,
     "rotateFast": false
   },
   "reversed": false,
