@@ -7,6 +7,8 @@ package frc.robot.subsystems;
 import static frc.robot.Constants.LauncherConstants.*;
 import static frc.robot.subsystems.climber.trap;
 
+import com.revrobotics.AbsoluteEncoder;
+
 //import frc.robot.commands.LaunchNote;
 
 import com.revrobotics.CANSparkMax;
@@ -28,6 +30,7 @@ public class CANLauncher extends SubsystemBase {
   CANSparkMax m_launchWheel;
   CANSparkMax m_feedWheel;
   CANSparkMax m_kickerWheel;
+  RelativeEncoder m_launchEncoder;
   public DigitalInput m_ringDetect;
   public DigitalInput m_ringDetect1;
   public static boolean hasnote;
@@ -55,6 +58,7 @@ public class CANLauncher extends SubsystemBase {
         
    m_intakeencode = m_feedWheel.getEncoder();
    m_kickerWheel.setOpenLoopRampRate(.2);
+   m_launchEncoder = m_launchWheel.getEncoder();
    createDashboards();
   }
  @Override
@@ -67,6 +71,9 @@ public class CANLauncher extends SubsystemBase {
   if(trap == true){setFeedWheel(kIntakeFeederReverseSpeed);
           setLaunchWheel(kLauncherReverseSpeed);
           setKickerWheel(-kIntakeKickerSpeed);}
+  if(m_launchWheel.get() > .1){
+    m_feedWheel.set(0);
+  }
  }
   /**
    * This method is an example of the 'subsystem factory' style of command creation. A method inside
@@ -110,7 +117,12 @@ public class CANLauncher extends SubsystemBase {
    
   
   public void noteMoveForAmp(){
-    m_feedWheel.set(.5);
+    if(m_launchEncoder.getVelocity() < -100){
+    m_feedWheel.set(0);
+    m_launchWheel.set(.01);
+    }else{
+      m_feedWheel.set(.5);
+    }
   }
   public void noteMoveForshot(){
     m_feedWheel.set(-.2);

@@ -211,7 +211,10 @@ public void createautoDashboards() {
     //             .handleInterrupt(() -> m_launcher.stop()));
 
     m_operatorController.rightBumper().whileTrue(
-        new PrepareLaunch(m_launcher).handleInterrupt(() -> m_launcher.stop())
+        new RunCommand(m_launcher::noteMoveForshot)
+        .withTimeout(.1)
+        .andThen(new PrepareLaunch(m_launcher)
+        .handleInterrupt(() -> m_launcher.stop()))
         .andThen(new InstantCommand(m_led::shootspoolup)));
 
     m_operatorController.rightBumper().whileTrue(        
@@ -227,10 +230,10 @@ public void createautoDashboards() {
                 
     // Set up a binding to run the intake command while the operator is pressing and holding the
     //left Bumper
-    m_operatorController.leftBumper().whileTrue(m_launcher.getIntakeCommand())
-                                      .onFalse(new RunCommand(m_launcher::noteMoveForshot)
-                                      .withTimeout(.08)//was .05
-                                      .andThen(new InstantCommand(m_launcher::stop)));
+    m_operatorController.leftBumper().whileTrue(m_launcher.getIntakeCommand());
+                                      // .onFalse(new RunCommand(m_launcher::noteMoveForshot)
+                                      // .withTimeout(.08)//was .05
+                                      // .andThen(new InstantCommand(m_launcher::stop)));
                          
     //m_operatorController.leftBumper().onTrue(m_launcher.intakeAutCommand());                                  
 
