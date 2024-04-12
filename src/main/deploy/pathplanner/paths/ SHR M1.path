@@ -45,7 +45,7 @@
   "eventMarkers": [
     {
       "name": "New Event Marker",
-      "waypointRelativePos": 0.8,
+      "waypointRelativePos": 0.7,
       "command": {
         "type": "race",
         "data": {
@@ -62,8 +62,8 @@
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 4.9,
-    "maxAcceleration": 4.25,
+    "maxVelocity": 5.5,
+    "maxAcceleration": 4.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },

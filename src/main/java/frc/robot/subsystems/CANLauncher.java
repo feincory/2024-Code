@@ -102,12 +102,12 @@ public class CANLauncher extends SubsystemBase {
  public Command intakeAutCommand(){
   return runEnd(() -> {
             if(!m_ringDetect.get()== true || !m_ringDetect1.get() == true) {
-              stop();
-              intakeAutCommand().isFinished();
               
+              intakeAutCommand().isFinished();
+              stop();
             }
             else  {
-              m_feedWheel.set(.33);//was.4
+              m_feedWheel.set(.38);//was.4
               setKickerWheel(kIntakeKickerSpeed);
             }
           }, () -> {
@@ -132,7 +132,7 @@ public class CANLauncher extends SubsystemBase {
   public Command getReverseNoteCommand() {
     // The startEnd helper method takes a method to call when the command is initialized and one to
     // call when it ends
-    return this.startEnd(
+    return this.runEnd(
         // When the command is initialized, set the wheels to the intake speed values
         () -> {
           setFeedWheel(kIntakeFeederReverseSpeed);

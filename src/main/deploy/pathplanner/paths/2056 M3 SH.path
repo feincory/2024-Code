@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 8.328999269805339,
-        "y": 4.097305368134887
+        "x": 8.281967377058862,
+        "y": 4.145636137206654
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.420132912842952,
-        "y": 4.12072704122645
+        "x": 6.373101020096476,
+        "y": 4.1690578102982165
       },
       "isLocked": false,
       "linkedName": "2056 M3"
@@ -63,11 +63,28 @@
           ]
         }
       }
+    },
+    {
+      "name": "New Event Marker",
+      "waypointRelativePos": 1.5,
+      "command": {
+        "type": "race",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "preparelaunch"
+              }
+            }
+          ]
+        }
+      }
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 4.9,
-    "maxAcceleration": 4.25,
+    "maxVelocity": 5.5,
+    "maxAcceleration": 4.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },

@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.3633965729469937,
-      "y": 5.555088802485298
+      "x": 1.283454953184902,
+      "y": 7.014868308787167
     },
-    "rotation": 0
+    "rotation": 34.0
   },
   "command": {
     "type": "sequential",
@@ -18,7 +18,26 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "2056 M3"
+                  "pathName": "2056 AMP M1"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "runintake"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "M1 MISS PATH"
                 }
               }
             ]
@@ -27,7 +46,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "2056 M3 SH"
+            "pathName": "M1 - SHR"
           }
         },
         {
@@ -49,7 +68,7 @@
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 0.3
+                  "waitTime": 1.0
                 }
               },
               {
@@ -93,7 +112,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "SH-M2"
+                  "pathName": "SHR M2"
                 }
               },
               {
@@ -112,9 +131,28 @@
           }
         },
         {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "runintake"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "M2 MISS PATH"
+                }
+              }
+            ]
+          }
+        },
+        {
           "type": "path",
           "data": {
-            "pathName": "M2 - SH"
+            "pathName": "M2-SHR"
           }
         },
         {
@@ -136,7 +174,7 @@
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 0.3
+                  "waitTime": 1.0
                 }
               },
               {
@@ -180,7 +218,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "SH-M1"
+                  "pathName": "SHR M2"
                 }
               },
               {

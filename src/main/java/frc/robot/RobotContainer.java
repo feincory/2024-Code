@@ -11,6 +11,7 @@ import com.pathplanner.lib.auto.NamedCommands;
 //import com.pathplanner.lib.commands.PathPlannerAuto;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest;
 
+import edu.wpi.first.units.Power;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -181,11 +182,15 @@ public void createautoDashboards() {
       drive.withVelocityX(m_drivercontroller.getRawAxis(1) * MaxSpeed) // Drive forward with
       .withVelocityY(-m_drivercontroller.getRawAxis(0) * MaxSpeed) // Drive left with negative X (left)
       .withRotationalRate((-LimelightHelpers.getTX(null)+3.8)*kLLpcontroller)))
-      .whileTrue(new RunCommand(m_arm::armAutoRotateCommand))
-      .onFalse(new InstantCommand(m_arm::stop))
-      .whileTrue(new PrepareLaunch(m_launcher)
-      .handleInterrupt(() -> m_launcher.stop())); 
-
+      .whileTrue(
+      new RunCommand(m_launcher::noteMoveForshot)
+      .withTimeout(.1)
+      .andThen(new PrepareLaunch(m_launcher))
+      .handleInterrupt(() -> m_launcher.stop()))
+      //  .andThen(new RunCommand(m_arm::armAutoRotateCommand)))
+      .onFalse(new InstantCommand(m_arm::stop));
+    m_operatorController.a().whileTrue(new RunCommand(m_arm::armAutoRotateCommand)); 
+      
 
     //limelight autoline up
     m_drivercontroller.button(13).whileTrue(drivetrain.applyRequest(() -> 
@@ -221,8 +226,14 @@ public void createautoDashboards() {
         new InstantCommand(m_led::shootspoolup));        
 
     m_operatorController.rightStick().whileTrue(
-    new InstantCommand(m_launcher::feed)).onFalse(new InstantCommand(m_launcher::stop));
-    m_operatorController.rightStick().onTrue(new InstantCommand(m_arm::armfeed)).onFalse(new InstantCommand(m_arm::armpositionIntake));
+      new RunCommand(m_launcher::noteMoveForshot)
+    .withTimeout(.1)
+    .andThen(new PrepareLaunch(m_launcher)))
+    //.handleInterrupt(() -> m_launcher.stop()))
+        .onFalse(new InstantCommand(m_launcher::stop));
+
+    m_operatorController.rightStick().onTrue(
+      new InstantCommand(m_arm::armfeed)).onFalse(new InstantCommand(m_arm::armpositionIntake));
 
 
     m_operatorController.leftStick().whileTrue(
@@ -240,7 +251,9 @@ public void createautoDashboards() {
 
 
                                       
-    m_operatorController.y().whileTrue(m_launcher.getReverseNoteCommand().andThen(m_launcher::noteMoveForshot));
+    m_operatorController.y().whileTrue(m_launcher.getReverseNoteCommand()).onFalse(new InstantCommand(m_launcher::stop));
+    //.andThen(m_launcher::noteMoveForshot)
+ 
 
       
    //climber

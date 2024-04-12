@@ -79,6 +79,7 @@ public static class armConstants{
   public static double kMinOutput=-.1;
   // position
   public static double kIntakePosition = -.175;
+
   //arm at bottom of rotation -.168
   //set zero with t squre 24" from ground, ++ increases the distance from the ground
   public static double kampPosition = .105;
@@ -88,8 +89,8 @@ public static class armConstants{
   public static double kPresetShot = -.140;
   public static double kfeed = -.145;
   public static double karmmovingshot1 = -.147;
-  public static double karmmovingshot2 = -.175;
-  public static double karmmovingshot3 = -.168;
+  public static double karmmovingshot2 = -.170;
+  public static double karmmovingshot3 = -.175;
   // speaker
   //shot from stage preset location -.155
 
