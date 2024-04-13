@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 8.167456764251632,
-        "y": 2.393766218659451
+        "x": 8.299857368945508,
+        "y": 2.269396846486001
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.35836745376532,
-        "y": 2.097757934335189
+        "x": 7.490768058459196,
+        "y": 1.9733885621617389
       },
       "isLocked": false,
       "linkedName": "M4"
     },
     {
       "anchor": {
-        "x": 5.32990758289209,
-        "y": 1.7957835915671831
+        "x": 5.48777866786503,
+        "y": 1.460307535999688
       },
       "prevControl": {
-        "x": 6.944227349993162,
-        "y": 1.624962144155058
+        "x": 7.102098434966103,
+        "y": 1.2894860885875628
       },
       "nextControl": {
-        "x": 3.715587815791017,
-        "y": 1.9666050389793082
+        "x": 3.873458900763958,
+        "y": 1.631128983411813
       },
       "isLocked": false,
       "linkedName": null
@@ -46,7 +46,42 @@
   ],
   "rotationTargets": [],
   "constraintZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "New Event Marker",
+      "waypointRelativePos": 0.0,
+      "command": {
+        "type": "race",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "Disable Note Detect"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "New Event Marker",
+      "waypointRelativePos": 1.6,
+      "command": {
+        "type": "race",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "preparelaunch"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
   "globalConstraints": {
     "maxVelocity": 5.5,
     "maxAcceleration": 4.0,
@@ -55,7 +90,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -46.0,
+    "rotation": -36.869897645843956,
     "rotateFast": false
   },
   "reversed": false,

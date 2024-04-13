@@ -105,7 +105,13 @@
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 0.8
+                  "waitTime": 1.0
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "autoaimrotate"
                 }
               }
             ]
@@ -125,6 +131,12 @@
                 "type": "wait",
                 "data": {
                   "waitTime": 0.25
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "autoaimrotate"
                 }
               }
             ]
@@ -180,7 +192,13 @@
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 0.75
+                  "waitTime": 1.0
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "autoaim"
                 }
               }
             ]
@@ -200,6 +218,12 @@
                 "type": "wait",
                 "data": {
                   "waitTime": 0.4
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "autoaimrotate"
                 }
               }
             ]

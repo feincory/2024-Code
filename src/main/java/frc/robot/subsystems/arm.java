@@ -273,7 +273,7 @@ public void armAutoRotateCommand(){
 }
 public void defenciveshot(){
  if(climberreleased == false){
-   m_fx.setControl(m_dutyPosition.withPosition(.170));}
+   m_fx.setControl(m_dutyPosition.withPosition(.178));}
   
 }
 

@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 8.182142446579412,
-        "y": 0.7636554807949453
+        "x": 8.289990426134699,
+        "y": 0.5328149117836701
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.573830768417595,
-        "y": 1.0497968223083962
+        "x": 6.681678747972882,
+        "y": 0.8189562532971211
       },
       "isLocked": false,
       "linkedName": "M5"
@@ -46,7 +46,42 @@
   ],
   "rotationTargets": [],
   "constraintZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "New Event Marker",
+      "waypointRelativePos": 0,
+      "command": {
+        "type": "race",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "Disable Note Detect"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "New Event Marker",
+      "waypointRelativePos": 1.5,
+      "command": {
+        "type": "race",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "preparelaunch"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
   "globalConstraints": {
     "maxVelocity": 5.5,
     "maxAcceleration": 4.0,
@@ -55,7 +90,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -46.16913932790739,
+    "rotation": -39.57974670096657,
     "rotateFast": false
   },
   "reversed": false,

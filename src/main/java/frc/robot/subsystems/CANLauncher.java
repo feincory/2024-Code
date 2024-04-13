@@ -100,20 +100,36 @@ public class CANLauncher extends SubsystemBase {
         });
   }
  public Command intakeAutCommand(){
-  return runEnd(() -> {
+  return this.runEnd(() -> {
             if(!m_ringDetect.get()== true || !m_ringDetect1.get() == true) {
               
               intakeAutCommand().isFinished();
               stop();
+              //intakeAutCommand().end(true);
+              System.out.println("true");
             }
             else  {
               m_feedWheel.set(.38);//was.4
               setKickerWheel(kIntakeKickerSpeed);
             }
           }, () -> {
+            //intakeAutCommand().end(true);
+            //stop();
             intakeAutCommand().isFinished();
+            
+            System.out.println("stop");
           });
         }
+
+   public Command endEarlyCommand(){
+    return this.run(() ->{
+      if(!m_ringDetect.get()== true || !m_ringDetect1.get() == true){
+        endEarlyCommand().isFinished();
+        System.out.println("end early");
+      }
+        
+      });
+    }
    
   
   public void noteMoveForAmp(){

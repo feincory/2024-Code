@@ -16,28 +16,28 @@
     },
     {
       "anchor": {
-        "x": 5.458177839432603,
-        "y": 1.5392430784861582
+        "x": 5.566714210351499,
+        "y": 1.2925695082159403
       },
       "prevControl": {
-        "x": 4.400859996313523,
-        "y": 1.6371428787749616
+        "x": 4.509396367232419,
+        "y": 1.3904693085047437
       },
       "nextControl": {
-        "x": 6.523807662999943,
-        "y": 1.4405736503780713
+        "x": 6.632344033918839,
+        "y": 1.1939000801078534
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 8.167456764251632,
-        "y": 2.393766218659451
+        "x": 8.299857368945508,
+        "y": 2.269396846486001
       },
       "prevControl": {
-        "x": 7.378101339386937,
-        "y": 2.0681571059027615
+        "x": 7.510501944080813,
+        "y": 1.9437877337293115
       },
       "nextControl": null,
       "isLocked": false,
@@ -45,8 +45,38 @@
     }
   ],
   "rotationTargets": [],
-  "constraintZones": [],
-  "eventMarkers": [],
+  "constraintZones": [
+    {
+      "name": "New Constraints Zone",
+      "minWaypointRelativePos": 1.25,
+      "maxWaypointRelativePos": 2.0,
+      "constraints": {
+        "maxVelocity": 2.0,
+        "maxAcceleration": 2.0,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 720.0
+      }
+    }
+  ],
+  "eventMarkers": [
+    {
+      "name": "New Event Marker",
+      "waypointRelativePos": 1.3,
+      "command": {
+        "type": "race",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "Enable Note Detect"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
   "globalConstraints": {
     "maxVelocity": 5.5,
     "maxAcceleration": 4.0,

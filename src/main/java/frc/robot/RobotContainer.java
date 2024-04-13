@@ -106,6 +106,7 @@ public class RobotContainer {
     kLLpcontroller = .075;
     kLLpcontrollerintake = .1;
     NamedCommands.registerCommand("runintake", m_launcher.intakeAutCommand());
+        NamedCommands.registerCommand("endearly", m_launcher.endEarlyCommand());
     NamedCommands.registerCommand("armintakepos", new RunCommand(m_arm::armpositionIntake));
     NamedCommands.registerCommand("arm moving shot 1", new RunCommand(m_arm::armmovingshot1));    
     NamedCommands.registerCommand("arm moving shot 2", new RunCommand(m_arm::armmovingshot2));    
@@ -228,7 +229,7 @@ public void createautoDashboards() {
     m_operatorController.rightStick().whileTrue(
       new RunCommand(m_launcher::noteMoveForshot)
     .withTimeout(.1)
-    .andThen(new PrepareLaunch(m_launcher)))
+    .andThen( new RunCommand(m_launcher::feed)))
     //.handleInterrupt(() -> m_launcher.stop()))
         .onFalse(new InstantCommand(m_launcher::stop));
 
@@ -303,7 +304,7 @@ public void createautoDashboards() {
 
                              
      //test button on flight controller                        
-     //m_drivercontroller.button(9).onTrue(m_launcher.intakeAutCommand());
+     m_drivercontroller.button(9).onTrue(m_launcher.intakeAutCommand());
 
     m_operatorController.rightTrigger(.8).onTrue(new InstantCommand(m_climber::climbdownmanual))
                              .onFalse(new InstantCommand(m_climber::stop));
