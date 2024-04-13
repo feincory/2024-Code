@@ -33,6 +33,7 @@ import frc.robot.Constants.OperatorConstants;
 //import frc.robot.commands.Autos;
 import frc.robot.commands.LaunchNote;
 import frc.robot.commands.PrepareLaunch;
+import frc.robot.commands.endEarlyCommand;
 //import frc.robot.subsystems.PWMDrivetrain;
 //import frc.robot.subsystems.PWMLauncher;
 import frc.robot.generated.TunerConstants;
@@ -106,7 +107,7 @@ public class RobotContainer {
     kLLpcontroller = .075;
     kLLpcontrollerintake = .1;
     NamedCommands.registerCommand("runintake", m_launcher.intakeAutCommand());
-        NamedCommands.registerCommand("endearly", m_launcher.endEarlyCommand());
+        NamedCommands.registerCommand("endearly", new endEarlyCommand(m_launcher));
     NamedCommands.registerCommand("armintakepos", new RunCommand(m_arm::armpositionIntake));
     NamedCommands.registerCommand("arm moving shot 1", new RunCommand(m_arm::armmovingshot1));    
     NamedCommands.registerCommand("arm moving shot 2", new RunCommand(m_arm::armmovingshot2));    

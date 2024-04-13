@@ -16,16 +16,15 @@
           "data": {
             "commands": [
               {
-                "type": "deadline",
+                "type": "named",
                 "data": {
-                  "commands": [
-                    {
-                      "type": "path",
-                      "data": {
-                        "pathName": "cal path"
-                      }
-                    }
-                  ]
+                  "name": "endearly"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "cal path"
                 }
               }
             ]

@@ -89,6 +89,7 @@ public class climber extends SubsystemBase {
  //
  //sets ranges
  position = 0;
+ //m_designFlaw.setAngle(kpreDeploy);
  //m_climberPID.setReference(position, CANSparkMax.ControlType.kPosition);
  autolineup =false;
  climberHomed = false;

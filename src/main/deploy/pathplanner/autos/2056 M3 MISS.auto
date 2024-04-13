@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.8305816611633238,
-      "y": 4.4795920361071495
+      "x": 1.3633965729469937,
+      "y": 5.555088802485298
     },
-    "rotation": -60.0
+    "rotation": 0
   },
   "command": {
     "type": "sequential",
@@ -16,65 +16,9 @@
           "data": {
             "commands": [
               {
-                "type": "named",
-                "data": {
-                  "name": "autoaim"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "preparelaunch"
-                }
-              },
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 0.75
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "race",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "launchnote"
-                }
-              },
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 0.25
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "race",
-          "data": {
-            "commands": [
-              {
                 "type": "path",
                 "data": {
-                  "pathName": "SPL -M5"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "armintakepos"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "runintake"
+                  "pathName": "2056 M3"
                 }
               }
             ]
@@ -93,7 +37,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "M5 TO M4 MISS"
+                  "pathName": "M3 TO M4 MISS PATH"
                 }
               }
             ]
@@ -102,7 +46,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "M5-SHL"
+            "pathName": "2056 M3 SH"
           }
         },
         {
@@ -124,7 +68,7 @@
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 1.0
+                  "waitTime": 0.3
                 }
               },
               {
@@ -162,13 +106,13 @@
           }
         },
         {
-          "type": "race",
+          "type": "deadline",
           "data": {
             "commands": [
               {
                 "type": "path",
                 "data": {
-                  "pathName": "SHL-M4"
+                  "pathName": "SH-M2"
                 }
               },
               {
@@ -199,7 +143,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "M4 TO M3 MISS"
+                  "pathName": "M2 TO M1 MISS"
                 }
               }
             ]
@@ -208,7 +152,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "M4-SHL"
+            "pathName": "M2 - SH"
           }
         },
         {
@@ -218,25 +162,25 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "preparelaunch"
+                  "name": "autoaim"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "autoaim"
+                  "name": "preparelaunch"
                 }
               },
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 1.0
+                  "waitTime": 0.3
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "autoaim"
+                  "name": "autoaimrotate"
                 }
               }
             ]
@@ -255,13 +199,38 @@
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 0.4
+                  "waitTime": 0.25
                 }
               },
               {
                 "type": "named",
                 "data": {
                   "name": "autoaimrotate"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "SH-M1"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "armintakepos"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "runintake"
                 }
               }
             ]

@@ -27,10 +27,10 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class CANLauncher extends SubsystemBase {
-  CANSparkMax m_launchWheel;
-  CANSparkMax m_feedWheel;
-  CANSparkMax m_kickerWheel;
-  RelativeEncoder m_launchEncoder;
+  public CANSparkMax m_launchWheel;
+  public CANSparkMax m_feedWheel;
+  public CANSparkMax m_kickerWheel;
+  public RelativeEncoder m_launchEncoder;
   public DigitalInput m_ringDetect;
   public DigitalInput m_ringDetect1;
   public static boolean hasnote;
@@ -121,10 +121,10 @@ public class CANLauncher extends SubsystemBase {
           });
         }
 
-   public Command endEarlyCommand(){
+   public Command endEarlytest(){
     return this.run(() ->{
       if(!m_ringDetect.get()== true || !m_ringDetect1.get() == true){
-        endEarlyCommand().isFinished();
+        endEarlytest().isFinished();
         System.out.println("end early");
       }
         

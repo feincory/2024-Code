@@ -3,52 +3,42 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 8.378792911431978,
-        "y": 0.49334714054043566
+        "x": 8.293678213604645,
+        "y": 2.4470018170805568
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.770481233270161,
-        "y": 0.7794884820538865
+        "x": 8.289990426132883,
+        "y": 3.071026128886254
       },
       "isLocked": false,
-      "linkedName": "M5"
+      "linkedName": "M1 MISS"
     },
     {
       "anchor": {
-        "x": 4.158265490055131,
-        "y": 1.4391968676602838
+        "x": 8.293678213604645,
+        "y": 2.575272073621071
       },
       "prevControl": {
-        "x": 5.377177122869452,
-        "y": 0.8517695747377186
-      },
-      "nextControl": {
-        "x": 2.9570032757197113,
-        "y": 2.018118416737595
-      },
-      "isLocked": false,
-      "linkedName": null
-    },
-    {
-      "anchor": {
-        "x": 1.7791849537187452,
-        "y": 3.774220357027476
-      },
-      "prevControl": {
-        "x": 2.146327011795348,
-        "y": 2.731536912089924
+        "x": 8.289990426137773,
+        "y": 1.7957835915622438
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "SHL"
+      "linkedName": null
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.25,
+      "rotationDegrees": 91.00739868261316,
+      "rotateFast": true
+    }
+  ],
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "New Event Marker",
+      "name": "DISABLE NOTE DETECT",
       "waypointRelativePos": 0,
       "command": {
         "type": "race",
@@ -66,7 +56,7 @@
     },
     {
       "name": "New Event Marker",
-      "waypointRelativePos": 1.5,
+      "waypointRelativePos": 0.45,
       "command": {
         "type": "race",
         "data": {
@@ -74,7 +64,7 @@
             {
               "type": "named",
               "data": {
-                "name": "preparelaunch"
+                "name": "Enable Note Detect"
               }
             }
           ]
@@ -83,21 +73,21 @@
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 5.5,
-    "maxAcceleration": 4.0,
+    "maxVelocity": 2.0,
+    "maxAcceleration": 2.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -39.57974670096657,
+    "rotation": 89.09061955080104,
     "rotateFast": false
   },
   "reversed": false,
   "folder": null,
   "previewStartingState": {
-    "rotation": 1.7899106082462102,
+    "rotation": -1.4141597895788791,
     "velocity": 0
   },
-  "useDefaultConstraints": true
+  "useDefaultConstraints": false
 }
