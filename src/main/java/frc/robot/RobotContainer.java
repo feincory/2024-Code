@@ -305,7 +305,7 @@ public void createautoDashboards() {
 
                              
      //test button on flight controller                        
-     m_drivercontroller.button(9).onTrue(m_launcher.intakeAutCommand());
+     //m_drivercontroller.button(9).onTrue(m_launcher.intakeAutCommand());
 
     m_operatorController.rightTrigger(.8).onTrue(new InstantCommand(m_climber::climbdownmanual))
                              .onFalse(new InstantCommand(m_climber::stop));
