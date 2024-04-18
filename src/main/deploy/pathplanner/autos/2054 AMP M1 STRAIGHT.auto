@@ -2,15 +2,53 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.36086297850199,
-      "y": 5.527514849608872
+      "x": 1.441414260288271,
+      "y": 7.014868308787167
     },
-    "rotation": 0
+    "rotation": -1.1668307658827588
   },
   "command": {
     "type": "sequential",
     "data": {
       "commands": [
+        {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "2056 AMP STRAIGHT"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "endearly"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "M1 MISS PATH"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "M1 - SHR"
+          }
+        },
         {
           "type": "race",
           "data": {
@@ -30,7 +68,13 @@
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 0.75
+                  "waitTime": 0.8
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "autoaimrotate"
                 }
               }
             ]
@@ -49,20 +93,26 @@
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 0.4
+                  "waitTime": 0.25
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "autoaimrotate"
                 }
               }
             ]
           }
         },
         {
-          "type": "race",
+          "type": "deadline",
           "data": {
             "commands": [
               {
                 "type": "path",
                 "data": {
-                  "pathName": "CENTER SPEAKER TO S2"
+                  "pathName": "SHR M2"
                 }
               },
               {
@@ -87,6 +137,31 @@
               {
                 "type": "named",
                 "data": {
+                  "name": "endearly"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "M2 MISS PATH"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "M2-SHR"
+          }
+        },
+        {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
                   "name": "autoaim"
                 }
               },
@@ -99,7 +174,7 @@
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 1.0
+                  "waitTime": 0.8
                 }
               },
               {
@@ -143,194 +218,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "S2 TO S1"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "armintakepos"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "runintake"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "race",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "autoaim"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "preparelaunch"
-                }
-              },
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 1.0
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "autoaimrotate"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "race",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "launchnote"
-                }
-              },
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 0.5
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "autoaimrotate"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "race",
-          "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "S1-M1"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "runintake"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "armintakepos"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "race",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "endearly"
-                }
-              },
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "M1 MISS PATH"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "M1-SH"
-          }
-        },
-        {
-          "type": "race",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "preparelaunch"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "autoaim"
-                }
-              },
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 1.0
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "autoaimrotate"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "race",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "launchnote"
-                }
-              },
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 0.5
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "autoaimrotate"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "race",
-          "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "SH-M2"
+                  "pathName": "SHR M2"
                 }
               },
               {
