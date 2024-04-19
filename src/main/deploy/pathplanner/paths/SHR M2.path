@@ -32,16 +32,16 @@
     },
     {
       "anchor": {
-        "x": 8.19682812889776,
-        "y": 5.6539876943796825
+        "x": 8.035285623344055,
+        "y": 5.53650223579517
       },
       "prevControl": {
-        "x": 7.1580197132527585,
-        "y": 6.398733420057481
+        "x": 6.996477207699054,
+        "y": 6.281247961472968
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Mid-2"
+      "linkedName": null
     }
   ],
   "rotationTargets": [],
@@ -51,8 +51,8 @@
       "minWaypointRelativePos": 1.45,
       "maxWaypointRelativePos": 2.0,
       "constraints": {
-        "maxVelocity": 2.5,
-        "maxAcceleration": 4.0,
+        "maxVelocity": 2.0,
+        "maxAcceleration": 2.0,
         "maxAngularVelocity": 540.0,
         "maxAngularAcceleration": 720.0
       }
@@ -61,7 +61,7 @@
   "eventMarkers": [
     {
       "name": "New Event Marker",
-      "waypointRelativePos": 1.6,
+      "waypointRelativePos": 1.5,
       "command": {
         "type": "race",
         "data": {
@@ -85,7 +85,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -22.24902365721217,
+    "rotation": -41.82016988013582,
     "rotateFast": false
   },
   "reversed": false,
