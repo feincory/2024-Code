@@ -146,7 +146,8 @@ public void createautoDashboards() {
 
 
   /**
-   * Use this method to define your trigger->command mappings. Triggers can be accessed via the
+   * Use this method
+   *  to define your trigger->command mappings. Triggers can be accessed via the
    * named factory methods in the Command* classes in edu.wpi.first.wpilibj2.command.button (shown
    * below) or via the Trigger constructor for arbitary conditions
    */
@@ -263,7 +264,7 @@ public void createautoDashboards() {
    m_drivercontroller.button(8).onFalse(new InstantCommand(m_climber::climberNotReleaseable));
     
 
-  m_operatorController.b().whileTrue(m_climber.climbstatemach());
+ // m_operatorController.b().whileTrue(m_climber.climbstatemach());
  //.onFalse(new InstantCommand(m_climber::stop));
 
   m_operatorController.b().onTrue(new InstantCommand(m_arm::armpositionTrapPrep)
@@ -272,7 +273,7 @@ public void createautoDashboards() {
      .andThen(m_launcher::stop));      
    
 
-  m_operatorController.x().onTrue(
+  /*m_operatorController.x().onTrue(
   new InstantCommand(m_climber::climbwinchbottom))
   .onFalse(new InstantCommand(m_climber::stop));      
 
@@ -289,7 +290,7 @@ public void createautoDashboards() {
   //     // .andThen(new RunCommand(m_climber::climb))
 
       
-  //     .onFalse(new InstantCommand(m_climber::stop));
+  //     .onFalse(new InstantCommand(m_climber::stop));*/
 
    
 
@@ -300,20 +301,20 @@ public void createautoDashboards() {
      // .andThen(new RunCommand(m_arm::armpositionTrapPrep))
      // .andThen(new RunCommand(m_climber::climbNotSafe))                         
   
-     m_operatorController.leftTrigger(.8).onTrue(new InstantCommand(m_climber::climbupmanual))
-                             .onFalse(new InstantCommand(m_climber::stop));
+    /*  m_operatorController.leftTrigger(.8).onTrue(new InstantCommand(m_climber::climbupmanual))
+                             .onFalse(new InstantCommand(m_climber::stop));*/
 
                              
      //test button on flight controller                        
      //m_drivercontroller.button(9).onTrue(m_launcher.intakeAutCommand());
 
-    m_operatorController.rightTrigger(.8).onTrue(new InstantCommand(m_climber::climbdownmanual))
-                             .onFalse(new InstantCommand(m_climber::stop));
+    /*m_operatorController.rightTrigger(.8).onTrue(new InstantCommand(m_climber::climbdownmanual))
+                             .onFalse(new InstantCommand(m_climber::stop));*/
     //servo
-    m_drivercontroller.button(6).onTrue(new InstantCommand(m_climber::servoPreDeploy));
+   /*  m_drivercontroller.button(6).onTrue(new InstantCommand(m_climber::servoPreDeploy));
     m_drivercontroller.button(7).onTrue(new InstantCommand(m_climber::servoPostDeploy));
     m_drivercontroller.button(4).onTrue(new InstantCommand())
-                                       .onFalse(new InstantCommand(m_arm::stop));    
+                                       .onFalse(new InstantCommand(m_arm::stop));  */  
   
 
 
